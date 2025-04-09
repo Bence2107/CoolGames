@@ -5,7 +5,7 @@
     <link rel="icon" href="../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js" crossorigin="anonymous"></script>
+    <script src="../js/fa_script.js" crossorigin="anonymous"></script>
     <title>Kosár</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="../index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
             <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="basket.html" id="active">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
@@ -31,35 +31,41 @@
     <div class="inner_main">
         <div class="inner">
             <h1 id="title">Kosár</h1>
-                <hr>
-                <div class="checkOut">
-                    <div class="checkOut_item">
-                        <img src="../img/games/gameexample.png" alt="">
-                        <a href="game.html">The Last of Us: Part II.</a>
-                        <p>30 &#128008;</p>
-                        <form>
-                        <button>Törlés</button>
-                        </form>
-                    </div>
-                    <div class="checkOut_item">
-                        <img src="../img/games/gameexample2.jpg" alt="">
-                        <a href="game.html">The Witcher 3</a>
-                        <p>20 &#128008;</p>
-                        <form>
-                        <button>Törlés</button>
-                        </form>
-                    </div>
-                </div>
-                <hr>
-                <div id="buy">
-                    <h1>Összesen:</h1>
-                    <p>50 &#128008;</p>
+            <hr>
+            <div class="checkOut">
+                <div class="checkOut_item">
+                    <img src="../img/games/gameexample.jpg" alt="">
+                    <a href="game.html">The Last of Us: Part II.</a>
+                    <p>30 &#128008;</p>
                     <form>
-                        <button>Vásárlás</button>
+                        <input type="submit" value="Törlés">
                     </form>
                 </div>
+                <div class="checkOut_item">
+                    <img src="../img/games/gameexample2.jpg" alt="">
+                    <a href="game.html">The Witcher 3</a>
+                    <p>20 &#128008;</p>
+                    <form>
+                        <input type="submit" value="Törlés">
+                    </form>
+                </div>
+            </div>
+            <hr>
+            <div id="buy">
+                <h1>Összesen:</h1>
+                <p>50 &#128008;</p>
+                <form>
+                    <input type="submit" value="Vásárlás">
+                </form>
+            </div>
         </div>
     </div>
 </main>
+<footer>
+    <hr>
+    <div>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">2024 PORT:3306&#169;</a>
+    </div>
+</footer>
 </body>
 </html>

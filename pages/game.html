@@ -5,7 +5,7 @@
     <link rel="icon" href="../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/script.js" crossorigin="anonymous"></script>
+    <script src="../js/fa_script.js" crossorigin="anonymous"></script>
     <title>Játékok</title>
 </head>
 <body>
@@ -13,7 +13,7 @@
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="index.html" >Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="../index.html" >Főoldal <i class="fa-solid fa-house"></i></a></li>
             <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="games.html" id="active">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
@@ -32,7 +32,7 @@
         <div class="inner">
             <h1 id="title">The Last of Us: Part II.</h1>
             <div class="content" id="game">
-                <img src="../img/games/gameexample.png" alt="">
+                <img src="../img/games/gameexample.jpg" alt="">
                 <div>
                     <h3>Megjelenés:</h3><p>2020. június 19.</p>
                     <h3>Fejlesztő:</h3><p>Naughty Dog LLC, Iron Galaxy Studios</p>
@@ -58,24 +58,39 @@
 
                     Az új, továbbfejlesztett játékrendszerek illenek Ellie útjának élet-halál kérdéseihez az ellenséges világban. Érezd át kétségbeesett küzdelmét a túlélésért a még jobb funkciók segítségével: nagy intenzitású közelharc, folyamatos mozgás és dinamikus lopakodás.<br><br>
 
-                    Fegyverek, tárgyak, képességek és frissítések széles választékával saját játékstílusodhoz igazíthatod Ellie tulajdonságait.</p> <!--Itt is PhP barátunk segít majd-->
-                    <div>
-                        <div class="game_buy_sign">
-                            <h4>A The Last of Us: Part II. megvásárlása</h4>
-                            <div id="price">
-                                <p>59.99</p> &#128008;
-                                <div>
-                                    <form>
-                                        <button>Kosárba</button>
-                                    </form>
-                                </div>
+                    Fegyverek, tárgyak, képességek és frissítések széles választékával saját játékstílusodhoz igazíthatod Ellie tulajdonságait.</p>
+                <div>
+                    <div id="gameTier">
+                        <form method="post">
+                            <h2>Játék értékelése:</h2>
+                            <label>
+                                <input type="number" min="0" max="10" onkeydown="return false">
+                            </label>
+                            <input type="submit" value="Küldés">
+                        </form>
+                    </div>
+                    <div class="game_buy_sign">
+                        <h4>A The Last of Us: Part II. megvásárlása</h4>
+                        <div id="price">
+                            <p>59.99</p> &#128008;
+                            <div>
+                                <form>
+                                    <input type="submit" value="Kosárba">
+                                </form>
                             </div>
                         </div>
                     </div>
-                <br>
+                </div>
             </div>
         </div>
     </div>
 </main>
+<footer>
+    <hr>
+    <div>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">2024 PORT:3306&#169;</a>
+    </div>
+</footer>
+<script src="../js/script.js"></script>
 </body>
 </html>
