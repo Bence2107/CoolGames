@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+html{
+    scroll-behavior: smooth;
+}
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: rgb(32, 33, 35);
+}
+h1{ /*Teszt*/
+    color:burlywood;
+    text-transform: uppercase;
+    margin-right: auto;
+}
+h2{
+    text-transform: uppercase;
+    margin-right: auto;
+}
+/*Header*/
+.header{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    padding: 40px 10%;
+    margin: auto;
+}
+.header > li,a,button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: whitesmoke;
+    text-shadow: 1px 1px black;
+    text-decoration: none;
+}
+.navbar{
+    list-style: none;
+}
+.navbar li{
+    display: inline-block;
+    padding: 10px 20px;
+}
+.navbar li a:hover{
+    color: burlywood;
+    margin: auto;
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+.navbar>.bevasarlokocsi{
+    filter: drop-shadow(2px 2px 2px burlywood);
+}
+.headerButton{
+    border-radius: 20px;
+    font-size: 20px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-color: #28292b;
+    background-color: #28292b;
+    color: whitesmoke;
+    text-shadow: 1px 1px black;
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+.headerButton:hover{
+    background-color: burlywood;
+    color: #202123;
+}
+
+/*Main*/
+.round{
+    background-color: #28292b;
+    width: 80%;
+    margin: auto;
+    border-radius: 20px;
+    border-collapse: inherit;
+    display: flex;
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+.inner{
+    width: 90%;
+    margin: auto;
+    padding: 50px;
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+
+.helloDiv{
+    width:95%;
+    margin: auto;
+    margin-bottom: 300px;
+    color: whitesmoke;
+    border-radius: 30px;
+    background-image: url("../img/home/helloDivHatter.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(5px);
+    font-size: 30px;
+    padding: 200px;
+
+    animation: fadeIn 1s; /*keyFrame hozzá lentebb*/
+}
+.helloDiv2>h2 {
+    font-size: 60px;
+    font-family: "Montserrat", sans-serif;
+    text-transform: uppercase;
+    text-shadow: 3px 3px black;
+}
+.helloDiv2>p{
+    text-shadow: 1px 1px black;
+}
+
+/*Main*/
+.button{
+    border-radius: 5px;
+    font-size: 20px;
+    width: 200px;
+    height: 40px;
+    border: none;
+    background-color: #28292b;
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+.button:hover{
+    color: white;
+    background-color: rgb(254, 155, 24);
+    transition: all 0.3s ease 0s; /* Animáció*/
+}
+
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+.content{
+    
+    border-radius: 20px;
+    font-family: "Montserrat", sans-serif;
+    width: 95%;
+    margin: auto;
+    padding: 50px 40px;
+    background-color: rgb(32, 33, 35) ;
+    animation: fadeIn 1s;
+    color: floralwhite;
+}
+.content>h2{
+    text-transform: uppercase;
+    color: burlywood;
+}
