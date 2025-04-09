@@ -4,11 +4,11 @@
     if(isset($_SESSION["email"])){
         header("Location: profile.php");
     }
-    $errors = [];
-    if(isset($_SESSION["errors"])){
-        $errors = $_SESSION["errors"];
+    $errors = []; //Kezdetben nincs error
+    if(isset($_SESSION["errors"])){ //ha declarálva van $_SESSION["errors"]
+        $errors = $_SESSION["errors"]; //Akkor az error lista eveel egyenlő
     }
-    unset($_SESSION['errors']);
+    unset($_SESSION['errors']); //Ha újra töltjük az oldalt ne jelenjen meg
 
 ?>
 <!DOCTYPE html>

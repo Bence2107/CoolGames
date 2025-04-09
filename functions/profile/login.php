@@ -15,7 +15,7 @@
             if(!password_verify($passwd,$userData['jelszo'])){
                 $_SESSION['wrong_password'] = true;
                 header("Location: ../../pages/profile/log.php");
-                exit();
+                exit(); //terminálja a script futását
             }
             else{
                 $_SESSION["email"] = $email;

@@ -4,7 +4,7 @@
     include "../../database.php";
     include "../profileData.php";
     if($_SERVER['REQUEST_METHOD'] == "POST") {
-        if($_FILES["profile-pic"]["name"]==null){
+        if($_FILES["profile-pic"]["name"]==null){ //Ha nem töltünk fell fájlt
             header("Location: ../../../pages/profile/profile_edit.php");
         }
         $picture = addslashes(file_get_contents($_FILES["profile-pic"]["tmp_name"]));
