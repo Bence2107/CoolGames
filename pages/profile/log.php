@@ -25,7 +25,7 @@
             <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <li class="dropdown">
-                <a href="profile.php" id="active">Fiók <i class="fa-solid fa-user"></i></a>
+                <a href="profile.php" id="active3">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="log.php" id="active">Bejelentkezés</a><br>
                         <a href="reg.php">Regisztráció</a>
@@ -60,10 +60,10 @@
             <h2>Bejelentkezés</h2>
             <form method="post" action="../../functions/profile/login.php">
                 <div class="input_field">
-                    <input type="text" placeholder="Email" name="email" autocomplete="true">
+                    <input type="text" placeholder="Email" name="email">
                 </div>
                 <div class="input_field">
-                    <input type="password" placeholder="Jelszó" name="passwd" autocomplete="true">
+                    <input type="password" placeholder="Jelszó" name="passwd">
                 </div>
                 <input type="submit" value="Bejelentkezés">
             </form>

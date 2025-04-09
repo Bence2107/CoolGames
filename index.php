@@ -1,7 +1,9 @@
 <?php
     session_start();
     include_once "functions/database.php";
-    include_once "functions/profile/profileData.php";
+    if(isset($_SESSION["email"])){
+        include_once "functions/profile/profileData.php";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -26,7 +28,7 @@
                 if(!isset($_SESSION["email"])){
                     ?>
             <li class="dropdown">
-                <a href="pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                <a href="pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                 <div class="dropdown_content">
                     <a href="pages/profile/log.php">Bejelentkezés</a><br>
                     <a href="pages/profile/reg.php">Regisztráció</a>
@@ -99,10 +101,6 @@
                     <tr>
                         <th>Bíró Áron</th>
                         <th>Szabó Bence</th>
-                    </tr>
-                    <tr>
-                        <td>WQBT9A</td>
-                        <td>PSOHAF</td>
                     </tr>
                 </table>
             </div>

@@ -35,7 +35,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="log.php">Bejelentkezés</a><br>
                         <a href="reg.php">Regisztráció</a>

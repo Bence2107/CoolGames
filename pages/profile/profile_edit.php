@@ -35,7 +35,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="log.php">Bejelentkezés</a><br>
                         <a href="reg.php">Regisztráció</a>
@@ -64,11 +64,11 @@
         echo '</div>';
         unset($_SESSION["successfull"]);
     }
-    if (isset($_SESSION["error"])) {
+    if (isset($_SESSION["typeError"])) {
         echo '<div class="failed">';
         echo "<b>"."Nem megfelelő formátum! A megengedett képformátumok: '.jpg', '.png', '.jpeg'" . "</b>";
         echo '</div>';
-        unset($_SESSION["error"]);
+        unset($_SESSION["typeError"]);
     }
     if (isset($_SESSION["fileSizeError"])) {
         echo '<div class="failed">';

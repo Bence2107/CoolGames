@@ -29,5 +29,5 @@
             exit();
         }
     }
-    header("Location: ../../../index.php");
+    header("Location: ../../pages/profile/log.php");
     exit();

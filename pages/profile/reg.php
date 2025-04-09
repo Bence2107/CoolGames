@@ -31,10 +31,10 @@
             <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <li class="dropdown">
-                <a href="profile.php" id="active">Fiók <i class="fa-solid fa-user"></i></a>
+                <a href="profile.php" id="active">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                 <div class="dropdown_content">
                     <a href="log.php">Bejelentkezés</a><br>
-                    <a href="reg.php" id="active">Regisztráció</a>
+                    <a href="reg.php" id="active3">Regisztráció</a>
                 </div>
             </li>
         </ul>
@@ -113,7 +113,7 @@
                 </div>
 
                 <div class="input_field">
-                    <input type="password" placeholder="Jelszó (min. 7 karakter)" name="password">
+                    <input type="password" placeholder="Jelszó (min. 7 karakter, betű, szám)" name="password">
                     <div class="error">
                         <?php
                         if(in_array("empty_password",$errors)){
@@ -123,7 +123,7 @@
                             echo "<b>"."Kérem írjon be egy hosszabb jelszót! "."</b>";
                         }
                         if(in_array("wrong_character",$errors)){
-                            echo "<b>"."Kérem ne használjon speciális karaktereket! "."</b>";
+                            echo "<b>"."Kérem használjon kis vagy nagy betűket, valamint számokat! "."</b>";
                         }
                         if(in_array("passwords_not_match",$errors)){
                             echo "<b>"."A két jelszó nem egyezik! Kérem próbálja újra! "."</b>";

@@ -99,7 +99,7 @@ header .navbar li a:hover{
     transition: all 0.45s ease 0s;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }
-header #active{
+header #active, header #active3{
     color: #e4a14a;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }

@@ -90,5 +90,5 @@
         header("Location: ../../pages/profile/reg.php");
         exit();
     }
-    header("Location: ../../../index.php");
+    header("Location: ../../pages/profile/reg.php");
     exit();
