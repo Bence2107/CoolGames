@@ -8,6 +8,6 @@
     INNER JOIN felhasznalo ON birtokol.felh_email = felhasznalo.email
     WHERE felhasznalo.email='$currentUserData[0]'");
     } else{
-        header("Location: ../../../pages/profile/log.php");//HA url-ből akraja elérni egy nem bejlentkezett személy
+        header("Location: ../../../pages/profile/log.php");
         exit();
     }
