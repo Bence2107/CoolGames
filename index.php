@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    $currentUserData = null;
+    include "functions/database.php";
+include "functions/profile/actions/profileData.php"
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -13,17 +19,29 @@
     <img src="img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="index.html" id="active">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="pages/news.html" >Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="pages/games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="pages/basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="index.php" id="active">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="pages/news.php" >Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="pages/games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="pages/basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+
+            <?php
+                if(!isset($_SESSION["email"])){
+                    ?>
             <li class="dropdown">
-                <a href="pages/profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
-                    <div class="dropdown_content">
-                        <a href="pages/profile/log.html">Bejelentkezés</a><br>
-                        <a href="pages/profile/reg.html">Regisztráció</a>
-                    </div>
+                <a href="pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                <div class="dropdown_content">
+                    <a href="pages/profile/log.php">Bejelentkezés</a><br>
+                    <a href="pages/profile/reg.php">Regisztráció</a>
+                </div>
             </li>
+            <?php
+                } else{
+
+            ?>
+            <a href="pages/profile/profile.php"><img src="img/profile/profilePicture.png" alt="" class="header_avatar"></a>
+                    <?php
+                }
+            ?>
         </ul>
     </nav>
 </header>
@@ -32,8 +50,17 @@
         <div class="inner">
             <div class="wallpaper_container">
                 <div class="wallpaper_content">
+                    <?php
+                    if(!isset($_SESSION["email"])){
+                        ?>
                     <h2>Üdvözöllek a CoolGames-en!</h2>
+                    <?php } else{
+                        echo "<h2>Üdvözöllek ". $currentUserData[1] ."!"."</h2>";
+                    }
+
+                    if(!isset($_SESSION["email"])){?>
                     <p>Az oldal, ahol "Ingyen" szerezheted be a legújabb játékokat</p>
+                    <?php }?>
                     <button onclick="document.getElementById('about').scrollIntoView();">Bővebb információ</button>
                 </div>
             </div>
@@ -47,8 +74,8 @@
                 <ul>
                     <li><p><b>Főoldal</b>: Itt vagy most, és tájékozódsz az oldal működéséről.</p></li>
                     <li><p><b>Hírek:</b> Itt biztosítjuk számodra a legfontosabb híreket Videójátékokról, vagy olyan termékekről, amelyek Videójátékokhoz kapcsolódnak.</p></li>
-                    <li><p><b>Játékok:</b> Itt tudsz játékokat vásárolni.</p></li>
-                    <li><p><b>Kosár:</b> A megvásárolni kívánt játékaidat itt tudod véglegesen is magádévá tenni.</p></li>
+                    <li><p><b>Játékok:</b> Itt tudsz játékokat vásárolni. <b>Bejelentkezés szükséges!</b></p></li>
+                    <li><p><b>Kosár:</b> A megvásárolni kívánt játékaidat itt tudod véglegesen is magádévá tenni. <b>Bejelentkezés szükséges!</b></p></li>
                     <li><p><b>Fiók:</b> Itt találhatod, módosíthatod, akár törőlheted is Fiókod adatait.</p></li>
                 </ul>
                 <br>
@@ -64,6 +91,10 @@
                     <tr>
                         <th>Bíró Áron</th>
                         <th>Szabó Bence</th>
+                    </tr>
+                    <tr>
+                        <td>WQBT9A</td>
+                        <td>PSOHAF</td>
                     </tr>
                 </table>
             </div>

@@ -131,7 +131,7 @@ footer > div a:hover{
 
 /*Main*/
 main{
-    min-height: calc(100vh - 300px - 58px);
+    min-height: calc(100vh - 175px - 58px);
 }
 .inner_main{
     background-color: #28292b;
@@ -265,9 +265,11 @@ table .profile_picture{
     background-color: #202123;
     border-top: 2px groove #e4a14a;
     border-left: 2px groove #e4a14a;
+    margin-bottom: 20px;
 }
 
 #form_box h2{
+    text-align: center;
     font-size: 28px;
     color: whitesmoke;
     text-shadow: 1px 1px #28292b;
@@ -281,18 +283,16 @@ table .profile_picture{
     text-align: center;
     text-decoration: underline;
 }
+
 #form_box a:hover{
     color: #e4a14a;
     text-decoration: underline;
     transition: all 0.4s ease-in;
 }
-#form_box p{
-    margin-bottom: 20px;
-    text-align: center;
-    font-size: 18px;
-}
 #register_link{
+    display: flex;
     margin-top: 10px;
+    margin-left: 20px;
 }
 .input_field{
     margin: 12px 24px;
@@ -712,6 +712,88 @@ input[type=file]::file-selector-button:hover {
     margin-top: 20px;
     display: grid;
 }
+.error {
+    color: #ff3e3e;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+
+}
+.reg_successfull{
+    width: fit-content;
+    background-color: #cef6b9;
+    color: #30592f;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    margin: auto auto 20px;
+    padding: 50px;
+    border-radius: 30px;
+    border: 2px solid #30592f;
+    box-shadow:0 0 32px 5px #93FC7C77;
+    animation: fadeIn 0.3;
+}
+.failed{
+    width: fit-content;
+    background-color: #f1a5a5;
+    color: #592f2f;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-family: "Montserrat", sans-serif;
+    margin: auto auto 20px;
+    padding: 50px;
+    border-radius: 30px;
+    border: 2px solid #592f2f;
+    box-shadow:0 0 32px 5px rgba(252, 124, 124, 0.47);
+    animation: fadeIn 0.3;
+}
+.profile_pick_2{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    box-shadow: 0 2px #202123;
+    margin: auto auto 15px;
+}
+.header_avatar{
+    width: 50px;
+    border-radius: 50%;
+    vertical-align: center;
+    horiz-align: center;
+}
+.header_avatar:hover{
+    cursor: pointer;
+}
+.window{
+    width: fit-content;
+    color: whitesmoke;
+    margin:auto;
+    text-align: center;
+    background-color: #202123;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 25px;
+}
+.window p{
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+.window button{
+    margin-top: 20px;
+}
+#windows{
+    display: block;
+}
+#window_yes:hover{
+    transition: all 0.3s ease 0s;
+    background-color: #fa4444;
+}
+#cim{
+    text-align: center;
+}
+
 
 /*Mobile*/
 @media (max-width: 850px){
@@ -879,5 +961,8 @@ input[type=file]::file-selector-button:hover {
     #form_box input{
         width: fit-content;
         margin: auto;
+    }
+    .reg_successfull{
+        padding: 20px;
     }
 }
