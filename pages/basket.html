@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="icon" href="../img/header/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
+    <title>Kosár</title>
+</head>
+<body>
+<header>
+    <img src="../img/header/logo.png" alt="CoolGames" class="logo">
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="basket.html" id="active">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <div class="dropdown">
+                <li><a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a></li>
+                <div class="dropdown_content">
+                    <a href="profile/log.html">Bejelentkezés</a><br>
+                    <a href="profile/reg.html">Regisztráció</a>
+                </div>
+            </div>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="inner_main">
+        <div class="inner">
+            <h1 id="cim">Kosár</h1>
+            <section>
+                <aside class="info">
+                <hr>
+                <table class="checkOut">
+                    <tr>
+                        <td><img src="../img/games/gameexample.png" alt=""></td>
+                        <td><a href="game.html"><p id="gameLink">The Last of Us: Part II.</p></a></td>
+                        <td><p>59.99 &#128008;</p></td>
+                        <td><button>Törlés</button></td>
+                    </tr>
+                    <tr>
+                        <td><img src="../img/games/gameexample2.jpg" alt=""></td>
+                        <td><p>The Witcher 3</p></td>
+                        <td><p>39.99 &#128008;</p></td>
+                        <td><button>Törlés</button></td>
+                    </tr>
+
+                </table>
+                <hr>
+                </aside>
+                <aside class="info2">
+                    <div class="content" id="buy">
+                        <h1>Összesen:</h1>
+                        <p>99.98 &#128008</p>
+                        <button>Vásárlás</button>
+                    </div>
+                </aside>
+            </section>
+        </div>
+    </div>
+</main>
+</body>
+</html>

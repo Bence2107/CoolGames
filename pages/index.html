@@ -3,29 +3,30 @@
 <head>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="icon" href="../img/header/favicon.png">
-    <script src="https://kit.fontawesome.com/0c6bdff3b5.js"></script>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js"></script>
+    <title>Főoldal</title>
 </head>
 <body>
-    <header>
-        <img src="../img/header/logo.png" class="logo">
-        <nav>
-            <ul class="navbar">
-                <li><a href="#" id="active">Főoldal <i class="fa-solid fa-house"></i></a></li>
-                <li><a href="#">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-                <li><a href="#">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-                <li><a href="#">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li> 
-                <div class="dropdown">
-                    <li><a href="#">Fiók <i class="fa-solid fa-user"></i></a></li>
-                    <div class="dropdown_content">
-                        <a href="#">Bejelentkezés</a><br>
-                        <a href="regisztracio.html">Regisztráció</a>
-                    </div>
+<header>
+    <img src="../img/header/logo.png" alt="CoolGames" class="logo">
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html" id="active">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="news.html" >Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <div class="dropdown">
+                <li><a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a></li>
+                <div class="dropdown_content">
+                    <a href="profile/log.html">Bejelentkezés</a><br>
+                    <a href="profile/reg.html">Regisztráció</a>
                 </div>
-            </ul>
-        </nav>
-    </header>
+            </div>
+        </ul>
+    </nav>
+</header>
     <main>
         <div class="inner_main">
             <div class="inner">
@@ -33,17 +34,17 @@
                     <div class="content_placer">
                         <h2>Üdvözöllek a CoolGames-en!</h2>
                         <p>Az oldal, ahol "Ingyen" szerezheted be a legújabb játékokat</p>
-                        <button onclick="document.getElementById('leiras').scrollIntoView();">Bővebb információ</button>
+                        <button onclick="document.getElementById('aboutUs').scrollIntoView();">Bővebb információ</button>
                     </div>
                 </div>
-                <div class="content" id="leiras">
+                <div class="content">
                     <h1>Az oldalról</h1>
                     <p>Ez az oldal egy webáruház a legújabb Videójátkok iparában.</p>
                     <p>Kis "cégként" igyekszünk minél elérhetőbb áron a játékokat. </p>
                     <p>Az oldal kezdetleges fázisban van, így egyelőre kevés játék áll rendelkezésünkre</p>
                     <p>...</p>
                     <br>
-                    <h2>Rólunk</h2>
+                    <h2 id="aboutUs">Rólunk</h2>
                     <table>
                         <tr>
                             <th colspan="2">PORT: 3306</th>
@@ -65,29 +66,6 @@
             </div>
         </div>
     </main>
-    <script>
-        const aboutUS = document.querySelector(".content h2");
-        const tableDisplay = document.querySelector(".content table");
-        let clicks = 0;
-        aboutUS.addEventListener("click", () => {
-            if(clicks === 0){
-                tableDisplay.style.display = "table";
-                tableDisplay.style.animation = "fadeIn";
-                tableDisplay.style.animationDuration = "2s";
-                tableDisplay.scrollIntoView();
-                clicks++;
-            }
-            else{
-                tableDisplay.style.animation = "fadeOut";
-                tableDisplay.style.animationDuration = "1s";
-                setTimeout(() => {
-                    tableDisplay.style.display = "none";
-                }, 900);
-                clicks--;
-            }
-            
-        });
-         
-    </script>
+    <script src="../js/index.js"></script>
 </body>
 </html>

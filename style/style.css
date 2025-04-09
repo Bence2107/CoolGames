@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 html{
     scroll-behavior: smooth;
+    scrollbar-color:#e4a14a #202123 ;
 }
 *{
     box-sizing: border-box;
@@ -8,6 +9,7 @@ html{
     padding: 0;
 }
 body{
+    overflow-y: scroll;
     background: #202123;
     margin: 0 5px;
 }
@@ -22,7 +24,7 @@ h2{
 
 /*Header*/
 header{
-    position: sticky; /*Ez tartja fent a Header-t görgetskor*/
+    position: sticky;
     top: 0;
     z-index: 1;
     background-color: #202123;
@@ -90,20 +92,21 @@ header #active{
     margin: auto;
     border-radius: 20px;
     border-collapse: inherit;
+    padding: 20px;
     display: flex;
     transition: all 0.45s ease 0s; /* Animáció*/
+    animation: fadeIn 1.2s;
 }
 .inner{
-    width: 100%;
+    width: 95%;
     margin: auto;
     padding: 50px;
     transition: all 0.45s ease 0s; /* Animáció*/
-}
 
+}
 .wallpaper_container{
     width:95%;
-    margin: auto;
-    margin-bottom: 300px;
+    margin: auto auto 300px;
     color: whitesmoke;
     border-radius: 30px;
     background-image: url("../img/home/helloDivHatter.jpg");
@@ -135,54 +138,26 @@ header #active{
     transition: all 0.3s ease 0s; /* Animáció*/
 }
 .content_placer button:hover{
-    color: white;
+    cursor: pointer;
+    color: black;
     background-color: rgb(228, 161, 74);
     transition: all 0.3s ease 0s; /* Animáció*/
 }
-/*Reg*/
-.content .input_field, h2{
-   margin-bottom: 12px;
-   text-shadow: 1px 1px 2px #202123;
-}
-.content .input_field input{
-    outline: 0;
-    border: 3px groove #202123;
-    border-radius: 6px;
-    color: whitesmoke;
-    background-color: #28292b;
-    box-shadow: 1px 1px 1px #202123;
-    padding: 12px 15px;
-    width: 100%;
- }
-.content button {
-    font-size: 16px;
-    background-color: #28292b;
-    border: 3px groove #202123;
-    box-shadow: 1px 1px 1px #202123;
-    padding: 8px 12px;
- }
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
-@keyframes fadeOut {
-    0% {opacity: 1;}
-    100% {opacity: 0;}
-}
+
 .content{
     border-radius: 20px;
     font-family: "Montserrat", sans-serif;
     width: 95%;
-    margin: auto;
-    padding: 50px 40px;
+    margin: 0 auto 0 auto;
     background-color: rgb(32, 33, 35) ;
     box-shadow: 3px 3px rgb(32, 33, 35), 0 0 3px #e4a14a;
     border-top: 1px groove #e4a14a;
     border-left: 1px groove #e4a14a;
     animation: fadeIn 1s;
-    color: floralwhite;
+    color: whitesmoke;
+    padding: 50px 50px;
 }
-.content>h2{
+.content #aboutUs{
     text-transform: uppercase;
     display: inline;
     color: #e4a14a;
@@ -201,9 +176,9 @@ header #active{
     display: none;
 }
 
-.content tabel tr, th, td{
+.content table tr, th, td{
     font-size: 30px;
-    padding: 12px 0px;
+    padding: 12px 0;
     width: 50%;
     border: none;
     text-align: center;
@@ -213,4 +188,312 @@ header #active{
     width: 200px;
     height: 200px;
     border-radius: 50%;
+}
+
+/*Reg*/
+#reg_box{
+    padding: 10px 56px;
+    text-align: center;
+}
+#reg_box h2{
+    font-size: 22px;
+    color: #e4a14a;
+    margin-bottom: 24px;
+}
+.input_field{
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 2px #202123;
+ }
+ .content .input_field input{
+     outline: 0;
+     border: 3px groove #202123;
+     border-radius: 6px;
+     color: whitesmoke;
+     background-color: #28292b;
+     box-shadow: 1px 1px 1px #202123;
+     padding: 14px;
+     width: 98%;
+     margin: 0 auto 0 auto;
+  }
+.content button {
+    font-size: 16px;
+    background-color: #28292b;
+    border: 3px groove #202123;
+    box-shadow: 1px 1px 1px #202123;
+    padding: 8px 12px;
+  }
+ @keyframes fadeIn {
+     0% {opacity: 0;}
+     100% {opacity: 1;}
+ }
+ @keyframes fadeOut {
+     0% {opacity: 1;}
+     100% {opacity: 0;}
+ }
+
+ /*News*/
+ .news_container{
+     width: 1245px;
+     margin: 0 auto 0 auto;
+     border-collapse: separate;
+     border-spacing: 1px 32px;
+     animation: fadeIn 1.2s;
+ }
+ .news_container tr{
+     border: 0;       /*Ez is */
+     display: block;  /*Ez a kettő kell ide, hogy működjön a border-radius*/
+     height: fit-content;
+     border-radius: 30px;
+     animation: fadeIn 1.2s;
+ }
+ .news_container tr:hover{
+     background-color: #202123;
+     border-top: 1px groove #e4a14a;
+     border-left: 1px groove #e4a14a;
+     transition: all 0.25s ease 0s;
+     cursor: pointer;
+ }
+ .news_container td{
+     width: 40%;
+ }
+ .news_container td:first-of-type{
+     width: 60%;
+     padding-left: 20px;
+ }
+ .news_container img{
+     width: 450px;
+     border-radius: 20px;
+ }
+ .news_container h1{
+     text-transform: uppercase;
+     font-size: 26px;
+     text-align: justify;
+ }
+p{
+     color: whitesmoke;
+     font-size: 18px;
+     text-align: justify;
+}
+
+/*New*/
+#news_image{
+    display: block;
+    width: 45%;
+    margin: auto auto 50px;
+    border-radius: 30px;
+    animation: fadeIn 1.2s;
+}
+hr{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+#cim{
+    font-size: 34px;
+    text-align: center;
+    padding: 30px;
+}
+.games_container{
+    width: 1300px;
+    display: block;
+    animation: fadeIn 1.2s;
+}
+
+/*Games*/
+.game{
+    float: left;
+    text-align: center;
+    padding: 20px;
+    margin: 1px;
+}
+.game img{
+    width: 260px;
+    border-radius: 20px;
+    transition: transform .2s;
+    filter: grayscale(50%);
+    box-shadow: 0 0 11px black;
+}
+
+.game img:hover{
+    cursor: pointer;
+    transform: scale(1.02);
+    filter: grayscale(0%);
+    box-shadow: 0 0 11px rgb(70, 70, 70);
+}
+.game h3{
+    padding-top: 10px;
+}
+
+/*Game*/
+#gameName{
+    text-align: center;
+    padding-bottom: 30px;
+}
+.game_container{
+    text-align: center;
+    width: 50%;
+    margin: auto auto 30px;
+    display: flex;
+    background-color: #202123;
+}
+#game{
+    margin-bottom: 30px;
+    width: 65%;
+}
+#game h3{
+    text-align: left;
+    margin-top: 30px;
+}
+#game p{
+    text-align: justify-all;
+}
+#game img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    width: 300px;
+    padding-right: 10px;
+    border-radius: 20px;
+}
+#game_description{
+    text-align: justify;
+    font-size: 20px;
+}
+#game_description2{
+    width: 60%;
+}
+.video{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5%;
+    border:none ;
+    width:80%;
+    height: 500px;
+    transition: transform .2s;
+}
+.video:hover{
+    transform: scale(1.02);
+}
+.game_buy_sign {
+    background-color: #28292b;
+    border: solid 0.3em #28292b;
+    border-left-color: #e4a14a;
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 26px;
+}
+.game_buy_button{
+    margin: -30px 0 0 68%;
+    border-radius: 4px;
+    width: 30%;
+}
+.game_buy_button button{
+    width: 150px;
+    font-size: 24px;
+    border-radius: 4px;
+    height: auto;
+}
+.game_buy_button button:hover{
+    background-color: #e4a14a;
+    color: black;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+}
+
+#price{
+    display: flex;
+    float: left;
+    padding: 4px;
+    background-color: black;
+    font-size: 22px;
+}
+#price p{
+    padding: 12px;
+    text-align: center;
+    font-size: 22px;
+}
+/*Kosár*/
+section{
+    display: flex;
+    animation: fadeIn 1.2s;
+}
+.info{
+    float: left;
+    margin-right: 40px;
+}
+
+.info2{
+    float: right;
+}
+.info2 button{
+    color:whitesmoke;
+    background-color: #e4a14a;
+}
+.info2 button:hover{
+    color:black;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+}
+.checkOut{
+    border-collapse: separate;
+    border-spacing: 10px;
+    width: 65%;
+}
+.checkOut td,th{
+    padding: 2px;
+    height: auto;
+}
+.checkOut td:nth-child(1){
+    width: 25%;
+}
+.checkOut td:nth-child(2){
+    width: 50%;
+    padding: 25px;
+}
+.checkOut td:nth-child(2) p{
+    font-size: 22px;
+}
+.checkOut td:nth-child(3){
+    font-size: 20px;
+}
+.checkOut img{
+    width: 100%;
+    float: left;
+    border-radius: 30px;
+}
+.checkOut button{
+    color: whitesmoke;
+    height: 45px;
+    width: 95px;
+    align-items: center;
+    background-color: #e4a14a;
+    border-radius: 10px;
+    float: left;
+}
+.checkOut button:hover{
+    cursor: pointer;
+    color: #202123;
+    transition: all 0.25s ease 0s;
+}
+#gameLink:hover{
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.25s ease 0s;
+}
+#buy{
+    width: 270px;
+    text-align: center;
+    display: block;
+    padding: 30px;
+}
+#buy button{
+    width: 120px;
+    border-radius: 20px;
+}
+#buy p{
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 5px;
 }
