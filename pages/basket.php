@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    include "../functions/database.php";
+    if(!isset($_SESSION['email'])){
+        header("Location: profile/log.php");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +20,28 @@
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="basket.html" id="active">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li class="dropdown">
-                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+            <li><a href="../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="news.php">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="basket.php" id="active">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <?php
+            if(!isset($_SESSION["email"])){
+                ?>
+                <li class="dropdown">
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
                     <div class="dropdown_content">
-                        <a href="profile/log.html">Bejelentkezés</a><br>
-                        <a href="profile/reg.html">Regisztráció</a>
+                        <a href="../pages/profile/log.php">Bejelentkezés</a><br>
+                        <a href="../pages/profile/reg.php">Regisztráció</a>
                     </div>
-            </li>
+                </li>
+                <?php
+            } else{
+
+                ?>
+                <a href="../pages/profile/profile.php"><img src=../img/profile/profilePicture.png alt="" class="header_avatar"></a>
+                <?php
+            }
+            ?>
         </ul>
     </nav>
 </header>
@@ -35,7 +53,7 @@
             <div class="checkOut">
                 <div class="checkOut_item">
                     <img src="../img/games/gameexample.jpg" alt="">
-                    <a href="game.html">The Last of Us: Part II.</a>
+                    <a href="game.php">The Last of Us: Part II.</a>
                     <p>30 &#128008;</p>
                     <form>
                         <input type="submit" value="Törlés">
@@ -43,7 +61,7 @@
                 </div>
                 <div class="checkOut_item">
                     <img src="../img/games/gameexample2.jpg" alt="">
-                    <a href="game.html">The Witcher 3</a>
+                    <a href="game.php">The Witcher 3</a>
                     <p>20 &#128008;</p>
                     <form>
                         <input type="submit" value="Törlés">

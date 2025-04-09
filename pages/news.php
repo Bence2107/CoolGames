@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include "../functions/database.php";
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -6,24 +10,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/fa_script.js" crossorigin="anonymous"></script>
-    <title>Home</title>
+    <title>Hírek</title>
 </head>
 <body>
 <header>
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="news.html"  id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li class="dropdown">
-                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+            <li><a href="../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="news.php" id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="basket.php" >Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <?php
+            if(!isset($_SESSION["email"])){
+                ?>
+                <li class="dropdown">
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
                     <div class="dropdown_content">
-                        <a href="profile/log.html">Bejelentkezés</a><br>
-                        <a href="profile/reg.html">Regisztráció</a>
+                        <a href="../pages/profile/log.php">Bejelentkezés</a><br>
+                        <a href="../pages/profile/reg.php">Regisztráció</a>
                     </div>
-            </li>
+                </li>
+                <?php
+            } else{
+
+                ?>
+                <a href="../pages/profile/profile.php"><img src=../img/profile/profilePicture.png alt="" class="header_avatar"></a>
+                <?php
+            }
+            ?>
         </ul>
     </nav>
 </header>
@@ -31,7 +46,7 @@
     <div class="inner_main">
         <div class="inner">
             <div class="news_container">
-                <div class="news_item" onclick="window.location='new.html'">
+                <div class="news_item" onclick="window.location='new.php'">
                     <div class="new_description">
                                <h1>Mégis készül a The Last of Us 3?</h1>
                                <br>
@@ -46,7 +61,7 @@
                     <div class="new_description">
                         <h1>Játék vs IRL - A valóságban is leforgatták a GTA VI előzetesét</h1>
                         <br>
-                        <p>Egy tehetséges francia GTA rajongó a valóságban is újraalkotta a GTA VI előzetesének egyes felvételeit, megmutatva, hogy mennyire valósághű a játék</p>
+                        <p>Egy tehetséges francia GTA rajongó a valóságban is újraalkotta a GTA VI előzetesének egyes felvételeit, megmutatva, hogy mennyire valósághű a játék.</p>
                         <hr>
                         <p>2024.03.21</p>
                     </div>

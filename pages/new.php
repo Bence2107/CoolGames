@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include "../functions/database.php";
+?>
 <!DOCTYPE html>
 <html lang="hu">
 <head>
@@ -6,24 +10,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="../js/fa_script.js" crossorigin="anonymous"></script>
-    <title>Hír</title>
+    <title>Hírek</title>
 </head>
 <body>
 <header>
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../index.html">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="news.html"  id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <li class="dropdown">
-                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+            <li><a href="../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
+            <li><a href="news.php" id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
+            <li><a href="games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
+            <li><a href="basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <?php
+            if(!isset($_SESSION["email"])){
+                ?>
+                <li class="dropdown">
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
                     <div class="dropdown_content">
-                        <a href="profile/log.html">Bejelentkezés</a><br>
-                        <a href="profile/reg.html">Regisztráció</a>
+                        <a href="../pages/profile/log.php">Bejelentkezés</a><br>
+                        <a href="../pages/profile/reg.php">Regisztráció</a>
                     </div>
-            </li>
+                </li>
+                <?php
+            } else{
+
+                ?>
+                <a href="../pages/profile/profile.php"><img src=../img/profile/profilePicture.png alt="" class="header_avatar"></a>
+                <?php
+            }
+            ?>
         </ul>
     </nav>
 </header>
