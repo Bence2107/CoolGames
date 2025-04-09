@@ -1,13 +1,14 @@
 <?php
     session_start();
-    $currentUserData = null;
-    include "../../functions/database.php";
-    include "actions/profileData.php";
+    include_once "../../functions/database.php";
+    include_once "../../functions/profile/profileData.php";
+    if(!isset($_SESSION['email'])){
+        header("Location: log.php");
+    }
     $errors = [];
     if(isset($_SESSION["errors"])){
         $errors = $_SESSION["errors"];
     }
-
     unset($_SESSION['errors']);
 ?>
 
@@ -18,7 +19,7 @@
     <link rel="icon" href="../../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../js/fa_script.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Profil törlése</title>
 </head>
 <body>
@@ -26,10 +27,10 @@
     <img src="../../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house">&nbsp;</i></a></li>
+            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
+            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
+            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             if(!isset($_SESSION["email"])){
                 ?>
@@ -42,10 +43,14 @@
                 </li>
                 <?php
             } else{
-
-                ?>
-                <a href="profile.php"><img src=../../img/profile/profilePicture.png alt="" class="header_avatar"></a>
-                <?php
+                if($currentUserData[6]!=null){
+                    echo '<li>
+                                <a href="profile.php"><img class="header_avatar" src="data:image/png;base64,'.base64_encode($currentUserData[6]).'" alt="" id="active2"></a><p>'.$currentUserData[7]. '&#128008;</p>
+                            </li>';
+                }
+                else{
+                    echo '<li><a href="profile.php"><img src="../../img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a> <p>'.$currentUserData[7]. '&#128008;</p> </li>';
+                }
             }
             ?>
         </ul>
@@ -53,8 +58,8 @@
 </header>
 <main>
     <?php
-    if (isset($_SESSION["successfull"]) && $_SESSION["successfull"]) {
-        echo '<div class="reg_successfull">';
+    if (isset($_SESSION["successfull"])) {
+        echo '<div class="successfull">';
         echo "<b>"."Jelszó módosítva!" . "</b>";
         echo '</div>';
         unset($_SESSION["successfull"]);
@@ -108,6 +113,7 @@
                     </div>
 
                     <input type="submit" value="Jelszó módosítása">
+                </form>
             </div>
         </div>
 </main>

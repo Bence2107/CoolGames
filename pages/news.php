@@ -1,6 +1,10 @@
 <?php
     session_start();
-    include "../functions/database.php";
+    $_SESSION["news"] = true;
+    include_once "../functions/database.php";
+    include_once "../functions/profile/profileData.php";
+    include_once "../functions/news/newsQueries.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -9,7 +13,7 @@
     <link rel="icon" href="../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/fa_script.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Hírek</title>
 </head>
 <body>
@@ -17,10 +21,10 @@
     <img src="../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="news.php" id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="basket.php" >Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="../index.php">Főoldal <i class="fa-solid fa-house">&nbsp;</i></a></li>
+            <li><a href="news.php" id="active">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
+            <li><a href="games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
+            <li><a href="basket.php" >Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             if(!isset($_SESSION["email"])){
                 ?>
@@ -33,10 +37,14 @@
                 </li>
                 <?php
             } else{
-
-                ?>
-                <a href="../pages/profile/profile.php"><img src=../img/profile/profilePicture.png alt="" class="header_avatar"></a>
-                <?php
+                if($currentUserData[6]!=null){
+                    echo '<li>
+                                <a href="profile/profile.php"><img class="header_avatar" src="data:image/png;base64,'.base64_encode($currentUserData[6]).'" alt=""></a><p>'.$currentUserData[7]. '&#128008;</p>
+                            </li>';
+                }
+                else{
+                    echo '<li><a href="profile/profile.php"><img src="../img/profile/profilePicture.png" alt="" class="header_avatar"></a> <p>'.$currentUserData[7]. '&#128008;</p> </li>';
+                }
             }
             ?>
         </ul>
@@ -46,27 +54,22 @@
     <div class="inner_main">
         <div class="inner">
             <div class="news_container">
-                <div class="news_item" onclick="window.location='new.php'">
-                    <div class="new_description">
-                               <h1>Mégis készül a The Last of Us 3?</h1>
-                               <br>
-                               <p>Úgy tűnik formálódik a The Last of Us 3, de még nagyon, de nagyon az elején tartanak a munkálatok.
-                               </p>
-                               <hr>
-                               <p>2024.03.03</p>
-                           </div>
-                    <img src="../img/news/alhir1.jpg" alt="">
-                </div>
-                <div class="news_item">
-                    <div class="new_description">
-                        <h1>Játék vs IRL - A valóságban is leforgatták a GTA VI előzetesét</h1>
-                        <br>
-                        <p>Egy tehetséges francia GTA rajongó a valóságban is újraalkotta a GTA VI előzetesének egyes felvételeit, megmutatva, hogy mennyire valósághű a játék.</p>
-                        <hr>
-                        <p>2024.03.21</p>
-                    </div>
-                    <img src="../img/news/alhir2.jpg" alt="">
-                </div>
+                <?php
+                while (($newsData = mysqli_fetch_assoc($newsQuery))!= null){
+                    echo '<a href="new.php?cim='.urlencode($newsData['cim']).'">';
+                    echo '<div class="news_item">';
+                    echo '<div class="new_description">';
+                    echo '<h1>'. $newsData['cim'] .'</h1>';
+                    echo '<br>';
+                    echo '<p>' . $newsData['rovid_lerias']. '</p>';
+                    echo '<hr>';
+                    echo '<p>' . $newsData['datum']. '</p>';
+                    echo '</div>';
+                    echo '<img src="data:image/jpeg;base64,'.base64_encode($newsData['kep']).'" alt=""/>';
+                    echo '</div>';
+                    echo '</a>';
+                }
+                ?>
             </div>
         </div>
     </div>

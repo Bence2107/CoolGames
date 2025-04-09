@@ -1,11 +1,15 @@
 <?php
     session_start();
-    include "../../functions/database.php";
+    include_once "../../functions/database.php";
+    if(isset($_SESSION["email"])){
+        header("Location: profile.php");
+    }
     $errors = [];
     if(isset($_SESSION["errors"])){
         $errors = $_SESSION["errors"];
     }
     unset($_SESSION['errors']);
+
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -14,7 +18,7 @@
     <link rel="icon" href="../../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../js/fa_script.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Home</title>
 </head>
 <body>
@@ -22,10 +26,10 @@
     <img src="../../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house">&nbsp;</i></a></li>
+            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
+            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
+            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <li class="dropdown">
                 <a href="profile.php" id="active">Fiók <i class="fa-solid fa-user"></i></a>
                 <div class="dropdown_content">
@@ -38,12 +42,12 @@
 </header>
 <main>
 <?php
-if (isset($_SESSION['registration_success']) && $_SESSION['registration_success']) {
-    echo '<div class="reg_successfull">';
-        echo "<b>"."Sikeres regisztráció!" ."<br>"."Kérem jelentkezzen be!"."</b>";
-    echo '</div>';
-    unset($_SESSION['registration_success']);
-}
+    if (isset($_SESSION['registration_success'])) {
+        echo '<div class="successfull">';
+            echo "<b>"."Sikeres regisztráció!" ."<br>"."Kérem jelentkezzen be!"."</b>";
+        echo '</div>';
+        unset($_SESSION['registration_success']);
+    }
 ?>
     <div class="inner_main">
         <div id="form_box">
@@ -149,9 +153,6 @@ if (isset($_SESSION['registration_success']) && $_SESSION['registration_success'
                     <input type="date" name="szul_datum">
                     <div class="error">
                         <?php
-                        if(in_array("empty_szul_datum",$errors)){
-                            echo "<b>"."Kérem adjon meg egy dátumot! "."</b>";
-                        }
                         if(in_array("invalid_year",$errors)){
                             echo "<b>"."Kérem adjon meg egy helyes dátumot! "."</b>";
                         }

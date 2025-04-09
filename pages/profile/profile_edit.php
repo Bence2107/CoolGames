@@ -1,13 +1,14 @@
 <?php
     session_start();
-    $currentUserData = null;
     $errors = [];
-    include "../../functions/database.php";
-    include "../../functions/profile/actions/profileData.php";
+    include_once "../../functions/database.php";
+    include_once "../../functions/profile/profileData.php";
+    if(!isset($_SESSION['email'])){
+        header("Location: log.php");
+    }
     if(isset($_SESSION["errors"])){
         $errors = $_SESSION["errors"];
     }
-
     unset($_SESSION['errors']);
 ?>
 
@@ -18,7 +19,7 @@
     <link rel="icon" href="../../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../js/fa_script.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Profil szerkesztése</title>
 </head>
 <body>
@@ -26,10 +27,10 @@
     <img src="../../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house">&nbsp;</i></a></li>
+            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
+            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
+            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             if(!isset($_SESSION["email"])){
                 ?>
@@ -42,10 +43,14 @@
                 </li>
                 <?php
             } else{
-
-                ?>
-                <a href="profile.php"><img src=../../img/profile/profilePicture.png alt="" class="header_avatar"></a>
-                <?php
+                if($currentUserData[6]!=null){
+                    echo '<li>
+                                <a href="profile.php"><img class="header_avatar" src="data:image/png;base64,'.base64_encode($currentUserData[6]).'" alt="" id="active2"></a><p>'.$currentUserData[7]. '&#128008;</p>
+                            </li>';
+                }
+                else{
+                    echo '<li><a href="profile.php"><img src="../../img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a> <p>'.$currentUserData[7]. '&#128008;</p> </li>';
+                }
             }
             ?>
         </ul>
@@ -53,25 +58,44 @@
 </header>
 <main>
     <?php
-    if (isset($_SESSION["successfull"]) && $_SESSION["successfull"]) {
-        echo '<div class="reg_successfull">';
+    if (isset($_SESSION["successfull"])) {
+        echo '<div class="successfull">';
         echo "<b>"."Adatok módosítva!" . "</b>";
         echo '</div>';
         unset($_SESSION["successfull"]);
+    }
+    if (isset($_SESSION["error"])) {
+        echo '<div class="failed">';
+        echo "<b>"."Nem megfelelő formátum! A megengedett képformátumok: '.jpg', '.png', '.jpeg'" . "</b>";
+        echo '</div>';
+        unset($_SESSION["error"]);
+    }
+    if (isset($_SESSION["fileSizeError"])) {
+        echo '<div class="failed">';
+        echo "<b>"."Túl nagy fájlméret! 3MB vagy annál kisebb lehet!"."</b>";
+        echo '</div>';
+        unset($_SESSION["fileSizeError"]);
     }
     ?>
     <div class="inner_main">
         <h1 id="cim">Profil módosítása</h1>
         <div class="inner">
             <div class="profile_buttons">
-                <img src="../../img/profile/profilePicture.png" alt="" class="profile_pick_2">
-                <form id="form_box">
+                <?php
+                    if($currentUserData[6]!=null){
+                        echo '<img class="profile_pick_2" src="data:image/png;base64,'.base64_encode($currentUserData[6]).'" alt="">';
+                    }
+                    else{
+                        echo '<img class="profile_pick_2" src="../../img/profile/profilePicture.png" alt="">';
+                    }
+                ?>
+                <form id="form_box" method="post"  enctype="multipart/form-data" action="../../functions/profile/actions/profile_picture_change.php">
                     <h2>Profilkép módosítása</h2>
                     <input type="file" name="profile-pic"><br>
                     <button type="submit">Profilkép Feltöltése</button>
                 </form>
             </div>
-            <div id="form_box">
+            <div id="form_box2">
                 <h2>Adatok módosítása</h2>
                 <form method="post" action="../../functions/profile/actions/profile_info_change.php">
                     <div class="input_field">
@@ -126,15 +150,14 @@
                             ?>
                         </div>
                     </div>
-
-
                     <input type="submit" value="Módosít">
                 </form>
         </div>
             <div class="profile_buttons">
-                <button onclick="location.href='password_change.php'">Jelszó módosítása</button>
-                <button onclick="location.href='profiledelquestion.php'">Profil törlése</button>
+                <button onclick="location.href='profile_edit_passwd.php'">Jelszó módosítása</button>
+                <button id="warning" onclick="location.href='profile_del_question.php'">Profil törlése</button>
             </div>
+    </div>
     </div>
 </main>
 <footer>

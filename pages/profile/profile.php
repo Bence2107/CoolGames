@@ -1,8 +1,7 @@
 <?php
     session_start();
-    $currentUserData = null;
-    include "../../functions/database.php";
-    include "../../functions/profile/actions/profileData.php";
+    include_once "../../functions/database.php";
+    include_once "../../functions/profile/profileData.php";
     if(!isset($_SESSION["email"])){
         header("Location: log.php");
     }
@@ -14,7 +13,7 @@
     <link rel="icon" href="../../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../../js/fa_script.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Profil</title>
 </head>
 <body>
@@ -22,10 +21,10 @@
     <img src="../../img/header/logo.png" alt="CoolGames" class="logo">
     <nav>
         <ul class="navbar">
-            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house"></i></a></li>
-            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
-            <li><a href="../games.php" id="active">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
-            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
+            <li><a href="../../index.php">Főoldal <i class="fa-solid fa-house">&nbsp;</i></a></li>
+            <li><a href="../news.php">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
+            <li><a href="../games.php">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
+            <li><a href="../basket.php">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             if(!isset($_SESSION["email"])){
                 ?>
@@ -38,9 +37,14 @@
                 </li>
                 <?php
             } else{
-                ?>
-                <a href="../../pages/profile/profile.php"><img src=../../img/profile/profilePicture.png alt="" class="header_avatar"></a>
-                <?php
+                if($currentUserData[6]!=null){
+                    echo '<li>
+                                <a href="profile.php"><img class="header_avatar" src="data:image/png;base64,'.base64_encode($currentUserData[6]).'" alt="" id="active2"></a><p>'.$currentUserData[7]. '&#128008;</p>
+                            </li>';
+                }
+                else{
+                    echo '<li><a href="profile.php"><img src="../../img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a> <p>'.$currentUserData[7]. '&#128008;</p> </li>';
+                }
             }
             ?>
         </ul>
@@ -52,7 +56,14 @@
             <div class="profile_container">
                 <div class="profile_pick_container">
                     <div class="profile_buttons">
-                        <img src="../../img/profile/profilePicture.png" alt="" class="profile_pick">
+                        <?php
+                        if($currentUserData[6]!=null){
+                            echo '<img class="profile_pick" src="data:image/jpeg;base64,'.base64_encode($currentUserData[6]).'" alt="">';
+                        }
+                        else{
+                            echo '<img src="../../img/profile/profilePicture.png" alt="" class="profile_pick">';
+                        }
+                        ?>
                     </div>
                 </div>
                 <div class="profile_data_container">
@@ -81,14 +92,43 @@
                             echo "<p>". $currentUserData[5] ."</p>";
                         ?>
                     </div>
+                    <div class="profile_data">
+                        <b>Aktuális MacskaKredit:</b>
+                        <?php
+                        echo "<p>". $currentUserData[7] . "&#128008;</p>";
+                        ?>
+                    </div>
                     <hr>
                     <div class="profile_buttons">
                         <button onclick="location.href='profile_edit.php'">Profil szerkesztése</button>
                         <form method="post" id="logOut" action="../../functions/profile/actions/logout.php">
-                            <input type="submit" value="Kijelentkezés">
+                            <input id="warning" type="submit" value="Kijelentkezés">
                         </form>
                     </div>
                 </div>
+            </div>
+            <h1 id="title">Játékaim:</h1>
+            <div class="games_container">
+                <?php
+                if(mysqli_num_rows($ownGamesQuery)==0){
+                    echo '<div class="empty_sign">';
+                        echo '<h3>Ön még egy játéknak sem a tulajdonosa. Hogy birtokoljon, látogasson el a Játékok Weboldalra:</h3>';
+                        echo ' <div class="action">';
+                            echo '<form action="../games.php">';
+                                echo '<input type="submit" value="Játékok vásárlása">';
+                            echo  '</form>';
+                        echo '</div>';
+                    echo '</div>';
+                }
+
+                while (($gameData = mysqli_fetch_assoc($ownGamesQuery))!= null) {
+                    echo '<div class="game">';
+                    echo ' <a href="../game.php?name='.urlencode($gameData['nev']).'"><img src="data:image/jpeg;base64,'.base64_encode($gameData['kep']).'" alt=""></a>';
+                    echo ' <h3> ' . $gameData['nev'];
+                    echo ' </h3>';
+                    echo ' </div>';
+                }
+                ?>
             </div>
         </div>
     </div>
