@@ -16,7 +16,7 @@ html{
 }
 ::-webkit-scrollbar-thumb {
     background-color: #28292b;
-    border-radius: 20px; 
+    border-radius: 20px;
 }
 ::-webkit-scrollbar-thumb:hover{
     background-color: hsl(0, 0%, 51%);
@@ -24,6 +24,10 @@ html{
 @keyframes fadeIn {
     0% {opacity: 0;}
     100% {opacity: 1;}
+}
+@keyframes fadeOut {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
 }
 body{
     overflow-y: scroll;
@@ -65,13 +69,24 @@ header .logo{
 }
 header .navbar{
     list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 header .navbar li{
-    display: inline-block; /*egymás mellé rakja a List Itemeket*/
     padding: 10px 20px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+header .navbar li p{
+   padding-left: 10px;
+}
 header .navbar li a{
+    display: flex;
+    align-items: center;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
     font-size: 20px;
@@ -88,6 +103,9 @@ header #active{
     color: #e4a14a;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }
+header #active2{
+    box-shadow: 1px -1px 10px 0 #e4a14a;
+}
 
 .dropdown{
     position: relative;
@@ -97,8 +115,7 @@ header #active{
 .dropdown_content{
     background-color: rgb(40, 41, 43);
     display: block;
-    padding: 4px 8px;
-    margin: 5px 0 0 10px;
+    padding: 4px 4px;
     border: 2px groove #e4a14a;
     border-radius: 12px;
     box-shadow: 1px 1px 1px #202123;
@@ -167,7 +184,7 @@ main{
     text-transform: uppercase;
     text-shadow: 3px 3px 1px black;
 }
-.wallpaper_content  p{
+.wallpaper_content p{
     text-shadow: 1px 1px 1px black;
 }
 .wallpaper_content button{
@@ -256,7 +273,7 @@ table .profile_picture{
 }
 
 /*Form-Box (Log-Reg)*/
-#form_box{
+#form_box, #form_box2{
     border-radius: 12px;
     text-align: center;
     min-height: 260px;
@@ -268,7 +285,7 @@ table .profile_picture{
     margin-bottom: 20px;
 }
 
-#form_box h2{
+#form_box h2, #form_box2 h2{
     text-align: center;
     font-size: 28px;
     color: whitesmoke;
@@ -277,14 +294,14 @@ table .profile_picture{
     margin-bottom: 4px;
     padding-top: 16px;
 }
-#form_box a{
+#form_box a, #form_box2 a{
     font-size: 18px;
     color: whitesmoke;
     text-align: center;
     text-decoration: underline;
 }
 
-#form_box a:hover{
+#form_box a:hover, #form_box2 a:hover{
     color: #e4a14a;
     text-decoration: underline;
     transition: all 0.4s ease-in;
@@ -333,7 +350,7 @@ table .profile_picture{
     border-radius: 6px;
     background-color: #e4a14a;
     margin-top: 20px;
- }
+}
 #form_box input[type="submit"]:hover{
     color: white;
     box-shadow: 0 0 4px #e4a14a;
@@ -348,12 +365,12 @@ table .profile_picture{
 
 }
 
- /*News*/
+/*News*/
 .news_container{
-     width: 97%;
-     border-collapse: separate;
-     border-spacing: 5px 32px;
-     animation: fadeIn 1.2s;
+    width: 97%;
+    border-collapse: separate;
+    border-spacing: 5px 32px;
+    animation: fadeIn 1.2s;
 }
 .news_item{
     padding: 10px;
@@ -374,8 +391,7 @@ table .profile_picture{
 .new_description{
     display: block;
     width: 60%;
-    top: 50%;
-    margin-top: 8%;
+    margin-top: 55px;
     padding-right: 30px;
     padding-left: 30px;
     height: fit-content;
@@ -406,10 +422,11 @@ hr{
 }
 
 /*Games && Game*/
-#title{
-    text-shadow: 2px 2px #202123;
+#title, #title2{
+    display: block;
+    margin: 30px auto;
     text-align: center;
-    margin: 40px;
+    text-shadow: 2px 2px #202123;
 }
 .games_container{
     display: flex;
@@ -473,7 +490,7 @@ hr{
     padding: 5%;
     border: none;
     width: 100%;
-    height: 880px;
+    height: 700px;
     transition: transform .2s;
 }
 .video:hover{
@@ -519,8 +536,8 @@ hr{
     font-size: 20px;
 }
 #price input[type="submit"]{
-    width: 100px;
-    font-size: 20px;
+    width: 120px;
+    font-size: 22px;
     padding: 8px;
     margin-left: 12px;
     border: none;
@@ -543,23 +560,24 @@ hr{
 }
 .checkOut_item{
     display: flex;
+    width: 800px;
     margin-top: 30px;
     padding: 20px;
     justify-content: space-between;
     color: whitesmoke;
-    height: auto;
     background-color: #202123;
     border-radius: 20px;
 }
 .checkOut_item img{
-    width: 17%;
+    width: 180px;
+    height: 270px;
     float: left;
     border-radius: 20px;
 }
 .checkOut_item a{
     float: right;
     font-size: 24px;
-    margin-top: 12%;
+    margin-top: 120px;
     color: whitesmoke;
     text-decoration: none;
 }
@@ -570,11 +588,11 @@ hr{
     transition: all 0.25s ease 0s;
 }
 .checkOut_item p{
-    margin-top: 10.8%;
+    margin-top: 116px;
     font-size: 22px;
 }
 .checkOut_item input[type="submit"]{
-    margin-top: 88%;
+    margin-top: 110px;
     color: whitesmoke;
     width: 95px;
     height: 45px;
@@ -586,17 +604,17 @@ hr{
     background-color: #e4a14a;
     transition: all 0.25s ease 0s;
 }
-#buy{
+.action{
     width: 220px;
     text-align: center;
     margin: auto;
     display: block;
     padding: 20px 12px;
 }
-#buy p{
+.action p{
     font-size: 30px;
 }
-#buy input[type="submit"]{
+.action input[type="submit"]{
     width: 200px;
     height: 40px;
     margin-top: 2px;
@@ -607,12 +625,12 @@ hr{
     background-color: #202123;
     transition: all 0.3s ease 0s
 }
-#buy input[type="submit"]:hover{
+.action input[type="submit"]:hover{
     cursor: pointer;
     background-color: #e4a14a;
     transition: all 0.25s ease 0s;
 }
-#buy p{
+.action p{
     text-align: center;
     padding-bottom: 20px;
     padding-top: 5px;
@@ -624,6 +642,7 @@ hr{
     display: flex;
     width: fit-content;
     background-color: #202123;
+    margin:auto;
     border-left: 1px groove #e4a14a;
     border-top: 1px groove #e4a14a;
     border-radius: 30px;
@@ -647,11 +666,16 @@ hr{
     align-items: center;
     justify-content: center;
 }
+.profile_pick_2{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto auto 15px;
+}
 .profile_pick_container .profile_pick{
     height: 250px;
     width: 250px;
     border-radius: 50%;
-    box-shadow: 0 2px #202123;
 }
 .profile_data_container{
     border-left: none;
@@ -719,7 +743,7 @@ input[type=file]::file-selector-button:hover {
     margin-top: 5px;
 
 }
-.reg_successfull{
+.successfull{
     width: fit-content;
     background-color: #cef6b9;
     color: #30592f;
@@ -749,18 +773,10 @@ input[type=file]::file-selector-button:hover {
     box-shadow:0 0 32px 5px rgba(252, 124, 124, 0.47);
     animation: fadeIn 0.3;
 }
-.profile_pick_2{
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    box-shadow: 0 2px #202123;
-    margin: auto auto 15px;
-}
 .header_avatar{
     width: 50px;
+    height: 50px;
     border-radius: 50%;
-    vertical-align: center;
-    horiz-align: center;
 }
 .header_avatar:hover{
     cursor: pointer;
@@ -786,17 +802,61 @@ input[type=file]::file-selector-button:hover {
 #windows{
     display: block;
 }
-#window_yes:hover{
+#warning{
+    margin: 5px auto;
+}
+#warning:hover{
     transition: all 0.3s ease 0s;
     background-color: #fa4444;
+}
+#window_no:hover{
+    transition: all 0.3s ease 0s;
+    background-color: #2dad00;
 }
 #cim{
     text-align: center;
 }
+.news_container a{
+    transition: all 1s;
+    text-decoration: none;
+}
+a hr{
+    color: whitesmoke;
+}
+#rating_container{
+    display: block;
+    margin: auto;
+}
+#rating_container h1 {
+    text-align: center;
+}
+.empty_sign{
+    display: block;
+    width: fit-content;
+}
+.empty_sign h1 {
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+.empty_sign h3 {
+    text-align: center;
+    font-size: 25px;
+    color: whitesmoke;
+}
+.empty_sign img{
+    display: block;
+    margin: auto;
+    width: 160px;
+    height: fit-content;
+}
+.empty_sign b{
+    color: #ff3e3e;
+}
 
 
 /*Mobile*/
-@media (max-width: 850px){
+@media (max-width: 900px){
     p{
         font-size: 14px;
     }
@@ -818,6 +878,7 @@ input[type=file]::file-selector-button:hover {
     i[class]{
         display: none;
     }
+   
     .inner_main{
         padding: 0;
     }
@@ -873,15 +934,14 @@ input[type=file]::file-selector-button:hover {
     #game img{
         width: 200px;
     }
+    #game > iframe, div{
+        margin: 0 auto 0 auto;
+    }
     .game_buy_button{
         width: 100px;
     }
     .game_buy_button button{
         font-size: 16px;
-    }
-    .video{
-        width: 230px;
-        height: 180px;
     }
     .game_buy_sign {
         display: block;
@@ -896,6 +956,10 @@ input[type=file]::file-selector-button:hover {
     }
     .game_buy_sign h4{
         font-size: 16px;
+    }
+    .video{
+        width: 70%;
+        height: 50%;
     }
     #price{
         display: flex;
@@ -918,51 +982,72 @@ input[type=file]::file-selector-button:hover {
         height: 100%;
         width: 100%;
     }
+    .header_avatar{
+        height: 30px;
+        width: 30px;
+    }
     .checkOut{
         width: fit-content;
         display: flex;
         flex-wrap: wrap;
-        padding: 0;
         justify-content: center;
+    }
+    .checkOut hr{
+        display: none;
     }
     .checkOut_item{
-        text-align: center;
-        width: 200px;
-        display: flex;
-        margin-top: 18px;
-        flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
+        width: 80%;
+        height: fit-content;
+        margin: 18px 20px;
     }
-    .checkOut_item img{
-        display: block;
-        width: 150px;
-    }
-    .checkOut_item a{
-        font-size: 20px;
-        margin-top: 10px;
-    }
+    .checkOut_item a, 
     .checkOut_item p{
-        width: fit-content;
-        padding-top: 1px;
-        display: block;
-        margin: auto;
-        text-align: center;
+        margin: 20px 12px 0 12px;
+        font-size: 14px;
     }
-    .checkOut_item button{
-        margin-top: 10px;
+    .checkOut_item img {
+        border: 1px solid black;
+        width: 150px;
+        margin: 0;
+        height: 220px;
     }
-    #buy p{
+    .checkOut_item input[type="submit"]{
+        margin-top: 20px;
+    }
+    .checkOut_item a::after{
+        content: "\a";
+        white-space: pre;
+    }
+    .action p{
         font-size: 30px;
     }
+    #cim{
+        font-size: 26px;
+        padding-top: 20px;
+    }
     #form_box{
-        width: fit-content;
+        width: max-content;
         margin:auto;
     }
     #form_box input{
         width: fit-content;
         margin: auto;
     }
-    .reg_successfull{
+    #form_box h2,
+    #form_box2 h2{
+        font-size: 24px;
+        padding: 10px 5px;
+    }
+    .successfull{
         padding: 20px;
+    }
+    .empty_sign img{
+        width: 100px;
+    }
+    .empty_sign h3 {
+        font-size: 14px;
     }
 }
