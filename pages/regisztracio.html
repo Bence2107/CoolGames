@@ -4,7 +4,6 @@
     <link rel="stylesheet" href="../style/style.css">
     <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
 <body>
@@ -27,10 +26,9 @@
             </ul>
         </nav>
     </header>
-    <main>
-        <div class="inner_main">
+    <main class="inner_main">
             <div class="inner">
-                <div class="content" id="reg_box">
+                <div class="content">
                     <h2>Regisztráció</h2>
                     <form>
                         <div class="input_field">
@@ -49,8 +47,28 @@
                     </form>
                 </div>
             </div>
-        </div>
     </main>
-    <script src="../js/index.js"></script>
+    <script>
+        const aboutUS = document.querySelector(".content h2");
+        const tableDisplay = document.querySelector(".content table");
+        let clicks = 0;
+        aboutUS.addEventListener("click", () => {
+            if(clicks === 0){
+                tableDisplay.style.display = "table";
+                tableDisplay.style.animation = "fadeIn";
+                tableDisplay.style.animationDuration = "2s";
+                clicks++;
+            }
+            else{
+                tableDisplay.style.animation = "fadeOut";
+                tableDisplay.style.animationDuration = "1s";
+                setTimeout(() => {
+                    tableDisplay.style.display = "none";
+                }, 900);
+                clicks--;
+            }
+            
+        }) 
+    </script>
 </body>
 </html>

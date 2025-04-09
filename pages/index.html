@@ -3,7 +3,6 @@
 <head>
     <link rel="stylesheet" href="../style/style.css">
     <link rel="icon" href="../img/header/favicon.png">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/0c6bdff3b5.js"></script>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -34,17 +33,17 @@
                     <div class="content_placer">
                         <h2>Üdvözöllek a CoolGames-en!</h2>
                         <p>Az oldal, ahol "Ingyen" szerezheted be a legújabb játékokat</p>
-                        <button onclick="document.getElementById('introduction').scrollIntoView();">Bővebb információ</button>
+                        <button onclick="document.getElementById('leiras').scrollIntoView();">Bővebb információ</button>
                     </div>
                 </div>
-                <div class="content" id="introduction">
+                <div class="content" id="leiras">
                     <h1>Az oldalról</h1>
                     <p>Ez az oldal egy webáruház a legújabb Videójátkok iparában.</p>
                     <p>Kis "cégként" igyekszünk minél elérhetőbb áron a játékokat. </p>
                     <p>Az oldal kezdetleges fázisban van, így egyelőre kevés játék áll rendelkezésünkre</p>
                     <p>...</p>
                     <br>
-                    <h2 id="aboutUs">Rólunk</h2>
+                    <h2>Rólunk</h2>
                     <table>
                         <tr>
                             <th colspan="2">PORT: 3306</th>
@@ -66,6 +65,29 @@
             </div>
         </div>
     </main>
-    <script src="../js/index.js"></script>
+    <script>
+        const aboutUS = document.querySelector(".content h2");
+        const tableDisplay = document.querySelector(".content table");
+        let clicks = 0;
+        aboutUS.addEventListener("click", () => {
+            if(clicks === 0){
+                tableDisplay.style.display = "table";
+                tableDisplay.style.animation = "fadeIn";
+                tableDisplay.style.animationDuration = "2s";
+                tableDisplay.scrollIntoView();
+                clicks++;
+            }
+            else{
+                tableDisplay.style.animation = "fadeOut";
+                tableDisplay.style.animationDuration = "1s";
+                setTimeout(() => {
+                    tableDisplay.style.display = "none";
+                }, 900);
+                clicks--;
+            }
+            
+        });
+         
+    </script>
 </body>
 </html>
