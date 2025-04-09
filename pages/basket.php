@@ -31,7 +31,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="../pages/profile/log.php">Bejelentkezés</a><br>
                         <a href="../pages/profile/reg.php">Regisztráció</a>
@@ -88,7 +88,7 @@
                         echo '<hr>';
                         while (($basketData = mysqli_fetch_assoc($basketQuery))!= null) {
                             echo ' <div class="checkOut_item">';
-                                echo '<img src="data:image/jpeg;base64,'.base64_encode($basketData['kep']).'" alt="">';
+                                echo '<img src="../img/assets/games/' .$basketData['id']. '.jpg" alt=""/>';
                                 echo ' <a href="game.php?name='.urlencode($basketData['nev']).'">'.$basketData['nev'].'</a>';
                                 echo ' <p>' . $basketData['ar'] . '&#128008;</p>';
                                 echo ' <form method="post" action="../functions/game/gameDeleteFromBasket.php">';

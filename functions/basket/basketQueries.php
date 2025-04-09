@@ -4,7 +4,7 @@
         exit();
     }
     //Basket
-    $basketQuery = mysqli_query($con, "SELECT id,kep,nev,ar FROM jatek 
+    $basketQuery = mysqli_query($con, "SELECT id,nev,ar FROM jatek 
                 INNER JOIN kosar on jatek.id = kosar.jatek_id 
                 INNER JOIN felhasznalo ON kosar.email = felhasznalo.email 
                 WHERE felhasznalo.email='$currentUserData[0]'");

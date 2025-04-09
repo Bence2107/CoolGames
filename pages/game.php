@@ -33,7 +33,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="../pages/profile/log.php">Bejelentkezés</a><br>
                         <a href="../pages/profile/reg.php">Regisztráció</a>
@@ -59,7 +59,7 @@
         <div class="inner">
             <h1 id="title"><?php echo $gameData['nev']?></h1>
             <div class="content" id="game">
-                <?php echo '<img src="data:image/jpeg;base64,'.base64_encode($gameData['kep']).'" alt="">'?>
+                <?php echo '<img src="../img/assets/games/' .$gameData['id']. '.jpg" alt=""/>'; ?>
                 <div>
                     <div id="rating_container">
                         <?php

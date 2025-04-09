@@ -2,7 +2,9 @@
     session_start();
     $_SESSION["news"] = true;
     include_once "../functions/database.php";
-    include_once "../functions/profile/profileData.php";
+    if(isset($_SESSION["email"])){
+        include_once "../functions/profile/profileData.php";
+    }
     include_once "../functions/news/newsQueries.php";
 
 ?>
@@ -29,7 +31,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="../pages/profile/log.php">Bejelentkezés</a><br>
                         <a href="../pages/profile/reg.php">Regisztráció</a>
@@ -53,7 +55,7 @@
 <main>
     <div class="inner_main">
         <div class="inner">
-            <?php  echo '<img id="new_image" src="data:image/jpeg;base64,'.base64_encode($newData[4]).'" alt=""/>';?>
+            <?php echo '<img id="new_image" src="../img/assets/new_images/' .$newData[0]. '.jpg" alt=""/>'; ?>
             <div class="content">
                 <h1 id="new_title"><?php echo $newData[1]?></h1>
                 <br>
@@ -61,7 +63,7 @@
                     <?php echo nl2br($newData[3])?>
                 </p>
                 <hr>
-                <p><?php echo $newData[5]?></p>
+                <p><?php echo $newData[4]?></p>
             </div>
         </div>
     </div>

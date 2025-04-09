@@ -31,7 +31,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="../pages/profile/log.php">Bejelentkezés</a><br>
                         <a href="../pages/profile/reg.php">Regisztráció</a>
@@ -98,7 +98,7 @@
                 <?php
                 while (($gameData = mysqli_fetch_assoc($top3GameQuery))!= null) {
                     echo '<div class="game">';
-                    echo ' <a href="game.php?name='.urlencode($gameData['nev']).'"><img src="data:image/jpeg;base64,'.base64_encode($gameData['kep']).'" alt=""></a>';
+                    echo ' <a href="game.php?name='.urlencode($gameData['nev']).'"><img src="../img/assets/games/' .$gameData['id']. '.jpg" alt=""></a>';
                     echo ' <h3> ' . $gameData['nev'];
                     echo '<br>';
                     echo '<span>' .$gameData['ar']. '&#128008;</span>';
@@ -113,7 +113,7 @@
                 <?php
                 while (($gameData = mysqli_fetch_assoc($gamesQuery))!= null) {
                     echo '<div class="game">';
-                        echo ' <a href="game.php?name='.urlencode($gameData['nev']).'"><img src="data:image/jpeg;base64,'.base64_encode($gameData['kep']).'" alt=""></a>';
+                        echo ' <a href="game.php?name='.urlencode($gameData['nev']).'"><img src="../img/assets/games/' .$gameData['id']. '.jpg" alt=""></a>';
                         echo ' <h3> ' . $gameData['nev'];
                             echo '<br>';
                             echo '<span>' .$gameData['ar']. '&#128008;</span>';

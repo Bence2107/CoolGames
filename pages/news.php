@@ -2,7 +2,9 @@
     session_start();
     $_SESSION["news"] = true;
     include_once "../functions/database.php";
-    include_once "../functions/profile/profileData.php";
+    if(isset($_SESSION["email"])){
+        include_once "../functions/profile/profileData.php";
+    }
     include_once "../functions/news/newsQueries.php";
 
 ?>
@@ -29,7 +31,7 @@
             if(!isset($_SESSION["email"])){
                 ?>
                 <li class="dropdown">
-                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user"></i></a>
+                    <a href="../pages/profile/profile.php">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
                         <a href="../pages/profile/log.php">Bejelentkezés</a><br>
                         <a href="../pages/profile/reg.php">Regisztráció</a>
@@ -65,7 +67,7 @@
                     echo '<hr>';
                     echo '<p>' . $newsData['datum']. '</p>';
                     echo '</div>';
-                    echo '<img src="data:image/jpeg;base64,'.base64_encode($newsData['kep']).'" alt=""/>';
+                    echo '<img src="../img/assets/new_images/' .$newsData['id']. '.jpg" alt=""/>';
                     echo '</div>';
                     echo '</a>';
                 }
