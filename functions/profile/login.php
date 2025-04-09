@@ -3,34 +3,31 @@
     include "../database.php";
 
     if($_SERVER['REQUEST_METHOD'] == "POST") {
-        $errors = array();
-
         $email = $_POST["email"];
         $passwd = $_POST["passwd"];
 
         if (!empty(trim($email)) && !filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = "invalid_email";
-            $_SESSION['login_failed'] = true;
+            $_SESSION['invalid_email'] = true;
         }
         $emailQuery = mysqli_query($con,"SELECT email,jelszo FROM felhasznalo WHERE email='$email'");
         if(mysqli_num_rows($emailQuery)>0){
-            $query = mysqli_fetch_row($emailQuery);
-            if(!password_verify($passwd,$query[1])){
-                $_SESSION['login_failed'] = true;
-                $errors[] = "hibas";
+            $userData = mysqli_fetch_assoc($emailQuery);
+            if(!password_verify($passwd,$userData['jelszo'])){
+                $_SESSION['wrong_password'] = true;
                 header("Location: ../../pages/profile/log.php");
+                exit();
             }
             else{
                 $_SESSION["email"] = $email;
                 header("Location: ../../index.php");
+                exit();
             }
         }
         else{
-            $errors[] = "hibas";
-            $_SESSION['login_failed'] = true;
+            $_SESSION['userNotFound'] = true;
             header("Location: ../../pages/profile/log.php");
+            exit();
         }
-
-        $_SESSION["errors"] = $errors;
-        exit();
     }
+    header("Location: ../../../index.php");
+    exit();
