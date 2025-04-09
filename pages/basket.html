@@ -17,48 +17,47 @@
             <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="basket.html" id="active">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <div class="dropdown">
-                <li><a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a></li>
-                <div class="dropdown_content">
-                    <a href="profile/log.html">Bejelentkezés</a><br>
-                    <a href="profile/reg.html">Regisztráció</a>
-                </div>
-            </div>
+            <li class="dropdown">
+                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+                    <div class="dropdown_content">
+                        <a href="profile/log.html">Bejelentkezés</a><br>
+                        <a href="profile/reg.html">Regisztráció</a>
+                    </div>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     <div class="inner_main">
         <div class="inner">
-            <h1 id="cim">Kosár</h1>
-            <section>
-                <aside class="info">
+            <h1 id="title">Kosár</h1>
                 <hr>
-                <table class="checkOut">
-                    <tr>
-                        <td><img src="../img/games/gameexample.png" alt=""></td>
-                        <td><a href="game.html"><p id="gameLink">The Last of Us: Part II.</p></a></td>
-                        <td><p>59.99 &#128008;</p></td>
-                        <td><button>Törlés</button></td>
-                    </tr>
-                    <tr>
-                        <td><img src="../img/games/gameexample2.jpg" alt=""></td>
-                        <td><p>The Witcher 3</p></td>
-                        <td><p>39.99 &#128008;</p></td>
-                        <td><button>Törlés</button></td>
-                    </tr>
-
-                </table>
-                <hr>
-                </aside>
-                <aside class="info2">
-                    <div class="content" id="buy">
-                        <h1>Összesen:</h1>
-                        <p>99.98 &#128008</p>
-                        <button>Vásárlás</button>
+                <div class="checkOut">
+                    <div class="checkOut_item">
+                        <img src="../img/games/gameexample.png" alt="">
+                        <a href="game.html">The Last of Us: Part II.</a>
+                        <p>30 &#128008;</p>
+                        <form>
+                        <button>Törlés</button>
+                        </form>
                     </div>
-                </aside>
-            </section>
+                    <div class="checkOut_item">
+                        <img src="../img/games/gameexample2.jpg" alt="">
+                        <a href="game.html">The Witcher 3</a>
+                        <p>20 &#128008;</p>
+                        <form>
+                        <button>Törlés</button>
+                        </form>
+                    </div>
+                </div>
+                <hr>
+                <div id="buy">
+                    <h1>Összesen:</h1>
+                    <p>50 &#128008;</p>
+                    <form>
+                        <button>Vásárlás</button>
+                    </form>
+                </div>
         </div>
     </div>
 </main>

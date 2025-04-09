@@ -17,34 +17,31 @@
             <li><a href="../news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="../games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="../basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <div class="dropdown">
-                <li><a href="profile.html" id="active">Fiók <i class="fa-solid fa-user"></i></a></li>
-                <div class="dropdown_content">
-                    <a href="log.html">Bejelentkezés</a><br>
-                    <a href="reg.html">Regisztráció</a>
-                </div>
-            </div>
+            <li class="dropdown">
+                <a href="profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+                    <div class="dropdown_content">
+                        <a href="log.html" id="active">Bejelentkezés</a><br>
+                        <a href="reg.html">Regisztráció</a>
+                    </div>
+            </li>
         </ul>
     </nav>
 </header>
     <main>
         <div class="inner_main">
-            <div class="inner">
-                <div class="content" id="reg_box">
+                <div id="form_box">
                     <h2>Bejelentkezés</h2>
                     <form>
                         <div class="input_field">
-                            <input type="text" placeholder="Felhasználónév" required>
+                            <input type="text" placeholder="Email">
                         </div>
                         <div class="input_field">
-                            <input type="password" placeholder="Jelszó" required>
+                            <input type="password" placeholder="Jelszó">
                         </div>
                         <button>Bejelentkezés</button>
                     </form>
                 </div>
-            </div>
         </div>
     </main>
-    <script src="../../js/index.js"></script>
 </body>
 </html>

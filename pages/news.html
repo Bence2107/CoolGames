@@ -17,32 +17,42 @@
             <li><a href="news.html"  id="active">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="games.html">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <div class="dropdown">
-                <li><a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a></li>
-                <div class="dropdown_content">
-                    <a href="profile/log.html">Bejelentkezés</a><br>
-                    <a href="profile/reg.html">Regisztráció</a>
-                </div>
-            </div>
+            <li class="dropdown">
+                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+                    <div class="dropdown_content">
+                        <a href="profile/log.html">Bejelentkezés</a><br>
+                        <a href="profile/reg.html">Regisztráció</a>
+                    </div>
+            </li>
         </ul>
     </nav>
 </header>
     <main>
         <div class="inner_main">
            <div class="inner">
-               <div>
-                   <table class="news_container">
-                       <tr onclick="window.location='new.html'">
-                           <td><h1>Mégis készül a The Last of Us 3?</h1>
+                   <div class="news_container">
+                       <div class="news_item" onclick="window.location='new.html'">
+                           <div class="new_description">
+                               <h1>Mégis készül a The Last of Us 3?</h1>
                                <br>
                                <p>Úgy tűnik formálódik a The Last of Us 3, de még nagyon, de nagyon az elején tartanak a munkálatok.
                                </p>
-                           </td>
-                           <td><img src="../img/news/alhir1.jpg" alt=""></td>
-                           <td></td>
-                        </tr>
-                   </table>
-               </div>
+                               <hr>
+                               <p>2024.03.03</p>
+                           </div>
+                           <img src="../img/news/alhir1.jpg" alt="">
+                       </div>
+                       <div class="news_item">
+                           <div class="new_description">
+                               <h1>Játék vs IRL - A valóságban is leforgatták a GTA VI előzetesét</h1>
+                               <br>
+                               <p>Egy tehetséges francia GTA rajongó a valóságban is újraalkotta a GTA VI előzetesének egyes felvételeit, megmutatva, hogy mennyire valósághű a játék</p>
+                               <hr>
+                               <p>2024.03.21</p>
+                           </div>
+                           <img src="../img/news/alhir2.jpg" alt="">
+                       </div>
+                  </div>
            </div>
         </div>
     </main>

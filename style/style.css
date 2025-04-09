@@ -1,52 +1,70 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 html{
     scroll-behavior: smooth;
-    scrollbar-color:#e4a14a #202123 ;
 }
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+::-webkit-scrollbar{
+    width: 10px;
+    margin-left: 20px;
+}
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #28292b;
+    border-radius: 20px; 
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: hsl(0, 0%, 51%);
+}
+@keyframes fadeIn {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
 body{
     overflow-y: scroll;
+    overflow-x: hidden;
     background: #202123;
     margin: 0 5px;
 }
 h1{
     color: #e4a14a;
+    text-shadow: 3px 4px #202123;
     text-transform: uppercase;
 }
 h2{
-    margin-right: auto;
+    text-shadow: 10px 10px #202123;
     text-transform: uppercase;
 }
-
+p{
+    color: whitesmoke;
+    font-size: 18px;
+    text-align: justify;
+}
 /*Header*/
 header{
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 2;
     background-color: #202123;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 10px 12%;
-    margin: auto auto 2%;
-    border-radius: 45px;
+    margin-bottom: 2%;
+    border-radius: 0 0 80px 80px;
     border: 3px groove #e4a14a;
 }
 header .logo{
     width: 250px;
     margin-right: auto;
-}
-header li, a, button{
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 20px;
-    color: whitesmoke;
-    text-shadow: 1px 1px black;
-    text-decoration: none;
 }
 header .navbar{
     list-style: none;
@@ -55,53 +73,61 @@ header .navbar li{
     display: inline-block; /*egymás mellé rakja a List Itemeket*/
     padding: 10px 20px;
 }
-header .navbar a:hover{
+
+header .navbar li a{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: whitesmoke;
+    text-shadow: 1px 1px black;
+    text-decoration: none;
+}
+header .navbar li a:hover{
     color: #e4a14a;
-    margin: auto;
-    transition: all 0.45s ease 0s; /* Késleltető Animáció*/
+    transition: all 0.45s ease 0s;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
-   
 }
 header #active{
     color: #e4a14a;
+    text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }
+
 .dropdown{
     position: relative;
     display: inline-block;
 }
+
 .dropdown_content{
     background-color: rgb(40, 41, 43);
     display: block;
-    padding: 3px 6px;
-    border: 3px groove #e4a14a;
-    border-radius: 6px;
+    padding: 4px 8px;
+    margin: 5px 0 0 10px;
+    border: 2px groove #e4a14a;
+    border-radius: 12px;
     box-shadow: 1px 1px 1px #202123;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     visibility: hidden;
 }
 .dropdown:hover .dropdown_content{
     visibility: visible;
-    margin-left: 20px;
 }
 
 /*Main*/
 .inner_main{
     background-color: #28292b;
-    width: fit-content;
+    width: 95%;
+    max-width: max-content;
     margin: auto;
     border-radius: 20px;
-    border-collapse: inherit;
     padding: 20px;
-    display: flex;
-    transition: all 0.45s ease 0s; /* Animáció*/
+    transition: all 0.45s ease 0s;
     animation: fadeIn 1.2s;
 }
 .inner{
     width: 95%;
     margin: auto;
-    padding: 50px;
-    transition: all 0.45s ease 0s; /* Animáció*/
+    padding: 30px;
 
 }
 .wallpaper_container{
@@ -112,45 +138,43 @@ header #active{
     background-image: url("../img/home/helloDivHatter.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: blur(5px);
-    font-size: 26px;
-    padding: 200px;
-    animation: fadeIn 1s; /*keyFrame hozzá lentebb*/
+    padding: 200px 120px;
+    animation: fadeIn 1s;
 }
-.content_placer>h2 {
+
+.wallpaper_content h2 {
     font-size: 48px;
     font-family: "Montserrat", sans-serif;
     text-transform: uppercase;
-    text-shadow: 3px 3px black;
+    text-shadow: 3px 3px 1px black;
 }
-.content_placer>p{
-    text-shadow: 1px 1px black;
+.wallpaper_content  p{
+    text-shadow: 1px 1px 1px black;
 }
-
-.content_placer button{
-    border-radius: 5px;
-    font-size: 20px;
+.wallpaper_content button{
     width: 200px;
     height: 40px;
     margin-top: 15px;
     border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: whitesmoke;
     background-color: #28292b;
-    transition: all 0.3s ease 0s; /* Animáció*/
+    transition: all 0.3s ease 0s;
 }
-.content_placer button:hover{
+.wallpaper_content  button:hover{
     cursor: pointer;
-    color: black;
-    background-color: rgb(228, 161, 74);
-    transition: all 0.3s ease 0s; /* Animáció*/
+    color: #202123;
+    background-color: #e4a14a;
+    transition: all 0.3s ease 0s;
 }
-
 .content{
     border-radius: 20px;
     font-family: "Montserrat", sans-serif;
     width: 95%;
     margin: 0 auto 0 auto;
-    background-color: rgb(32, 33, 35) ;
-    box-shadow: 3px 3px rgb(32, 33, 35), 0 0 3px #e4a14a;
+    background-color: #202123 ;
+    box-shadow: 3px 3px #202123, 0 0 3px #e4a14a;
     border-top: 1px groove #e4a14a;
     border-left: 1px groove #e4a14a;
     animation: fadeIn 1s;
@@ -158,127 +182,168 @@ header #active{
     padding: 50px 50px;
 }
 .content #aboutUs{
-    text-transform: uppercase;
     display: inline;
-    color: #e4a14a;
     cursor: pointer;
-    font-size: 32px;
+}
+.content ul{
+    margin-left: 1%;
+}
+.content li{
+    padding-top: 10px;
+}
+#cat{
+    display: block;
+    margin: auto;
+    width: 220px;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+#cat:hover{
+    transform: scale(1.04);
+    cursor: pointer;
+    /*Ide rakhatod a Rainbow box-shadow-ot*/
 }
 
 .content table{
     border-radius: 20px;
-    width: 100%;
-    margin-top: 30px;
+    width: 80%;
+    margin:30px auto auto;
     color: whitesmoke;
     border: 10px double #e4a14a;
     text-shadow: 2px 2px 1px black;
     box-shadow: 2px 2px 5px black;
     display: none;
+    font-size: 30px;
 }
 
-.content table tr, th, td{
-    font-size: 30px;
+.content table th, td{
     padding: 12px 0;
     width: 50%;
     border: none;
     text-align: center;
     border-collapse: collapse;
 }
-.border{
+table .profile_picture{
     width: 200px;
     height: 200px;
     border-radius: 50%;
 }
 
-/*Reg*/
-#reg_box{
-    padding: 10px 56px;
+/*Form-Box (Log-Reg)*/
+#form_box{
+    border-radius: 12px;
     text-align: center;
+    margin: auto;
+    width: 100%;
+    background-color: #202123;
+    border-top: 2px groove #e4a14a;
+    border-left: 2px groove #e4a14a;
 }
-#reg_box h2{
-    font-size: 22px;
-    color: #e4a14a;
-    margin-bottom: 24px;
+#form_box h2{
+    font-size: 28px;
+    color: whitesmoke;
+    text-shadow: 1px 1px #28292b;
+    margin-top: 0;
+    margin-bottom: 4px;
+    padding-top: 16px;
 }
 .input_field{
+    margin: 12px 24px;
+}
+.input_field input{
+    color: #e4a14a;
+    font-size: 16px;
+    border-radius: 12px;
+    border: none;
+    outline: 0;
+    width: 300px;
+    background-color: #28292b;
+    transition: all 0.5s ease-out;
+    box-shadow: 1px 1px #e4a14a;
+    border-right: 1px outset #e4a14a;
+    border-bottom: 1px outset #e4a14a;
+    padding: 12px 20px;
+}
+.input_field input:focus{
+    background-color: hsl(220, 4%, 20%);
+    color: #e4a14a;
+    transition: all 0.5s ease-in;
+}
+.input_field input::placeholder{
+    color: whitesmoke;
+    text-shadow: 1px 1px #202123;
+}
+.input_field input:focus::placeholder{
+    color: #e4a14a;
+    transition: color 0.5s ease;
+}
+#form_box button{
+    color: whitesmoke;
+    text-shadow: 1px 1px #202123;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid #28292b;
+    border-radius: 6px;
+    background-color: #e4a14a;
     margin-bottom: 12px;
-    text-shadow: 1px 1px 2px #202123;
- }
- .content .input_field input{
-     outline: 0;
-     border: 3px groove #202123;
-     border-radius: 6px;
-     color: whitesmoke;
-     background-color: #28292b;
-     box-shadow: 1px 1px 1px #202123;
-     padding: 14px;
-     width: 98%;
-     margin: 0 auto 0 auto;
-  }
+}
+#form_box button:hover{
+    color: white;
+    box-shadow: 0 0 4px #e4a14a;
+    cursor: pointer;
+}
 .content button {
     font-size: 16px;
     background-color: #28292b;
     border: 3px groove #202123;
     box-shadow: 1px 1px 1px #202123;
     padding: 8px 12px;
-  }
- @keyframes fadeIn {
-     0% {opacity: 0;}
-     100% {opacity: 1;}
- }
- @keyframes fadeOut {
-     0% {opacity: 1;}
-     100% {opacity: 0;}
- }
+}
 
  /*News*/
- .news_container{
-     width: 1245px;
-     margin: 0 auto 0 auto;
+.news_container{
+     width: 97%;
      border-collapse: separate;
-     border-spacing: 1px 32px;
+     border-spacing: 5px 32px;
      animation: fadeIn 1.2s;
- }
- .news_container tr{
-     border: 0;       /*Ez is */
-     display: block;  /*Ez a kettő kell ide, hogy működjön a border-radius*/
-     height: fit-content;
-     border-radius: 30px;
-     animation: fadeIn 1.2s;
- }
- .news_container tr:hover{
-     background-color: #202123;
-     border-top: 1px groove #e4a14a;
-     border-left: 1px groove #e4a14a;
-     transition: all 0.25s ease 0s;
-     cursor: pointer;
- }
- .news_container td{
-     width: 40%;
- }
- .news_container td:first-of-type{
-     width: 60%;
-     padding-left: 20px;
- }
- .news_container img{
-     width: 450px;
-     border-radius: 20px;
- }
- .news_container h1{
-     text-transform: uppercase;
-     font-size: 26px;
-     text-align: justify;
- }
-p{
-     color: whitesmoke;
-     font-size: 18px;
-     text-align: justify;
+}
+.news_item{
+    padding: 10px;
+    display: flex;
+    width: fit-content;
+    margin-bottom: 20px;
+    border-radius: 30px;
+    background-color: #202123;
+    box-shadow: 2px 3px #232323;
+}
+.news_item:hover{
+    background-color: rgba(0, 0, 0, 0.11);
+    border-top: 1px groove #e4a14a;
+    border-left: 1px groove #e4a14a;
+    transition: all 0.25s ease 0s;
+    cursor: pointer;
+}
+.new_description{
+    display: block;
+    width: 60%;
+    top: 50%;
+    margin-top: 8%;
+    padding-right: 30px;
+    vertical-align: center;
+    padding-left: 30px;
+    height: fit-content;
+}
+.news_item img{
+    padding: 30px;
+    width: 40%;
+    height: 30%;
+    border-radius: 30px;
 }
 
 /*New*/
-#news_image{
+#new_image{
     display: block;
-    width: 45%;
+    width: 75%;
     margin: auto auto 50px;
     border-radius: 30px;
     animation: fadeIn 1.2s;
@@ -287,30 +352,37 @@ hr{
     margin-top: 30px;
     margin-bottom: 10px;
 }
-#cim{
-    font-size: 34px;
+#new_title {
+    text-shadow: 2px 2px #202123;
+    padding-bottom: 25px;
     text-align: center;
-    padding: 30px;
+}
+
+/*Games && Game*/
+#title{
+    text-shadow: 2px 2px #202123;
+    text-align: center;
+    margin: 40px;
 }
 .games_container{
-    width: 1300px;
-    display: block;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     animation: fadeIn 1.2s;
 }
 
-/*Games*/
 .game{
-    float: left;
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     margin: 1px;
 }
 .game img{
-    width: 260px;
+    width: 270px;
+    height: 400px;
     border-radius: 20px;
     transition: transform .2s;
     filter: grayscale(50%);
-    box-shadow: 0 0 11px black;
+    box-shadow: 0 12px 12px #202123;
 }
 
 .game img:hover{
@@ -320,14 +392,14 @@ hr{
     box-shadow: 0 0 11px rgb(70, 70, 70);
 }
 .game h3{
+    color: #e4a14a;
+    text-shadow: 2px 2px #202123;
     padding-top: 10px;
 }
-
-/*Game*/
-#gameName{
-    text-align: center;
-    padding-bottom: 30px;
+.game h3 span{
+    color: whitesmoke;
 }
+
 .game_container{
     text-align: center;
     width: 50%;
@@ -336,164 +408,407 @@ hr{
     background-color: #202123;
 }
 #game{
+    display: flex;
+    flex-wrap: wrap;
     margin-bottom: 30px;
-    width: 65%;
 }
 #game h3{
     text-align: left;
     margin-top: 30px;
 }
-#game p{
-    text-align: justify-all;
-}
 #game img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    width: 300px;
+    width: 350px;
+    margin: auto auto 10px;
     padding-right: 10px;
     border-radius: 20px;
 }
-#game_description{
-    text-align: justify;
-    font-size: 20px;
-}
-#game_description2{
-    width: 60%;
-}
 .video{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     padding: 5%;
-    border:none ;
-    width:80%;
-    height: 500px;
+    border: none;
+    width: 100%;
+    height: 880px;
     transition: transform .2s;
 }
 .video:hover{
     transform: scale(1.02);
 }
 .game_buy_sign {
+    display: flex;
+    width: fit-content;
+    flex-wrap: nowrap;
+    align-items: center;
     background-color: #28292b;
     border: solid 0.3em #28292b;
     border-left-color: #e4a14a;
     margin-top: 30px;
     padding: 15px;
     border-radius: 8px;
-    font-size: 26px;
+    font-size: 30px;
 }
-.game_buy_button{
-    margin: -30px 0 0 68%;
-    border-radius: 4px;
-    width: 30%;
-}
-.game_buy_button button{
-    width: 150px;
-    font-size: 24px;
-    border-radius: 4px;
-    height: auto;
-}
-.game_buy_button button:hover{
-    background-color: #e4a14a;
-    color: black;
-    transition: all 0.25s ease 0s;
-    cursor: pointer;
-}
-
 #price{
     display: flex;
-    float: left;
-    padding: 4px;
-    background-color: black;
-    font-size: 22px;
+    align-items: center;
+    justify-content: center;
+    background-color: #141515;
+    padding: 12px;
+    margin-left: 40px;
+    border-radius: 6px;
+    width: 220px;
+    font-size: 18px;
+    
 }
 #price p{
-    padding: 12px;
-    text-align: center;
-    font-size: 22px;
-}
-/*Kosár*/
-section{
-    display: flex;
-    animation: fadeIn 1.2s;
-}
-.info{
-    float: left;
-    margin-right: 40px;
-}
-
-.info2{
-    float: right;
-}
-.info2 button{
-    color:whitesmoke;
-    background-color: #e4a14a;
-}
-.info2 button:hover{
-    color:black;
-    cursor: pointer;
-    transition: all 0.25s ease 0s;
-}
-.checkOut{
-    border-collapse: separate;
-    border-spacing: 10px;
-    width: 65%;
-}
-.checkOut td,th{
-    padding: 2px;
-    height: auto;
-}
-.checkOut td:nth-child(1){
-    width: 25%;
-}
-.checkOut td:nth-child(2){
-    width: 50%;
-    padding: 25px;
-}
-.checkOut td:nth-child(2) p{
-    font-size: 22px;
-}
-.checkOut td:nth-child(3){
     font-size: 20px;
 }
-.checkOut img{
-    width: 100%;
-    float: left;
-    border-radius: 30px;
-}
-.checkOut button{
+#price button{
+    font-size: 20px;
+    padding: 8px;
+    margin-left: 12px;
+    border: none;
     color: whitesmoke;
-    height: 45px;
-    width: 95px;
-    align-items: center;
+    transition: background 0.4s ease-in;
+}
+#price button:hover{
     background-color: #e4a14a;
-    border-radius: 10px;
+    transition: background 0.4s ease-in;
+    cursor: pointer;
+}
+
+/*Basket*/
+.checkOut{
+    display: block;
+    width: fit-content;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+.checkOut_item{
+    display: flex;
+    margin-top: 30px;
+    padding: 20px;
+    justify-content: space-between;
+    color: whitesmoke;
+    height: auto;
+    background-color: #202123;
+    border-radius: 20px;
+}
+.checkOut_item img{
+    width: 20%;
     float: left;
 }
-.checkOut button:hover{
+.checkOut_item a{
+    float: right;
+    font-size: 24px;
+    margin-top: 110px;
+    color: whitesmoke;
+    text-decoration: none;
+}
+.checkOut_item a:hover{
     cursor: pointer;
-    color: #202123;
+    color: #e4a14a;
+    text-decoration: underline;
     transition: all 0.25s ease 0s;
 }
-#gameLink:hover{
-    text-decoration: underline;
+.checkOut_item p{
+    margin-top: 100px;
+    font-size: 22px;
+}
+.checkOut_item button{
+    margin-top: 95px;
+    color: whitesmoke;
+    width: 95px;
+    height: 45px;
+    background-color: #141515;
+    border-radius: 10px;
+}
+.checkOut_item button:hover{
     cursor: pointer;
+    background-color: #e4a14a;
     transition: all 0.25s ease 0s;
 }
 #buy{
-    width: 270px;
+    width: 220px;
     text-align: center;
+    margin: auto;
     display: block;
-    padding: 30px;
+    padding: 20px 12px;
+}
+#buy p{
+    font-size: 30px;
 }
 #buy button{
-    width: 120px;
-    border-radius: 20px;
+    width: 200px;
+    height: 40px;
+    margin-top: 2px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: whitesmoke;
+    background-color: #202123;
+    transition: all 0.3s ease 0s
+}
+#buy button:hover{
+    cursor: pointer;
+    background-color: #e4a14a;
+    transition: all 0.25s ease 0s;
 }
 #buy p{
     text-align: center;
     padding-bottom: 20px;
     padding-top: 5px;
+}
+
+/*Profile*/
+.profile_container{
+    border: 1px solid #e4a14a;
+    display: flex;
+    width: fit-content;
+    background-color: #202123;
+    border-left: 1px groove #e4a14a;
+    border-top: 1px groove #e4a14a;
+    border-radius: 30px;
+}
+.profile_pick_container{
+    padding: 30px;
+    width: 50%;
+    margin-right: 20px;
+    display: flex;
+    border-top-left-radius: 29px;
+    border-bottom-left-radius: 29px;
+    align-items: center;
+    justify-content: center;
+    background-color: #e4a14a;
+}
+.profile_pick{
+    background-color: #e4a14a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.profile_pick_container .profile_pick{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    box-shadow: 0 2px #202123;
+}
+.profile_data_container{
+    height: 100%;
+    width: 60%;
+    padding: 40px;
+}
+.profile_data_container h2{
+    color: whitesmoke;
+    font-size: 22px;
+}
+.profile_data{
+    color: whitesmoke;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+input[type=file]{
+    color: white;
+}
+input[type=file]::file-selector-button {
+    color: whitesmoke;
+    text-shadow: 1px 1px #202123;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid #28292b;
+    border-radius: 6px;
+    background-color: #e4a14a;
+    margin: 6px 12px;
+    width: 150px;
+}
+input[type=file]::file-selector-button:hover {
+    box-shadow: 0 0 4px #e4a14a;
+    cursor: pointer;
+}
+.profile_buttons{
+    display: grid;
+}
+.profile_buttons button{
+    color: whitesmoke;
+    text-shadow: 1px 1px #202123;
+    font-size: 16px;
+    padding: 6px 12px;
+    border: 2px solid #28292b;
+    border-radius: 6px;
+    background-color: #e4a14a;
+    margin: auto;
+    width: 180px;
+}
+.profile_buttons button:hover{
+    color: white;
+    box-shadow: 0 0 4px #e4a14a;
+    cursor: pointer;
+}
+
+.profile_container #logOut{
+    margin-top: 20px;
+    display: grid;
+}
+
+/*Mobile*/
+@media (max-width: 850px){
+    p{
+        font-size: 14px;
+    }
+    header .navbar li{
+        padding-bottom: 0;
+        padding-top: 0;
+    }
+    header .navbar li a{
+        font-size: 14px;
+    }
+    .dropdown_content{
+        margin: 5px 0 0 -20px;
+    }
+    i[class]{
+        display: none;
+    }
+    .inner_main{
+        padding: 0;
+    }
+    .inner{
+        padding: 20px 0;
+    }
+    .wallpaper_container{
+        padding-left: 20px;
+    }
+    .wallpaper_content h2{
+        font-size: 32px;
+    }
+    .content table{
+        font-size: 16px;
+    }
+    .content table .profile_picture{
+        width: 100px;
+        height: 100px;
+    }
+    .content h1{
+        font-size: 26px;
+    }
+    .news_container h1{
+        font-size: 10px;
+    }
+    .news_container p{
+        font-size: 14px;
+    }
+    .news_container img{
+        width: 150px;
+    }
+    .news_item{
+        display: block;
+    }
+    .news_item img{
+        width: 100%;
+    }
+    .new_description{
+        width: fit-content;
+    }
+    .new_description h1{
+        font-size: 22px;
+    }
+    .new_description p{
+        font-size: 18px;
+    }
+    #new_image{
+        width: 90%;
+    }
+    .game_buy_sign{
+        font-size: 18px;
+    }
+    #game img{
+        width: 200px;
+    }
+    .game_buy_button{
+        width: 100px;
+    }
+    .game_buy_button button{
+        font-size: 16px;
+    }
+    .video{
+        width: 230px;
+        height: 180px;
+    }
+    .game_buy_sign {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: fit-content;
+        padding: 10px;
+    }
+    .game_buy_sign h4{
+        width: 100%;
+        text-align: center;
+    }
+    .game_buy_sign h4{
+        font-size: 16px;
+    }
+    #price{
+        display: flex;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        transform: scale(0.8);
+    }
+    .profile_container{
+        flex-direction: column;
+        width: fit-content;
+    }
+    .profile_pick_container{
+        margin-right: 0;
+        width: 100%;
+        border-radius: 29px;
+    }
+    .profile_data_container{
+        margin-top: 20px;
+        height: 100%;
+        width: 100%;
+    }
+    .checkOut{
+        width: fit-content;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        justify-content: center;
+    }
+    .checkOut_item{
+        text-align: center;
+        width: 200px;
+        display: flex;
+        margin-top: 18px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .checkOut_item img{
+        display: block;
+        width: 150px;
+    }
+    .checkOut_item a{
+        font-size: 20px;
+        margin-top: 10px;
+    }
+    .checkOut_item p{
+        width: fit-content;
+        padding-top: 1px;
+        display: block;
+        margin: auto;
+        text-align: center;
+    }
+    .checkOut_item button{
+        margin-top: 10px;
+    }
+    #buy p{
+        font-size: 30px;
+    }
+    #form_box{
+        width: fit-content;
+        margin:auto;
+    }
+    #form_box input{
+        width: fit-content;
+        margin: auto;
+    }
 }

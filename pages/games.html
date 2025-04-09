@@ -5,7 +5,7 @@
     <link rel="icon" href="../img/header/favicon.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/0c6bdff3b5.js"></script>
+    <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
     <title>Játékok</title>
 </head>
 <body>
@@ -17,30 +17,52 @@
             <li><a href="news.html">Hírek <i class="fa-solid fa-newspaper"></i></a></li>
             <li><a href="games.html" id="active">Játékok <i class="fa-solid fa-gamepad"></i></a></li>
             <li><a href="basket.html">Kosár <i class="fa-solid fa-cart-shopping"></i></a></li>
-            <div class="dropdown">
-                <li><a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a></li>
-                <div class="dropdown_content">
-                    <a href="profile/log.html">Bejelentkezés</a><br>
-                    <a href="profile/reg.html">Regisztráció</a>
-                </div>
-            </div>
+            <li class="dropdown">
+                <a href="profile/profile.html">Fiók <i class="fa-solid fa-user"></i></a>
+                    <div class="dropdown_content">
+                        <a href="profile/log.html">Bejelentkezés</a><br>
+                        <a href="profile/reg.html">Regisztráció</a>
+                    </div>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     <div class="inner_main">
         <div class="inner">
-            <h1 id="cim">Játékaink</h1>
+            <h1 id="title">Játékaink</h1>
             <div class="games_container">
                 <div class="game">
                     <a href="game.html"><img src="../img/games/gameexample.png" alt=""></a>
-                    <h3>The Last of Us: Part II.</h3>
-                    <h4>59.99&#128008;</h4>
+                    <h3>The Last of Us: Part II. <br> <span>30&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample5.jpg" alt="">
+                    <h3>F1 23 <br> <span>30&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample3.png" alt="">
+                    <h3>Grand Theft Auto V <br> <span>20&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample4.jpg" alt="">
+                    <h3>Minecraft <br> <span>10&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample7.jpg" alt="">
+                    <h3>Rayman Legends <br> <span>2&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample8.jpg" alt="">
+                    <h3>Rise of The Tomb Raider <br> <span>25&#128008;</span></h3>
+                </div>
+                <div class="game">
+                    <img src="../img/games/gameexample6.png" alt="">
+                    <h3>The Sims 4 <br> <span>0&#128008;</span></h3>
                 </div>
                 <div class="game">
                     <img src="../img/games/gameexample2.jpg" alt="">
-                    <h3>The Witcher 3</h3>
-                    <h4>34.99</h4>
+                    <h3>The Witcher 3 <br> <span>20&#128008;</span></h3>
                 </div>
             </div>
         </div>

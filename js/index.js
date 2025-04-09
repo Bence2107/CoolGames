@@ -1,4 +1,4 @@
-const aboutUS = document.querySelector(".content h2");
+const aboutUS = document.getElementById("aboutUs");
 const tableDisplay = document.querySelector(".content table");
 let clicks = 0;
 aboutUS.addEventListener("click", () => {
