@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 html{
     scroll-behavior: smooth;
+    scrollbar-color:#e4a14a #202123 ;
 }
 *{
     box-sizing: border-box;
@@ -8,83 +9,100 @@ html{
     padding: 0;
 }
 body{
-    background: rgb(32, 33, 35);
+    overflow-y: scroll;
+    background: #202123;
+    margin: 0 5px;
 }
-h1{ /*Teszt*/
-    color:burlywood;
+h1{
+    color: #e4a14a;
     text-transform: uppercase;
-    margin-right: auto;
 }
 h2{
+    margin-right: auto;
     text-transform: uppercase;
+}
+
+/*Header*/
+header{
+    position: sticky; /*Ez tartja fent a Header-t görgetskor*/
+    top: 0;
+    z-index: 1;
+    background-color: #202123;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 12%;
+    margin: auto auto 2%;
+    border-radius: 45px;
+    border: 3px groove #e4a14a;
+}
+header .logo{
+    width: 250px;
     margin-right: auto;
 }
-/*Header*/
-.header{
-    display: flex;
-    justify-content: flex-end;
-    align-items: end;
-    padding: 40px 10%;
-    margin: auto;
-}
-.header > li,a,button{
+header li, a, button{
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    font-size: 18px;
+    font-size: 20px;
     color: whitesmoke;
     text-shadow: 1px 1px black;
     text-decoration: none;
 }
-.navbar{
+header .navbar{
     list-style: none;
 }
-.navbar li{
-    display: inline-block;
+header .navbar li{
+    display: inline-block; /*egymás mellé rakja a List Itemeket*/
     padding: 10px 20px;
 }
-.navbar li a:hover{
-    color: burlywood;
+header .navbar a:hover{
+    color: #e4a14a;
     margin: auto;
-    transition: all 0.3s ease 0s; /* Animáció*/
+    transition: all 0.45s ease 0s; /* Késleltető Animáció*/
+    text-shadow: 1px 1px black, 0 0 3px #e4a14a;
+   
 }
-.navbar>.bevasarlokocsi{
-    filter: drop-shadow(2px 2px 2px burlywood);
+header #active{
+    color: #e4a14a;
 }
-.headerButton{
-    border-radius: 20px;
-    font-size: 20px;
-    width: 200px;
-    height: 40px;
-    border: none;
-    border-color: #28292b;
-    background-color: #28292b;
-    color: whitesmoke;
-    text-shadow: 1px 1px black;
-    transition: all 0.3s ease 0s; /* Animáció*/
+.dropdown{
+    position: relative;
+    display: inline-block;
 }
-.headerButton:hover{
-    background-color: burlywood;
-    color: #202123;
+.dropdown_content{
+    background-color: rgb(40, 41, 43);
+    display: block;
+    padding: 3px 6px;
+    border: 3px groove #e4a14a;
+    border-radius: 6px;
+    box-shadow: 1px 1px 1px #202123;
+    position: absolute;
+    z-index: 1;
+    visibility: hidden;
+}
+.dropdown:hover .dropdown_content{
+    visibility: visible;
+    margin-left: 20px;
 }
 
 /*Main*/
-.round{
+.inner_main{
     background-color: #28292b;
-    width: 80%;
+    width: fit-content;
     margin: auto;
     border-radius: 20px;
     border-collapse: inherit;
     display: flex;
-    transition: all 0.3s ease 0s; /* Animáció*/
+    transition: all 0.45s ease 0s; /* Animáció*/
 }
 .inner{
-    width: 90%;
+    width: 100%;
     margin: auto;
     padding: 50px;
-    transition: all 0.3s ease 0s; /* Animáció*/
+    transition: all 0.45s ease 0s; /* Animáció*/
 }
 
-.helloDiv{
+.wallpaper_container{
     width:95%;
     margin: auto;
     margin-bottom: 300px;
@@ -94,53 +112,143 @@ h2{
     background-size: cover;
     background-repeat: no-repeat;
     backdrop-filter: blur(5px);
-    font-size: 30px;
+    font-size: 26px;
     padding: 200px;
-
     animation: fadeIn 1s; /*keyFrame hozzá lentebb*/
 }
-.helloDiv2>h2 {
-    font-size: 60px;
+.content_placer>h2 {
+    font-size: 48px;
     font-family: "Montserrat", sans-serif;
     text-transform: uppercase;
     text-shadow: 3px 3px black;
 }
-.helloDiv2>p{
+.content_placer>p{
     text-shadow: 1px 1px black;
 }
 
-/*Main*/
-.button{
+.content_placer button{
     border-radius: 5px;
     font-size: 20px;
     width: 200px;
     height: 40px;
+    margin-top: 15px;
     border: none;
     background-color: #28292b;
     transition: all 0.3s ease 0s; /* Animáció*/
 }
-.button:hover{
+.content_placer button:hover{
     color: white;
-    background-color: rgb(254, 155, 24);
+    background-color: rgb(228, 161, 74);
     transition: all 0.3s ease 0s; /* Animáció*/
 }
 
-@keyframes fadeIn {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
 .content{
-    
     border-radius: 20px;
     font-family: "Montserrat", sans-serif;
     width: 95%;
-    margin: auto;
-    padding: 50px 40px;
+    margin: 0 auto 0 auto;
     background-color: rgb(32, 33, 35) ;
+    box-shadow: 3px 3px rgb(32, 33, 35), 0 0 3px #e4a14a;
+    border-top: 1px groove #e4a14a;
+    border-left: 1px groove #e4a14a;
     animation: fadeIn 1s;
-    color: floralwhite;
+    color: whitesmoke;
 }
-.content>h2{
+#introduction{
+    padding: 50px 40px;
+}
+.content #aboutUs{
     text-transform: uppercase;
-    color: burlywood;
+    display: inline;
+    color: #e4a14a;
+    cursor: pointer;
+    font-size: 32px;
 }
+
+.content table{
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 30px;
+    color: whitesmoke;
+    border: 10px double #e4a14a;
+    text-shadow: 2px 2px 1px black;
+    box-shadow: 2px 2px 5px black;
+    display: none;
+}
+
+.content tabel tr, th, td{
+    font-size: 30px;
+    padding: 12px 0px;
+    width: 50%;
+    border: none;
+    text-align: center;
+    border-collapse: collapse;
+}
+.border{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+/*Reg*/
+#reg_box{
+    padding: 10px 56px;
+    text-align: center;
+}
+#reg_box h2{
+    font-size: 22px;
+    color: #e4a14a;
+    margin-bottom: 24px;
+}
+.input_field{
+    margin-bottom: 12px;
+    text-shadow: 1px 1px 2px #202123;
+ }
+ .content .input_field input{
+     outline: 0;
+     border: 3px groove #202123;
+     border-radius: 6px;
+     color: whitesmoke;
+     background-color: #28292b;
+     box-shadow: 1px 1px 1px #202123;
+     padding: 14px;
+     width: 98%;
+     margin: 0 auto 0 auto;
+  }
+.content button {
+    font-size: 16px;
+    background-color: #28292b;
+    border: 3px groove #202123;
+    box-shadow: 1px 1px 1px #202123;
+    padding: 8px 12px;
+  }
+ @keyframes fadeIn {
+     0% {opacity: 0;}
+     100% {opacity: 1;}
+ }
+ @keyframes fadeOut {
+     0% {opacity: 1;}
+     100% {opacity: 0;}
+ }
+
+ /*News*/
+ .news_container{
+    width: 800px;
+    height: fit-content;
+ }
+ .news_container table{
+    height: 100%;
+    width: 100%;
+    border-spacing: 1px 40px;
+ }
+ .news_container table tr{
+    padding-bottom: 40px;
+ }
+ .news_container table td{
+    border: 5px solid black;
+    width: 40%;
+ }
+ .news_container table td:first-of-type{
+    width: 60%;
+ }
+ 
