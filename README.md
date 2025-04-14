@@ -28,9 +28,9 @@
 
 > ⚠️ Az alkalmazás kifejezetten a [XAMPP](https://www.apachefriends.org/hu/index.html) PHPMyAdmin alkalmazását használja. Ez szükséges a projekt futtatásához.
 
-1. Klónozd a repót: `git clone https://github.com/Bence2107/CoolGames` (vagy töltsd le: GitHubon Code -> Download ZIP
+1. Töltsd le a legfrissebb verziót (GitHub-on -> Releases)
 
-2. Másold be a projekt tartamát a **xampp/htdocs** mappába
+2. Másold be a ZIP tartamát a **xampp/htdocs** mappába
 
 3. Indítsd el a XAMPP Appot, és indítsd el az **Apache** és **MySQL** modulokat **alap beállításokkal**!
 
