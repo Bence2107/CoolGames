@@ -1,8 +1,5 @@
 <?php
 
-
-// View.php
-
 class View
 {
     private string $viewPath = __DIR__ . '/../views/';

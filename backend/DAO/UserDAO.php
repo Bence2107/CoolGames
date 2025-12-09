@@ -114,7 +114,4 @@ class UserDAO {
         $stmt->bindValue(':email', $email);
         return $stmt->execute();
     }
-
-
-
 }
