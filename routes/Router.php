@@ -29,24 +29,27 @@ class Router {
 
         foreach ($this->routes as $route) {
             if ($route['uri'] === $requestUri && $route['method'] === $requestMethod) {
-
                 $controllerClass = $route['handler'][0];
                 $methodName = $route['handler'][1];
 
-
-
                 $pdoConnection = Database::getInstance()->getConnection();
-                $userDao = new UserDAO($pdoConnection);
 
+                $userDao = new UserDAO($pdoConnection);
                 $authService = new AuthService($userDao);
                 $profileService = new ProfileService($userDao);
 
+                $articleDAO = new ArticleDAO($pdoConnection);
+                $articleService = new ArticleService($articleDAO);
+
                 $view = new View();
 
-                $controller = new $controllerClass($authService, $profileService, $view);
+                if ($controllerClass === 'UserController') {
+                    $controller = new $controllerClass($authService, $profileService, $view);
+                } elseif ($controllerClass === 'ArticleController') {
+                    $controller = new $controllerClass($articleService, $view);
+                }
 
                 $controller->$methodName($_POST, $_FILES);
-
                 return;
             }
         }
