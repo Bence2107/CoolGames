@@ -53,7 +53,7 @@ class BasketController {
      * Add game to basket
      */
     #[NoReturn]
-    public function addToBasket(array $post = [], array $files = []): void {
+    public function addToBasket(array $post = []): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -100,7 +100,7 @@ class BasketController {
      * Remove game from basket
      */
     #[NoReturn]
-    public function removeFromBasket(array $post = [], array $files = []): void {
+    public function removeFromBasket(array $post = []): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -143,7 +143,7 @@ class BasketController {
      * Purchase basket
      */
     #[NoReturn]
-    public function purchaseBasket(array $post = [], array $files = []): void {
+    public function purchaseBasket(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();

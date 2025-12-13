@@ -16,7 +16,7 @@ class GameController {
     /**
      * Show all games page
      */
-    public function showGames(array $post = [], array $files = []): void {
+    public function showGames(): void {
         $_SESSION["games"] = true;
 
         if (!SessionHelper::isLoggedIn()) {
@@ -39,7 +39,7 @@ class GameController {
         }
     }
 
-    public function showGame(array $post = [], array $files = []): void {
+    public function showGame(): void {
         $_SESSION["games"] = true;
 
         if (!SessionHelper::isLoggedIn()) {
@@ -85,7 +85,7 @@ class GameController {
      * Rate a game
      */
     #[NoReturn]
-    public function rateGame(array $post = [], array $files = []): void {
+    public function rateGame(array $post = []): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -139,7 +139,7 @@ class GameController {
     /**
      * Show user's library (owned games)
      */
-    public function showLibrary(array $post = [], array $files = []): void {
+    public function showLibrary(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();

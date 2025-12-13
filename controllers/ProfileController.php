@@ -9,7 +9,7 @@ class ProfileController {
         $this->userDAO = $userDAO;
     }
 
-    public function showEdit(array $post = [], array $files = []): void {
+    public function showEdit(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -30,7 +30,7 @@ class ProfileController {
         }
     }
 
-    public function showPasswordEdit(array $post = [], array $files = []): void {
+    public function showPasswordEdit(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -51,7 +51,7 @@ class ProfileController {
         }
     }
 
-    public function showDelete(array $post = [], array $files = []): void {
+    public function showDelete(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();

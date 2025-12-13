@@ -7,7 +7,7 @@ class HomeController {
         $this->view = $view;
     }
 
-    public function index(array $post = [], array $files = []): void {
+    public function index(): void {
         try {
             $this->view->render('home/index');
         } catch (Exception $e) {

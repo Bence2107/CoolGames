@@ -17,7 +17,7 @@ class UserController {
         $this->view = $view;
     }
 
-    public function showProfile(array $post = [], array $files = []): void {
+    public function showProfile(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
             exit();
@@ -107,11 +107,10 @@ class UserController {
 
         if (empty($errors)) {
             $_SESSION["successfull"] = true;
-            header("Location: /profile/edit/password");
         } else {
             $_SESSION["errors"] = $errors;
-            header("Location: /profile/edit/password");
         }
+        header("Location: /profile/edit/password");
         exit();
     }
 

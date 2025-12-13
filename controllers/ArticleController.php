@@ -9,7 +9,7 @@ class ArticleController {
         $this->view = $view;
     }
 
-    public function showNews(array $post = [], array $files = []): void {
+    public function showNews(): void {
         $_SESSION["news"] = true;
 
         $articles = $this->articleService->getArticles();
@@ -23,7 +23,7 @@ class ArticleController {
         }
     }
 
-    public function showArticle(array $post = [], array $files = []): void {
+    public function showArticle(): void {
         $_SESSION["news"] = true;
 
         if (!isset($_GET['cim'])) {

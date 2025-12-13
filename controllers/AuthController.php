@@ -9,7 +9,7 @@ class AuthController {
         $this->view = $view;
     }
 
-    public function showLogin(array $post = [], array $files = []): void {
+    public function showLogin(): void {
         if (SessionHelper::isLoggedIn()) {
             header("Location: /profile");
             exit();
@@ -22,7 +22,7 @@ class AuthController {
         }
     }
 
-    public function showRegister(array $post = [], array $files = []): void {
+    public function showRegister(): void {
         if (SessionHelper::isLoggedIn()) {
             header("Location: /profile");
             exit();
@@ -36,7 +36,7 @@ class AuthController {
     }
 
     #[NoReturn]
-    public function logout(array $post = [], array $files = []): void {
+    public function logout(): void {
         session_destroy();
         header("Location: /index");
         exit();
