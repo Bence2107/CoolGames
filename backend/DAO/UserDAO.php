@@ -44,9 +44,9 @@ class UserDAO {
     public function create(User $user): bool
     {
         $sql = "INSERT INTO $this->tableName 
-                (email, felhasznalo_nev, veznev, kernev, jelszo, szul_datum, szul_datum, macskakredit)
+                (email, felhasznalo_nev, veznev, kernev, jelszo, szul_datum, profilkep, macskakredit)
                 VALUES 
-                (:email, :username, :firstname, :surname, :password, :birthdate, :catcredit)";
+                (:email, :username, :surname, :firstname, :password, :birthdate, :profilkep, :catcredit)";
 
         $stmt = $this->db->prepare($sql);
 
@@ -56,6 +56,7 @@ class UserDAO {
         $stmt->bindValue(":firstname", $user->getFirstName());
         $stmt->bindValue(":password", $user->getPassword());
         $stmt->bindValue(":birthdate", $user->getBirthdate());
+        $stmt->bindValue(":profilkep", $user->getProfilepicture(), PDO::PARAM_LOB);
         $stmt->bindValue(":catcredit", $user->getCatcredit());
 
         return $stmt->execute();
@@ -105,6 +106,14 @@ class UserDAO {
         $stmt->bindValue(':pk', $user->getProfilepicture(), PDO::PARAM_LOB);
         $stmt->bindValue(':email', $user->getEmail());
 
+        return $stmt->execute();
+    }
+
+    public function updateMoney(User $user): bool {
+        $sql = "UPDATE $this->tableName SET macskakredit = :money WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':money', $user->getCatcredit());
+        $stmt->bindValue(':email', $user->getEmail());
         return $stmt->execute();
     }
 

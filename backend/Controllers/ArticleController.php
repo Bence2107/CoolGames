@@ -9,11 +9,13 @@ class ArticleController {
         $this->view = $view;
     }
 
-    public function showNews(): void {
+    public function showNews(array $post = [], array $files = []): void {
+        $_SESSION["news"] = true;
+
         $articles = $this->articleService->getArticles();
 
         try {
-            $this->view->render('news', [
+            $this->view->render('news/news', [
                 'articles' => $articles
             ]);
         } catch (Exception $e) {
@@ -21,7 +23,9 @@ class ArticleController {
         }
     }
 
-    public function showArticle(): void {
+    public function showArticle(array $post = [], array $files = []): void {
+        $_SESSION["news"] = true;
+
         if (!isset($_GET['cim'])) {
             header("Location: /news");
             exit();
@@ -37,7 +41,7 @@ class ArticleController {
         }
 
         try {
-            $this->view->render('new', [
+            $this->view->render('news/article', [
                 'article' => $article
             ]);
         } catch (Exception $e) {

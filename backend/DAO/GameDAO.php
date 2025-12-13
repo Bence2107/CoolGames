@@ -46,8 +46,9 @@ class GameDAO {
     }
 
     public function getGameByName(string $name) : ?Game {
-        $sql = "SELECT * FROM $this->tableName WHERE nev='$name'";
+        $sql = "SELECT * FROM $this->tableName WHERE nev = :name";
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':name', $name);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -70,12 +71,12 @@ class GameDAO {
         return null;
     }
 
-    public function updateGameRating(int $gameId, float $newRating): bool {
+    public function updateGameRating(Game $game, float $newRating): bool {
         $sql = "UPDATE $this->tableName SET ertekeles = :rating WHERE id = :id";
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue(':rating', $newRating);
-        $stmt->bindValue(':id', $gameId, PDO::PARAM_INT);
+        $stmt->bindValue(':id', $game->getId(), PDO::PARAM_INT);
         return $stmt->execute();
     }
 }

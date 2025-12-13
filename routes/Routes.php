@@ -22,4 +22,15 @@ $router->post('/profile/register', [UserController::class, 'register']);
 $router->get('/news', [ArticleController::class, 'showNews']);
 $router->get('/news/article', [ArticleController::class, 'showArticle']);
 
+// GameController routes:
+$router->get('/games', [GameController::class, 'showGames']);
+$router->get('/games/game', [GameController::class, 'showGame']);
+$router->post('/games/rate', [GameController::class, 'rateGame']);
+
+// BasketController routes:
+$router->get('/basket', [BasketController::class, 'showBasket']);
+$router->post('/basket/add', [BasketController::class, 'addToBasket']);
+$router->post('/basket/remove', [BasketController::class, 'removeFromBasket']);
+$router->post('/basket/purchase', [BasketController::class, 'purchaseBasket']);
+
 $router->dispatch();

@@ -26,7 +26,6 @@ class Router {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
-
         foreach ($this->routes as $route) {
             if ($route['uri'] === $requestUri && $route['method'] === $requestMethod) {
                 $controllerClass = $route['handler'][0];
@@ -34,19 +33,35 @@ class Router {
 
                 $pdoConnection = Database::getInstance()->getConnection();
 
+                // Initialize DAOs
                 $userDao = new UserDAO($pdoConnection);
+                $articleDAO = new ArticleDAO($pdoConnection);
+                $gameDAO = new GameDAO($pdoConnection);
+                $basketDAO = new BasketDAO($pdoConnection);
+                $purchaseDAO = new PurchaseDAO($pdoConnection);
+                $ratingDAO = new RatingDAO($pdoConnection);
+
+                SessionHelper::ensureUserInSession($userDao);
+
+                // Initialize Services
                 $authService = new AuthService($userDao);
                 $profileService = new ProfileService($userDao);
-
-                $articleDAO = new ArticleDAO($pdoConnection);
                 $articleService = new ArticleService($articleDAO);
+                $gameService = new GameService($gameDAO, $purchaseDAO, $ratingDAO, $userDao);
+                $basketService = new BasketService($basketDAO, $purchaseDAO, $userDao);
 
+                // Initialize View
                 $view = new View();
 
+                // Initialize Controller based on type
                 if ($controllerClass === 'UserController') {
-                    $controller = new $controllerClass($authService, $profileService, $view);
+                    $controller = new $controllerClass($authService, $profileService, $gameService, $userDao , $view);
                 } elseif ($controllerClass === 'ArticleController') {
-                    $controller = new $controllerClass($articleService, $view);
+                    $controller = new $controllerClass($articleService, $userDao, $view);
+                } elseif ($controllerClass === 'GameController') {
+                    $controller = new $controllerClass($gameService, $userDao, $view);
+                } elseif ($controllerClass === 'BasketController') {
+                    $controller = new $controllerClass($basketService, $gameService, $userDao, $view);
                 }
 
                 $controller->$methodName($_POST, $_FILES);
@@ -56,5 +71,4 @@ class Router {
 
         header("HTTP/1.0 404 Not Found");
         echo "<h1>404 Page Not Found</h1>";
-    }
-}
+    }}

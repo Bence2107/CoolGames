@@ -8,7 +8,7 @@ class Database {
     private string $user = "root";
     private string $pass = "";
     private string $database = "coolgames";
-    private string $sqlFilePath = __DIR__ . "../sql/coolgames.sql";
+    private string $sqlFilePath = __DIR__ . "/../sql/coolgames.sql";
 
     private function __construct() {
         try {
@@ -25,10 +25,9 @@ class Database {
                 $this->createDatabase();
             }
             else {
-                $this->connection->exec("USE '$this->database'");
+                $this->connection->exec("USE `$this->database`");
             }
         }
-
         catch (PDOException $e) {
             die("Connection failed: " . $e->getMessage());
         }
@@ -62,7 +61,7 @@ class Database {
     private function createDatabase(): void
     {
         try{
-            $this->connection->exec("CREATE DATABASE IF NOT EXITS `$this->database`");
+            $this->connection->exec("CREATE DATABASE IF NOT EXISTS `$this->database`");
             $this->connection->exec("USE `$this->database`");
             if (file_exists($this->sqlFilePath)) {
                 $sql = file_get_contents($this->sqlFilePath);

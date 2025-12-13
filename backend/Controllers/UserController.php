@@ -5,14 +5,42 @@ use JetBrains\PhpStorm\NoReturn;
 class UserController {
     private AuthService $authService;
     private ProfileService $profileService;
+    private GameService $gameService;
+    private UserDAO $userDAO;
+    private View $view;
 
-    public function __construct(AuthService $authService, ProfileService $profileService) {
+    public function __construct(AuthService $authService, ProfileService $profileService, GameService $gameService, UserDAO $userDAO, View $view) {
         $this->authService = $authService;
         $this->profileService = $profileService;
+        $this->gameService = $gameService;
+        $this->userDAO = $userDAO;
+        $this->view = $view;
     }
 
-    public function showProfile(string $email): ?User {
-        return $this->authService->getUserByEmail($email);
+    public function showProfile(array $post = [], array $files = []): void {
+        if (!SessionHelper::isLoggedIn()) {
+            header("Location: /auth/login");
+            exit();
+        }
+
+        SessionHelper::ensureUserInSession($this->userDAO);
+        $user = SessionHelper::getCurrentUser();
+
+        if (!$user) {
+            header("Location: /auth/login");
+            exit();
+        }
+
+        $ownedGames = $this->gameService->getUserGames($user);
+
+        try {
+            $this->view->render('profile/profile', [
+                'user' => $user,
+                'ownedGames' => $ownedGames
+            ]);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 
     #[NoReturn]
@@ -21,6 +49,7 @@ class UserController {
 
         if ($user) {
             $_SESSION["email"] = $user->getEmail();
+            $_SESSION["user"] = $user;
             header("Location: /index");
         } else {
             $_SESSION['login_failed'] = true;
@@ -50,6 +79,8 @@ class UserController {
 
         if (empty($errors)) {
             $_SESSION["successfull"] = true;
+            // Refresh user in session
+            SessionHelper::refreshUser($this->userDAO);
         } else {
             $_SESSION["errors"] = $errors;
         }
@@ -76,7 +107,6 @@ class UserController {
         exit();
     }
 
-
     #[NoReturn]
     public function updateProfilePicture(string $email, array $fileData): void {
         if (empty($fileData["name"] ?? null)) {
@@ -88,6 +118,8 @@ class UserController {
 
         if (empty($errors)) {
             $_SESSION["successfull"] = true;
+            // Refresh user in session
+            SessionHelper::refreshUser($this->userDAO);
         } else {
             $_SESSION["errors"] = $errors;
         }
@@ -99,7 +131,6 @@ class UserController {
     #[NoReturn]
     public function deleteAccount(string $email): void {
         if ($this->authService->deleteAccount($email)) {
-
             session_destroy();
             header("Location: /index");
         } else {

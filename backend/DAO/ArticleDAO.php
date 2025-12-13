@@ -30,14 +30,15 @@ class ArticleDAO {
     }
 
     public function getArticleByTitle(string $title): ?Article {
-        $sql = "SELECT * FROM $this->tableName WHERE cim='$title'";
+        $sql = "SELECT * FROM $this->tableName WHERE cim = :title";
         $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(':title', $title);
         $stmt->execute();
 
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data) {
-           return new Article(
+            return new Article(
                 $data['id'],
                 $data['cim'],
                 $data['rovid_leiras'],
