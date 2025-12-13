@@ -1,5 +1,4 @@
 <?php
-// Ezt a fájlt kell a main index.php-ban include-olni.
 
 class Router {
     private array $routes = [];
@@ -43,7 +42,7 @@ class Router {
 
                 SessionHelper::ensureUserInSession($userDao);
 
-                // Initialize services
+                // Initialize Services
                 $authService = new AuthService($userDao);
                 $profileService = new ProfileService($userDao);
                 $articleService = new ArticleService($articleDAO);
@@ -55,13 +54,19 @@ class Router {
 
                 // Initialize Controller based on type
                 if ($controllerClass === 'UserController') {
-                    $controller = new $controllerClass($authService, $profileService, $gameService, $userDao , $view);
+                    $controller = new $controllerClass($authService, $profileService, $gameService, $userDao, $view);
                 } elseif ($controllerClass === 'ArticleController') {
-                    $controller = new $controllerClass($articleService, $userDao, $view);
+                    $controller = new $controllerClass($articleService, $view);
                 } elseif ($controllerClass === 'GameController') {
                     $controller = new $controllerClass($gameService, $userDao, $view);
                 } elseif ($controllerClass === 'BasketController') {
                     $controller = new $controllerClass($basketService, $gameService, $userDao, $view);
+                } elseif ($controllerClass === 'AuthController') {
+                    $controller = new $controllerClass($view);
+                } elseif ($controllerClass === 'ProfileController') {
+                    $controller = new $controllerClass($view, $userDao);
+                } elseif ($controllerClass === 'HomeController') {
+                    $controller = new $controllerClass($view);
                 }
 
                 $controller->$methodName($_POST, $_FILES);
@@ -71,4 +76,5 @@ class Router {
 
         header("HTTP/1.0 404 Not Found");
         echo "<h1>404 Page Not Found</h1>";
-    }}
+    }
+}
