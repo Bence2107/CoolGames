@@ -9,10 +9,7 @@ class UserDAO {
         $this->db = $connection;
     }
 
-    public function getByEmail(string $email) : ?User {
-        $sql = "SELECT * FROM $this->tableName WHERE email = :email";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(":email", $email);
+    private function getUser($stmt) : ?User {
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -25,20 +22,18 @@ class UserDAO {
         return null;
     }
 
+    public function getByEmail(string $email) : ?User {
+        $sql = "SELECT * FROM $this->tableName WHERE email = :email";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindValue(":email", $email);
+        return $this->getUser($stmt);
+    }
+
     public function getByUsername(string $username) : ?User {
         $sql = "SELECT * FROM $this->tableName WHERE felhasznalo_nev = :username";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(":username", $username);
-        $stmt->execute();
-        $data = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if($data) {
-            return new User(
-                $data['email'], $data['felhasznalo_nev'], $data['veznev'], $data['kernev'],
-                $data['jelszo'], $data['szul_datum'], $data['profilkep'], (int)$data['money']
-            );
-        }
-        return null;
+        return $this->getUser($stmt);
     }
 
     public function create(User $user): bool

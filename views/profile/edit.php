@@ -1,9 +1,9 @@
 ﻿<?php
-$errors = [];
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-}
-unset($_SESSION['errors']);
+    $errors = [];
+    if(isset($_SESSION["errors"])){
+        $errors = $_SESSION["errors"];
+    }
+    unset($_SESSION['errors']);
 ?>
 <!DOCTYPE html>
 <html lang="hu">

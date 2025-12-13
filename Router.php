@@ -77,10 +77,10 @@ class Router {
                     $controller->$methodName($_SESSION['email'] ?? '', $_POST);
                 } elseif ($methodName === 'changePassword') {
                     $controller->$methodName($_SESSION['email'] ?? '', $_POST);
-                } elseif ($methodName === 'updateProfilePicture') {
-                    $controller->$methodName($_SESSION['email'] ?? '', $_FILES);
                 } elseif ($methodName === 'deleteAccount') {
                     $controller->$methodName($_SESSION['email'] ?? '');
+                } elseif ($methodName === 'updateProfilePicture') {
+                    $controller->$methodName($_SESSION['email'] ?? '', $_FILES['profile-pic'] ?? []);
                 } else {
                     $controller->$methodName($_POST, $_FILES);
                 }

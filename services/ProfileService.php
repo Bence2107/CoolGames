@@ -54,8 +54,10 @@ class ProfileService {
         $type = strtolower(pathinfo($fileData["name"] ?? '', PATHINFO_EXTENSION));
 
         if (($fileData["size"] ?? 0) > 3145728) {
+            $_SESSION["fileSizeError"] = true;
             $errors[] = "fileSizeError";
         } else if (!in_array($type, $allowedTypes)) {
+            $_SESSION["typeError"] = true;
             $errors[] = "typeError";
         }
 
