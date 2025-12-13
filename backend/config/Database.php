@@ -7,7 +7,7 @@ class Database {
     private string $host = "localhost";
     private string $user = "root";
     private string $pass = "";
-    private string $database = "coolgames";
+    private string $dbname = "coolgames";
     private string $sqlFilePath = __DIR__ . "/../sql/coolgames.sql";
 
     private function __construct() {
@@ -25,7 +25,7 @@ class Database {
                 $this->createDatabase();
             }
             else {
-                $this->connection->exec("USE `$this->database`");
+                $this->connection->exec("USE `$this->dbname`");
             }
         }
         catch (PDOException $e) {
@@ -49,7 +49,7 @@ class Database {
     private function databaseExists() : bool {
         try {
             $stmt = $this->connection->prepare("SHOW DATABASES LIKE ?");
-            $stmt->execute([$this->database]);
+            $stmt->execute([$this->dbname]);
             return $stmt->fetch() !== false;
         }
         catch (PDOException $e) {
@@ -61,8 +61,8 @@ class Database {
     private function createDatabase(): void
     {
         try{
-            $this->connection->exec("CREATE DATABASE IF NOT EXISTS `$this->database`");
-            $this->connection->exec("USE `$this->database`");
+            $this->connection->exec("CREATE DATABASE IF NOT EXISTS `$this->dbname`");
+            $this->connection->exec("USE `$this->dbname`");
             if (file_exists($this->sqlFilePath)) {
                 $sql = file_get_contents($this->sqlFilePath);
                 $this->connection->exec($sql);
