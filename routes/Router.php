@@ -43,7 +43,7 @@ class Router {
 
                 SessionHelper::ensureUserInSession($userDao);
 
-                // Initialize Services
+                // Initialize services
                 $authService = new AuthService($userDao);
                 $profileService = new ProfileService($userDao);
                 $articleService = new ArticleService($articleDAO);
