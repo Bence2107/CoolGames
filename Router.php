@@ -109,7 +109,13 @@ class Router
 
     private function handle404(): void
     {
-        header("HTTP/1.0 404 Not Found");
-        echo "<h1>404 Page Not Found</h1>";
+        http_response_code(404);
+
+        try {
+            $controller = $this->container->get('NotFoundController');
+            $controller->showNotFound();
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
     }
 }

@@ -33,6 +33,7 @@ require_once __DIR__ . '/../controllers/ArticleController.php';
 require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/ProfileController.php';
 require_once __DIR__ . '/../controllers/HomeController.php';
+require_once __DIR__ . '/../controllers/NotFoundController.php';
 
 // View
 require_once __DIR__ . '/../views/View.php';
@@ -159,6 +160,11 @@ $container->set('ProfileController', function ($c) {
 
 $container->set('HomeController', function ($c) {
     return new HomeController($c->get('view'));
+});
+
+
+$container->set('NotFoundController', function ($c) {
+    return new NotFoundController($c->get('view'));
 });
 
 // Initialize router with container
