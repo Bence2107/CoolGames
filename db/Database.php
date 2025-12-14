@@ -8,7 +8,7 @@ class Database {
     private string $user = "root";
     private string $pass = "";
     private string $dbname = "coolgames";
-    private string $sqlFilePath = __DIR__ . "/../sql/coolgames.sql";
+    private string $sqlFilePath = __DIR__ . "coolgames.sql";
 
     private function __construct() {
         try {
