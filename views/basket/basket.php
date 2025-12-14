@@ -60,7 +60,7 @@
                         <h1>A kosara <b>üres</b></h1>
                         <h3>Amennyiben szeretné megvásárolni a termékeit, kérem először helyezze a kosárba őket</h3>
                         <div class="action">
-                            <form action="/games">
+                            <form action="/games" method="get">
                                 <input type="submit" value="Játékok vásárlása">
                             </form>
                         </div>
