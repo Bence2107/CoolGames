@@ -1,10 +1,18 @@
 <?php
 
-class Router {
+class Router
+{
     private array $routes = [];
+    private Container $container;
 
-    private function add(string $method, string $uri, array $handler): void {
-        $uri = strtok($uri, '?');
+    public function __construct(Container $container)
+    {
+        $this->container = $container;
+    }
+
+    private function add(string $method, string $uri, array $handler): void
+    {
+        $uri = parse_url($uri, PHP_URL_PATH);
 
         $this->routes[] = [
             'uri' => $uri,
@@ -13,82 +21,94 @@ class Router {
         ];
     }
 
-    public function get(string $uri, array $handler): void {
+    public function get(string $uri, array $handler): void
+    {
         $this->add('GET', $uri, $handler);
     }
 
-    public function post(string $uri, array $handler): void {
+    public function post(string $uri, array $handler): void
+    {
         $this->add('POST', $uri, $handler);
     }
 
-    public function dispatch(): void {
+    public function dispatch(): void
+    {
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $requestMethod = $_SERVER['REQUEST_METHOD'];
 
         foreach ($this->routes as $route) {
             if ($route['uri'] === $requestUri && $route['method'] === $requestMethod) {
-                $controllerClass = $route['handler'][0];
-                $methodName = $route['handler'][1];
-
-                $pdoConnection = Database::getInstance()->getConnection();
-
-                // Initialize DAOs
-                $userDao = new UserDAO($pdoConnection);
-                $articleDAO = new ArticleDAO($pdoConnection);
-                $gameDAO = new GameDAO($pdoConnection);
-                $basketDAO = new BasketDAO($pdoConnection);
-                $purchaseDAO = new PurchaseDAO($pdoConnection);
-                $ratingDAO = new RatingDAO($pdoConnection);
-
-                SessionHelper::ensureUserInSession($userDao);
-
-                // Initialize Services
-                $authService = new AuthService($userDao);
-                $profileService = new ProfileService($userDao);
-                $articleService = new ArticleService($articleDAO);
-                $gameService = new GameService($gameDAO, $purchaseDAO, $ratingDAO, $userDao);
-                $basketService = new BasketService($basketDAO, $purchaseDAO, $userDao);
-
-                // Initialize View
-                $view = new View();
-
-                // Initialize Controller based on type
-                if ($controllerClass === 'UserController') {
-                    $controller = new $controllerClass($authService, $profileService, $gameService, $userDao, $view);
-                } elseif ($controllerClass === 'ArticleController') {
-                    $controller = new $controllerClass($articleService, $view);
-                } elseif ($controllerClass === 'GameController') {
-                    $controller = new $controllerClass($gameService, $userDao, $view);
-                } elseif ($controllerClass === 'BasketController') {
-                    $controller = new $controllerClass($basketService, $gameService, $userDao, $view);
-                } elseif ($controllerClass === 'AuthController') {
-                    $controller = new $controllerClass($view);
-                } elseif ($controllerClass === 'ProfileController') {
-                    $controller = new $controllerClass($view, $userDao);
-                } elseif ($controllerClass === 'HomeController') {
-                    $controller = new $controllerClass($view);
-                } else {
-                    header("HTTP/1.0 404 Not Found");
-                    echo "<h1>404 Controller Not Found</h1>";
-                    return;
-                }
-
-                if ($methodName === 'updateUserInfo') {
-                    $controller->$methodName($_SESSION['email'] ?? '', $_POST);
-                } elseif ($methodName === 'changePassword') {
-                    $controller->$methodName($_SESSION['email'] ?? '', $_POST);
-                } elseif ($methodName === 'deleteAccount') {
-                    $controller->$methodName($_SESSION['email'] ?? '');
-                } elseif ($methodName === 'updateProfilePicture') {
-                    $controller->$methodName($_SESSION['email'] ?? '', $_FILES['profile-pic'] ?? []);
-                } else {
-                    $controller->$methodName($_POST, $_FILES);
-                }
-
+                $this->handleRoute($route);
                 return;
             }
         }
 
+        $this->handle404();
+    }
+
+    private function handleRoute(array $route): void
+    {
+        // Validate handler structure
+        if (!isset($route['handler']) || !is_array($route['handler']) || count($route['handler']) !== 2) {
+            die("Invalid route handler configuration");
+        }
+
+        $controllerClass = $route['handler'][0];
+        $methodName = $route['handler'][1];
+
+        // Validate controller class and method
+        if (empty($controllerClass) || empty($methodName)) {
+            die("Controller class or method name is empty");
+        }
+
+        // Ensure user is in session
+        try {
+            SessionHelper::ensureUserInSession($this->container->get('userDao'));
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+        // Get controller from container (automatically resolved with dependencies)
+        try {
+            $controller = $this->container->make($controllerClass);
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+
+        // Verify method exists
+        if (!method_exists($controller, $methodName)) {
+            die("Method '$methodName' does not exist in controller '$controllerClass'");
+        }
+
+        // Call the appropriate method with proper parameters
+        $this->callControllerMethod($controller, $methodName);
+    }
+
+    private function callControllerMethod($controller, string $methodName): void
+    {
+        // Special handling for methods that need specific parameters
+        switch ($methodName) {
+            case 'changePassword':
+            case 'updateUserInfo':
+                $controller->$methodName($_SESSION['email'] ?? '', $_POST);
+                break;
+
+            case 'deleteAccount':
+                $controller->$methodName($_SESSION['email'] ?? '');
+                break;
+
+            case 'updateProfilePicture':
+                $controller->$methodName($_SESSION['email'] ?? '', $_FILES['profile-pic'] ?? []);
+                break;
+
+            default:
+                $controller->$methodName($_POST, $_FILES);
+                break;
+        }
+    }
+
+    private function handle404(): void
+    {
         header("HTTP/1.0 404 Not Found");
         echo "<h1>404 Page Not Found</h1>";
     }
