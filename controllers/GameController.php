@@ -55,7 +55,7 @@ class GameController {
             exit();
         }
 
-        $game = $this->gameService->getGameByName($gameName);
+        $game = $this->gameService->getGameByTitle($gameName);
         if (!$game) {
             header("Location: /games");
             exit();

@@ -11,9 +11,9 @@ class GameDAO {
     /**
      * Execute Game query
      * @param string $sql
-     * @return array (returns Game's in array)
+     * @return array|null (returns Game's in array)
      */
-    public function gamesQuery(string $sql): array {
+    public function gamesQuery(string $sql): ?array {
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
 
@@ -41,9 +41,9 @@ class GameDAO {
 
     /**
      * Get All Games.
-     * @return array (returns Game's in array)
+     * @return array|null (returns Game's in array)
      */
-    public function getGames() : array
+    public function getGames() : ?array
     {
         $sql = "SELECT * FROM $this->tableName ORDER BY title";
         return $this->gamesQuery($sql);
@@ -51,10 +51,10 @@ class GameDAO {
 
 
     /**
-     * Get Top 3 Games.
-     * @return array (returns Game's in array)
+     * Get Top 3 Games by rating.
+     * @return array|null (returns Game's in array)
      */
-    public function getTopThreeGames() : array {
+    public function getTopThreeGames() : ?array {
         $sql = "SELECT * FROM $this->tableName ORDER BY rating DESC LIMIT 3";
         return $this->gamesQuery($sql);
     }

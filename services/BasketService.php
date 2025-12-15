@@ -17,9 +17,12 @@ class BasketService {
     }
 
     /**
-     * Add game to user's basket
+     * Add Game to User's basket
+     * @param Game $game
+     * @param User $user
+     * @return array|null
      */
-    public function addToBasket(Game $game, User $user): array {
+    public function addToBasket(Game $game, User $user): ?array {
         // Check if user already owns the game
         $purchase = new Purchase($game->getId(), $user->getEmail());
         if ($this->purchaseDAO->isUserOwnsTheGame($purchase)) {
@@ -43,16 +46,21 @@ class BasketService {
     }
 
     /**
-     * Remove game from basket
+     * Remove Game from User's basket
+     * @param Game $game
+     * @param User $user
+     * @return bool (returns if the action was successful)
      */
     public function removeFromBasket(Game $game, User $user): bool {
         return $this->basketDAO->removeFromBasket($game, $user);
     }
 
     /**
-     * Purchase all games in basket
+     * Purchase all Game's, what's inside User's basket.
+     * @param User $user
+     * @return array|null
      */
-    public function purchaseBasket(User $user): array {
+    public function purchaseBasket(User $user): ?array {
         $basketGames = $this->basketDAO->getUsersBasket($user);
 
         if (empty($basketGames)) {
@@ -87,16 +95,20 @@ class BasketService {
     }
 
     /**
-     * Get user's basket
+     * Get all Games what's inside
+     * @param User $user
+     * @return array|null
      */
-    public function getUserBasket(User $user): array {
+    public function getUserBasket(User $user): ?array {
         return $this->basketDAO->getUsersBasket($user);
     }
 
     /**
-     * Get basket total price and reward
+     * Get User's basket summary
+     * @param User $user
+     * @return array|null (returns total price, reward, final price)
      */
-    public function getBasketSummary(User $user): array {
+    public function getBasketSummary(User $user): ?array {
         $basketGames = $this->basketDAO->getUsersBasket($user);
         $totalPrice = 0;
 

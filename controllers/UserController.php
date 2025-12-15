@@ -43,7 +43,7 @@ class UserController {
 
     #[NoReturn]
     public function handleLogin(array $postData): void {
-        $user = $this->authService->login($postData["email"] ?? '', $postData["password"] ?? '');
+        $user = $this->authService->login($postData);
 
         if ($user) {
             $_SESSION["email"] = $user->getEmail();
@@ -96,12 +96,7 @@ class UserController {
 
     #[NoReturn]
     public function changePassword(string $email, array $postData): void {
-        $errors = $this->authService->changePassword(
-            $email,
-            $postData["old_password"] ?? '',
-            $postData["new_password"] ?? '',
-            $postData["new_password_confirm"] ?? ''
-        );
+        $errors = $this->authService->changePassword($email, $postData);
 
         if (empty($errors)) {
             $_SESSION["successful"] = true;

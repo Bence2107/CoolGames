@@ -58,9 +58,9 @@ class RatingDAO {
     /**
      * Get a Game rating stats
      * @param Game $game
-     * @return array (returns count and total)
+     * @return array|null (returns count and total)
      */
-    public function getRatingStats(Game $game): array {
+    public function getRatingStats(Game $game): ?array {
         $sql = "SELECT COUNT(rating) as numberOf, SUM(rating) as total 
                 FROM $this->tableName WHERE game_id = :game_id";
         $stmt = $this->db->prepare($sql);

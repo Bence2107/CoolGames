@@ -11,9 +11,10 @@ class BasketDAO {
     /**
      * Get all Games, what is inside current User's Basket.
      * @param User $user
-     * @return array (with Article's in it)
+     * @return array|null (with Article's in it)
      */
-    public function getUsersBasket(User $user): array {
+    public function getUsersBasket(User $user): ?array
+    {
         $sql = "SELECT g.* FROM games jg
                 INNER JOIN $this->tableName b ON g.id = b.game_id 
                 WHERE b.user_email = :user_email";

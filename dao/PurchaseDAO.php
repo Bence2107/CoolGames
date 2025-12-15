@@ -11,9 +11,9 @@ class PurchaseDAO {
     /**
      * Get all Games purchased by the User.
      * @param string $email
-     * @return Game[]
+     * @return array|null
      */
-    public function getUserGames(string $email): array {
+    public function getUserGames(string $email): ?array {
         $sql = "SELECT g.* FROM games g 
                 INNER JOIN $this->tableName p ON g.id = p.game_id 
                 WHERE p.user_email = :user_email";

@@ -11,9 +11,9 @@ class ArticleDAO {
 
     /**
      * Get All Articles.
-     * @return array (with Article's in it)
+     * @return array|null (with Article's in it)
      */
-    public function getArticles(): array {
+    public function getArticles(): ?array {
         $sql = "SELECT * FROM $this->tableName ORDER BY publish_date DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();

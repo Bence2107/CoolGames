@@ -7,10 +7,20 @@ class AuthService {
         $this->userDAO = $userDAO;
     }
 
+    /**
+     * Returns User by email.
+     * @param string $email
+     * @return User|null
+     */
     public function getUserByEmail(string $email) : ?User{
         return $this->userDAO->getByEmail($email);
     }
 
+    /**
+     * Validates Registration form.
+     * @param array $data (form's data)
+     * @return array (return errors)
+     */
     public function validateRegistration(array $data): array{
         $errors = [];
 
@@ -87,16 +97,26 @@ class AuthService {
 
     }
 
-    public function login(string $email, string $password): ?User {
-        $user = $this->userDAO->getByEmail($email);
+    /**
+     * Returns with the User if login is successful.
+     * @param array $data (form's data)
+     * @return User|null
+     */
+    public function login(array $data): ?User {
+        $user = $this->userDAO->getByEmail($data["email"]);
 
-        if ($user && password_verify($password, $user->getPassword())) {
+        if ($user && password_verify($data["password"], $user->getPassword())) {
             return $user;
         }
         return null;
     }
 
 
+    /**
+     * Handle Register. Returns true if its succeed.
+     * @param array $data
+     * @return bool (returns if the action was successful)
+     */
     public function registerUser(array $data): bool {
         $hashedPassword = password_hash($data["password"], PASSWORD_DEFAULT);
 
@@ -114,9 +134,19 @@ class AuthService {
         return $this->userDAO->create($user);
     }
 
-    public function changePassword(string $email, string $oldPassword, string $newPassword, string $newPasswordAgain): array {
+    /**
+     * Change User's password.
+     * @param string $email
+     * @param $data
+     * @return array (returns errors)
+     */
+    public function changePassword(string $email, $data): array {
         $errors = [];
         $user = $this->userDAO->getByEmail($email);
+
+        $oldPassword = $data['oldPassword'];
+        $newPassword = $data['newPassword'];
+        $newPasswordAgain = $data['newPasswordAgain'];
 
         if (!$user) {
             $errors[] = "user_not_found";
@@ -138,6 +168,11 @@ class AuthService {
         return $errors;
     }
 
+    /**
+     * Deletes User.
+     * @param string $email
+     * @return bool (returns if the action was successful)
+     */
     public function deleteAccount(string $email): bool {
         return $this->userDAO->deleteByEmail($email);
     }

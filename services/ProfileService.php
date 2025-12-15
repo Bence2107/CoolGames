@@ -7,7 +7,13 @@ class ProfileService {
         $this->userDAO = $userDAO;
     }
 
-    public function updateUserInfo(string $email, array $postData): array {
+    /**
+     * Validates User info change form and if's succeed, updates it.
+     * @param string $email
+     * @param array $postData
+     * @return array|string[]|null (returns with errors)
+     */
+    public function updateUserInfo(string $email, array $postData): ?array {
         $errors = [];
         $user = $this->userDAO->getByEmail($email);
 
@@ -68,8 +74,13 @@ class ProfileService {
         return $errors;
     }
 
-
-    public function updateProfilePicture(string $email, array $fileData): array {
+    /**
+     * Validate's profile picture, and if's succeed, updates it.
+     * @param string $email
+     * @param array $fileData
+     * @return array|string[]|null
+     */
+    public function updateProfilePicture(string $email, array $fileData): ?array {
         $errors = [];
 
         $allowedTypes = ['jpg', 'png', 'jpeg'];

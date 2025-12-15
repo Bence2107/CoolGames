@@ -20,9 +20,13 @@ class GameService {
     }
 
     /**
-     * Rate a game
+     * Rates a Game by User
+     * @param Game $game
+     * @param User $user
+     * @param int $ratingValue
+     * @return array|null
      */
-    public function rateGame(Game $game, User $user, int $ratingValue): array {
+    public function rateGame(Game $game, User $user, int $ratingValue): ?array {
         // Validate rating value
         if ($ratingValue <= 0) {
             return ['success' => false, 'message' => 'invalidRating'];
@@ -63,35 +67,44 @@ class GameService {
     }
 
     /**
-     * Get all games
+     * Returns all Games.
+     * @return array|null
      */
-    public function getAllGames(): array {
+    public function getAllGames(): ?array {
         return $this->gameDAO->getGames();
     }
 
     /**
-     * Get top 3 rated games
+     * Returns the Top 3 Games by Rating.
+     * @return array|null
      */
-    public function getTopGames(): array {
+    public function getTopGames(): ?array {
         return $this->gameDAO->getTopThreeGames();
     }
 
     /**
-     * Get game by name
+     * Returns Game by Title.
+     * @param string $name
+     * @return Game|null
      */
-    public function getGameByName(string $name): ?Game {
+    public function getGameByTitle(string $name): ?Game {
         return $this->gameDAO->getGameByName(trim($name));
     }
 
     /**
-     * Get user's owned games
+     * Get user's owned games.
+     * @param User $user
+     * @return array|null
      */
-    public function getUserGames(User $user): array {
+    public function getUserGames(User $user): ?array {
         return $this->purchaseDAO->getUserGames($user->getEmail());
     }
 
     /**
-     * Check if user can rate a game
+     * Checks if User can rate the game.
+     * @param Game $game
+     * @param User $user
+     * @return bool
      */
     public function canUserRate(Game $game, User $user): bool {
         $purchase = new Purchase($game->getId(), $user->getEmail());
@@ -100,7 +113,10 @@ class GameService {
     }
 
     /**
-     * Get user's rating for a game
+     * Get User's rating on the Game.
+     * @param Game $game
+     * @param User $user
+     * @return float|null
      */
     public function getUserRating(Game $game, User $user): ?float {
         return $this->ratingDAO->getUserRating($game, $user);
