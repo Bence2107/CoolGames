@@ -40,7 +40,9 @@ unset($_SESSION['errors']);
             <h2>Regisztráció</h2>
             <form method="post" action="/auth/register">
                 <div class="input_field">
-                    <input type="email" placeholder="Email" name="email">
+                    <label for="id">
+                        <input type="email" placeholder="Email" id="id" name="email">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_email", $errors)) {
@@ -57,7 +59,9 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <input type="text" placeholder="Vezetéknév" name="surname">
+                    <label for="surname">
+                        <input type="text" placeholder="Vezetéknév" id="surname" name="surname">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_surname", $errors)) {
@@ -71,7 +75,9 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <input type="text" placeholder="Keresztnév" name="first_name">
+                    <label for="first_name">
+                        <input type="text" placeholder="Keresztnév" id="first_name" name="first_name">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_first_name", $errors)) {
@@ -85,7 +91,9 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <input type="text" placeholder="Felhasználónév" name="username">
+                    <label for="username">
+                        <input type="text" placeholder="Felhasználónév" id="username" name="username">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_username", $errors)) {
@@ -95,11 +103,13 @@ unset($_SESSION['errors']);
                             echo "<b>Ez a felhasználónév már létezik. Kérem válasszon másikat!</b>";
                         }
                         ?>
-                    </div
+                    </div>
                 </div>
 
                 <div class="input_field">
-                    <input type="password" placeholder="Jelszó (min. 7 karakter, betű, szám)" name="password">
+                    <label for="password">
+                        <input type="password" placeholder="Jelszó (min. 7 karakter, betű, szám)" id="password" name="password">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_password", $errors)) {
@@ -119,7 +129,9 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <input type="password" placeholder="Jelszó újra" name="password_again">
+                    <label for="password_again">
+                        <input type="password" placeholder="Jelszó újra" id="password_again" name="password_again">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("empty_password_again", $errors)) {
@@ -133,7 +145,9 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <input type="date" name="szul_datum">
+                    <label for="date">
+                        <input type="date" id="date" name="szul_datum">
+                    </label>
                     <div class="error">
                         <?php
                         if (in_array("invalid_year", $errors)) {

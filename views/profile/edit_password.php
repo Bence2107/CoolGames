@@ -28,12 +28,12 @@
                 <li>
                     <a href="/profile"><img class="header_avatar"
                                             src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
-                                            alt="" id="active2"></a>
+                                            alt="" id="active_profile_frame"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active_profile_frame"
                                             class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
@@ -54,10 +54,12 @@
             <h2>Jelszó módosítása</h2>
             <form method="post" action="/profile/edit/password">
                 <div class="input_field">
-                    <input type="password" placeholder="Jelenlegi Jelszó" name="old_passwd">
+                    <label for="old_password">
+                        <input type="password" placeholder="Jelenlegi Jelszó" id="old_password" name="old_password">
+                    </label>
                     <div class="error">
                         <?php
-                        if (in_array("wrong_passwd", $errors)) {
+                        if (in_array("wrong_password", $errors)) {
                             echo "<b>Hibás jelszó! Kérem próbálja újra!</b>";
                         }
                         ?>
@@ -65,10 +67,12 @@
                 </div>
 
                 <div class="input_field">
-                    <input type="password" placeholder="Új Jelszó" name="new_passwd">
+                    <label for="new_password">
+                        <input type="password" placeholder="Új Jelszó" name="new_password">
+                    </label>
                     <div class="error">
                         <?php
-                        if (in_array("new_passwd_not_equal", $errors)) {
+                        if (in_array("passwords_not_equal", $errors)) {
                             echo "<b>A két jelszó nem egyezik. Kérem próbálja újra!</b>";
                         }
                         ?>
@@ -76,10 +80,12 @@
                 </div>
 
                 <div class="input_field">
-                    <input type="password" placeholder="Új Jelszó Újra" name="new_passwd_again">
+                    <label for="new_password_confirm">
+                        <input type="password" placeholder="Új Jelszó Újra" name="new_password_confirm">
+                    </label>
                     <div class="error">
                         <?php
-                        if (in_array("new_passwd_not_equal", $errors)) {
+                        if (in_array("passwords_not_equal", $errors)) {
                             echo "<b>A két jelszó nem egyezik. Kérem próbálja újra!</b>";
                         }
                         ?>

@@ -28,12 +28,12 @@
                 <li>
                     <a href="/profile"><img class="header_avatar"
                                             src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
-                                            alt="" id="active2"></a>
+                                            alt="" id="active_profile_frame"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active_profile_frame"
                                             class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
@@ -85,7 +85,9 @@
                 <h2>Adatok módosítása</h2>
                 <form method="post" action="/profile/edit">
                     <div class="input_field">
-                        <input type="text" placeholder="<?= htmlspecialchars($user->getSurname()) ?>" name="surname">
+                        <label for="surname">
+                            <input type="text" value="<?= htmlspecialchars($user->getSurname()) ?>" id="surname" name="surname">
+                        </label>
                         <div class="error">
                             <?php
                             if (in_array("empty_surname", $errors)) {
@@ -99,7 +101,9 @@
                     </div>
 
                     <div class="input_field">
-                        <input type="text" placeholder="<?= htmlspecialchars($user->getFirstname()) ?>" name="first_name">
+                        <label for="first_name">
+                            <input type="text" value="<?= htmlspecialchars($user->getFirstname()) ?>" id="first_name" name="first_name">
+                        </label>
                         <div class="error">
                             <?php
                             if (in_array("empty_first_name", $errors)) {
@@ -113,7 +117,9 @@
                     </div>
 
                     <div class="input_field">
-                        <input type="text" placeholder="<?= htmlspecialchars($user->getUsername()) ?>" name="username">
+                        <label for="username">
+                            <input type="text" value="<?= htmlspecialchars($user->getUsername()) ?>" id="username" name="username">
+                        </label>
                         <div class="error">
                             <?php
                             if (in_array("username_already_exists", $errors)) {
@@ -124,7 +130,9 @@
                     </div>
 
                     <div class="input_field">
-                        <input type="date" name="birth_date" value="<?= htmlspecialchars($user->getBirthdate()) ?>">
+                        <label for="birth_date">
+                            <input type="date" value="<?= htmlspecialchars($user->getBirthdate()) ?>" id="birth_date" name="birth_date" >
+                        </label>
                     </div>
 
                     <input type="submit" value="Módosít">

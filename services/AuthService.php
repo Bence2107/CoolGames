@@ -126,7 +126,7 @@ class AuthService {
             $errors[] = "wrong_password";
         }
         if ($newPassword !== $newPasswordAgain) {
-            $errors[] = "new_passwd_not_equal";
+            $errors[] = "passwords_not_equal";
         }
 
         if (empty($errors)) {

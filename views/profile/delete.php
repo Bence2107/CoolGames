@@ -21,12 +21,12 @@
                 <li>
                     <a href="/profile"><img class="header_avatar"
                                             src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
-                                            alt="" id="active2"></a>
+                                            alt="" id="active_profile_frame"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active_profile_frame"
                                             class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>

@@ -103,7 +103,7 @@ header #active, header #active3{
     color: #e4a14a;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }
-header #active2{
+header #active_profile_frame{
     box-shadow: 1px -1px 10px 0 #e4a14a;
 }
 

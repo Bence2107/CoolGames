@@ -47,10 +47,14 @@
             <h2>Bejelentkezés</h2>
             <form method="post" action="/auth/login">
                 <div class="input_field">
-                    <input type="text" placeholder="Email" name="email">
+                    <label for="email">
+                        <input type="text" placeholder="Email" id="email" name="email">
+                    </label>
                 </div>
                 <div class="input_field">
-                    <input type="password" placeholder="Jelszó" name="passwd">
+                    <label for="password">
+                        <input type="password" placeholder="Jelszó" id="password" name="password">
+                    </label>
                 </div>
                 <input type="submit" value="Bejelentkezés">
             </form>
