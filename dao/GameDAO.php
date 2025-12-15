@@ -8,6 +8,11 @@ class GameDAO {
         $this->db = $db;
     }
 
+    /**
+     * Execute Game query
+     * @param string $sql
+     * @return array (returns Game's in array)
+     */
     public function gamesQuery(string $sql): array {
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
@@ -34,21 +39,35 @@ class GameDAO {
         return $games;
     }
 
+    /**
+     * Get All Games.
+     * @return array (returns Game's in array)
+     */
     public function getGames() : array
     {
         $sql = "SELECT * FROM $this->tableName ORDER BY title";
         return $this->gamesQuery($sql);
     }
 
+
+    /**
+     * Get Top 3 Games.
+     * @return array (returns Game's in array)
+     */
     public function getTopThreeGames() : array {
         $sql = "SELECT * FROM $this->tableName ORDER BY rating DESC LIMIT 3";
         return $this->gamesQuery($sql);
     }
 
-    public function getGameByName(string $name) : ?Game {
+    /**
+     * Get Game by its title, if its exits.
+     * @param string $title
+     * @return ?Game
+     */
+    public function getGameByName(string $title) : ?Game {
         $sql = "SELECT * FROM $this->tableName WHERE title = :title";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':title', $name);
+        $stmt->bindValue(':title', $title);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -71,6 +90,13 @@ class GameDAO {
         return null;
     }
 
+    /**
+     * Update Game's rating after a User rates.
+     * @param Game $game
+     * @param float $newRating
+     *
+     * @return bool (returns if the action was successful)
+     */
     public function updateGameRating(Game $game, float $newRating): bool {
         $sql = "UPDATE $this->tableName SET rating = :rating WHERE id = :id";
         $stmt = $this->db->prepare($sql);

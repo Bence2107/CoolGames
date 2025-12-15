@@ -22,7 +22,7 @@ class BasketService {
     public function addToBasket(Game $game, User $user): array {
         // Check if user already owns the game
         $purchase = new Purchase($game->getId(), $user->getEmail());
-        if ($this->purchaseDAO->userOwnsGame($purchase)) {
+        if ($this->purchaseDAO->isUserOwnsTheGame($purchase)) {
             return ['success' => false, 'message' => 'ownedGame'];
         }
 
@@ -65,14 +65,14 @@ class BasketService {
         $reward = $summary['reward'];
 
         // Check if user has enough money
-        $remainingMoney = ($user->getCatCredit() - $totalPrice) + $reward;
-        if ($remainingMoney < 0) {
+        $remainingCatCredit = ($user->getCatCredit() - $totalPrice) + $reward;
+        if ($remainingCatCredit < 0) {
             return ['success' => false, 'message' => 'notEnoughMoneyError'];
         }
 
         // Update user money
-        $user->setCatCredit($remainingMoney);
-        $this->userDAO->updateMoney($user);
+        $user->setCatCredit($remainingCatCredit);
+        $this->userDAO->updateCatCredit($user);
 
         // Add purchases
         foreach ($basketGames as $game) {

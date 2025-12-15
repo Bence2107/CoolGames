@@ -9,7 +9,12 @@ class UserDAO {
         $this->db = $connection;
     }
 
-    private function getUser($stmt) : ?User {
+    /**
+     * Executes User query if exits
+     * @param PDOStatement $stmt
+     * @return User|null
+     */
+    private function getUser(PDOStatement $stmt) : ?User {
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -22,6 +27,11 @@ class UserDAO {
         return null;
     }
 
+    /**
+     * Get User by email, if exits.
+     * @param string $email
+     * @return User|null
+     */
     public function getByEmail(string $email) : ?User {
         $sql = "SELECT * FROM $this->tableName WHERE email = :email";
         $stmt = $this->db->prepare($sql);
@@ -29,6 +39,11 @@ class UserDAO {
         return $this->getUser($stmt);
     }
 
+    /**
+     * Get User by username, if exits.
+     * @param string $username
+     * @return User|null
+     */
     public function getByUsername(string $username) : ?User {
         $sql = "SELECT * FROM $this->tableName WHERE felhasznalo_nev = :username";
         $stmt = $this->db->prepare($sql);
@@ -36,6 +51,11 @@ class UserDAO {
         return $this->getUser($stmt);
     }
 
+    /**
+     * Registries a User.
+     * @param User $user
+     * @return bool
+     */
     public function create(User $user): bool
     {
         $sql = "INSERT INTO $this->tableName 
@@ -57,6 +77,11 @@ class UserDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Update User by username, surname, first name, birthdate.
+     * @param User $user
+     * @return bool
+     */
     public function updateUserInfo(User $user): bool
     {
         $sql = "UPDATE $this->tableName SET 
@@ -77,6 +102,11 @@ class UserDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Update User's password.
+     * @param User $user
+     * @return bool
+     */
     public function updatePassword(User $user): bool {
         $sql = "UPDATE $this->tableName SET 
                 password = :password
@@ -90,6 +120,11 @@ class UserDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Update User's profile picture.
+     * @param User $user
+     * @return bool
+     */
     public function updateProfilePicture(User $user): bool
     {
         $sql = "UPDATE $this->tableName SET 
@@ -104,7 +139,12 @@ class UserDAO {
         return $stmt->execute();
     }
 
-    public function updateMoney(User $user): bool {
+    /**
+     * Update User's cat credit.
+     * @param User $user
+     * @return bool
+     */
+    public function updateCatCredit(User $user): bool {
         $sql = "UPDATE $this->tableName SET cat_credit = :cat_credit WHERE email = :email";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':cat_credit', $user->getCatCredit());
@@ -112,6 +152,11 @@ class UserDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Deletes User by email.
+     * @param string $email
+     * @return bool
+     */
     public function deleteByEmail(string $email): bool {
         $sql = "DELETE FROM $this->tableName WHERE email = :email";
         $stmt = $this->db->prepare($sql);

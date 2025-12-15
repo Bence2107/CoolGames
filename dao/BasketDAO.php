@@ -8,10 +8,15 @@ class BasketDAO {
         $this->db = $db;
     }
 
+    /**
+     * Get all Games, what is inside current User's Basket.
+     * @param User $user
+     * @return array (with Article's in it)
+     */
     public function getUsersBasket(User $user): array {
-        $sql = "SELECT j.* FROM games j 
-                INNER JOIN $this->tableName k ON j.id = k.game_id 
-                WHERE k.user_email = :user_email";
+        $sql = "SELECT g.* FROM games jg
+                INNER JOIN $this->tableName b ON g.id = b.game_id 
+                WHERE b.user_email = :user_email";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':user_email', $user->getEmail());
         $stmt->execute();
@@ -36,6 +41,12 @@ class BasketDAO {
         return $games;
     }
 
+    /**
+     * Add Game to User's basket.
+     * @param Game $game
+     * @param User $user
+     * @return bool (returns if the action was successful)
+     */
     public function addToBasket(Game $game, User $user): bool {
         $sql = "INSERT INTO $this->tableName (game_id, user_email) VALUES (:game_id, :user_email)";
         $stmt = $this->db->prepare($sql);
@@ -44,6 +55,12 @@ class BasketDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Remove Game from User's basket.
+     * @param Game $game
+     * @param User $user
+     * @return bool (returns if the action was successful)
+     */
     public function removeFromBasket(Game $game, User $user): bool {
         $sql = "DELETE FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
@@ -52,6 +69,11 @@ class BasketDAO {
         return $stmt->execute();
     }
 
+    /**
+     * Clear all Games from User's basket.
+     * @param User $user
+     * @return bool (returns if the action was successful)
+     */
     public function clearBasket(User $user): bool {
         $sql = "DELETE FROM $this->tableName WHERE user_email = :user_email";
         $stmt = $this->db->prepare($sql);

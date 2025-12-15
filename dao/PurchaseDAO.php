@@ -9,12 +9,14 @@ class PurchaseDAO {
     }
 
     /**
+     * Get all Games purchased by the User.
+     * @param string $email
      * @return Game[]
      */
     public function getUserGames(string $email): array {
-        $sql = "SELECT j.* FROM games j 
-                INNER JOIN $this->tableName b ON j.id = b.game_id 
-                WHERE b.user_email = :user_email";
+        $sql = "SELECT g.* FROM games g 
+                INNER JOIN $this->tableName p ON g.id = p.game_id 
+                WHERE p.user_email = :user_email";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':user_email', $email);
         $stmt->execute();
@@ -39,6 +41,11 @@ class PurchaseDAO {
         return $games;
     }
 
+    /**
+     * Activate a purchase.
+     * @param Purchase $purchase
+     * @return bool (returns if the action was successful)
+     */
     public function addPurchase(Purchase $purchase): bool {
         $sql = "INSERT INTO $this->tableName (game_id, user_email) VALUES (:game_id, :user_email)";
         $stmt = $this->db->prepare($sql);
@@ -47,7 +54,12 @@ class PurchaseDAO {
         return $stmt->execute();
     }
 
-    public function userOwnsGame(Purchase $purchase): bool {
+    /**
+     * Check if the User owns the actual Game.
+     * @param Purchase $purchase
+     * @return bool (returns if the action was successful)
+     */
+    public function isUserOwnsTheGame(Purchase $purchase): bool {
         $sql = "SELECT COUNT(*) FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':game_id', $purchase->getGameId(), PDO::PARAM_INT);

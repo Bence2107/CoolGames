@@ -35,7 +35,7 @@ class GameService {
 
         // Check if user owns the game
         $purchase = new Purchase($game->getId(), $user->getEmail());
-        if (!$this->purchaseDAO->userOwnsGame($purchase)) {
+        if (!$this->purchaseDAO->isUserOwnsTheGame($purchase)) {
             return ['success' => false, 'message' => 'notOwnedRate'];
         }
 
@@ -55,9 +55,9 @@ class GameService {
         $this->gameDAO->updateGameRating($game, $newRating);
 
         // Award user money (5 units)
-        $newMoney = $user->getCatCredit() + 5;
-        $user->setCatCredit($newMoney);
-        $this->userDAO->updateMoney($user);
+        $newCatCredit = $user->getCatCredit() + 5;
+        $user->setCatCredit($newCatCredit);
+        $this->userDAO->updateCatCredit($user);
 
         return ['success' => true, 'message' => 'ratingSuccess'];
     }
@@ -95,7 +95,7 @@ class GameService {
      */
     public function canUserRate(Game $game, User $user): bool {
         $purchase = new Purchase($game->getId(), $user->getEmail());
-        return $this->purchaseDAO->userOwnsGame($purchase)
+        return $this->purchaseDAO->isUserOwnsTheGame($purchase)
             && !$this->ratingDAO->hasUserRated($game, $user);
     }
 
