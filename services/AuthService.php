@@ -53,6 +53,10 @@ class AuthService {
             $errors[] = "empty_password_again";
         }
 
+        if (empty(trim($birth_date))) {
+            $errors[] = "empty_birth_date";
+        }
+
         //Email
         if ($email !== "" && !filter_var($email, FILTER_VALIDATE_EMAIL)){
             $errors[] = "invalid_email";
@@ -88,9 +92,11 @@ class AuthService {
         }
 
         //Birth_date
-        $birth_date_split = explode("-",$birth_date);
-        if($birth_date_split[0]<1930 || $birth_date_split[0]>2025){
-            $errors[] = "invalid_year";
+        if (!empty($birth_date)) {
+            $birth_date_split = explode("-", $birth_date);
+            if ($birth_date_split[0] < 1930 || $birth_date_split[0] > 2025) {
+                $errors[] = "invalid_year";
+            }
         }
 
         return $errors;
@@ -144,9 +150,9 @@ class AuthService {
         $errors = [];
         $user = $this->userDAO->getByEmail($email);
 
-        $oldPassword = $data['oldPassword'];
-        $newPassword = $data['newPassword'];
-        $newPasswordAgain = $data['newPasswordAgain'];
+        $oldPassword = $data['old_password'];
+        $newPassword = $data['new_password'];
+        $newPasswordConfirm = $data['new_password_confirm'];
 
         if (!$user) {
             $errors[] = "user_not_found";
@@ -155,7 +161,7 @@ class AuthService {
         if ($user && !password_verify($oldPassword, $user->getPassword())) {
             $errors[] = "wrong_password";
         }
-        if ($newPassword !== $newPasswordAgain) {
+        if ($newPassword !== $newPasswordConfirm) {
             $errors[] = "passwords_not_equal";
         }
 

@@ -15,7 +15,7 @@ class BasketDAO {
      */
     public function getUsersBasket(User $user): ?array
     {
-        $sql = "SELECT g.* FROM games jg
+        $sql = "SELECT g.* FROM games g
                 INNER JOIN $this->tableName b ON g.id = b.game_id 
                 WHERE b.user_email = :user_email";
         $stmt = $this->db->prepare($sql);

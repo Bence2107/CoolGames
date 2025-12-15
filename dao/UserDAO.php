@@ -45,7 +45,7 @@ class UserDAO {
      * @return User|null
      */
     public function getByUsername(string $username) : ?User {
-        $sql = "SELECT * FROM $this->tableName WHERE felhasznalo_nev = :username";
+        $sql = "SELECT * FROM $this->tableName WHERE username = :username";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(":username", $username);
         return $this->getUser($stmt);

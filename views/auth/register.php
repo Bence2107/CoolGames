@@ -145,11 +145,14 @@ unset($_SESSION['errors']);
                 </div>
 
                 <div class="input_field">
-                    <label for="date">
-                        <input type="date" id="date" name="szul_datum">
+                    <label for="birth_date">
+                        <input type="date" id="birth_date" name="birth_date">
                     </label>
                     <div class="error">
                         <?php
+                        if (in_array("empty_birth_date", $errors)) {
+                            echo "<b>Kérem adja meg a születési dátumát!</b>";
+                        }
                         if (in_array("invalid_year", $errors)) {
                             echo "<b>Kérem adjon meg egy helyes dátumot!</b>";
                         }
