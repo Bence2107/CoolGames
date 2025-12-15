@@ -7,11 +7,12 @@ class GameService {
     private UserDAO $userDAO;
 
     public function __construct(
-        GameDAO $gameDAO,
+        GameDAO     $gameDAO,
         PurchaseDAO $purchaseDAO,
-        RatingDAO $ratingDAO,
-        UserDAO $userDAO
-    ) {
+        RatingDAO   $ratingDAO,
+        UserDAO     $userDAO
+    )
+    {
         $this->gameDAO = $gameDAO;
         $this->purchaseDAO = $purchaseDAO;
         $this->ratingDAO = $ratingDAO;

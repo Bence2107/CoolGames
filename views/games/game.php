@@ -19,15 +19,17 @@
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             $user = SessionHelper::getCurrentUser();
-            if($user && $user->getProfilePicture() != null): ?>
+            if ($user && $user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt=""></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
                     <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
-                    <?php if($user): ?>
+                    <?php if ($user): ?>
                         <p><?= $user->getCatCredit() ?>&#128008;</p>
                     <?php endif; ?>
                 </li>
@@ -45,10 +47,14 @@
                     <div id="rating_container">
                         <h1>Értékelés: <?= round($game->getRating(), 1) ?></h1>
                     </div>
-                    <h3>Megjelenés:</h3><p><?= htmlspecialchars($game->getPublishDate()) ?></p>
-                    <h3>Fejlesztő:</h3><p><?= htmlspecialchars($game->getDeveloper()) ?></p>
-                    <h3>Kiadó:</h3><p><?= htmlspecialchars($game->getPublisher()) ?></p>
-                    <h3>Műfaj:</h3><p><?= htmlspecialchars($game->getGenre()) ?></p>
+                    <h3>Megjelenés:</h3>
+                    <p><?= htmlspecialchars($game->getPublishDate()) ?></p>
+                    <h3>Fejlesztő:</h3>
+                    <p><?= htmlspecialchars($game->getDeveloper()) ?></p>
+                    <h3>Kiadó:</h3>
+                    <p><?= htmlspecialchars($game->getPublisher()) ?></p>
+                    <h3>Műfaj:</h3>
+                    <p><?= htmlspecialchars($game->getGenre()) ?></p>
                     <hr>
                     <h2>Rövid Leírás:</h2>
                     <p><?= nl2br(htmlspecialchars($game->getShortDescription())) ?></p>
@@ -57,7 +63,7 @@
                 <h2>A Játékról:</h2>
                 <p><?= nl2br(htmlspecialchars($game->getLongDescription())) ?></p>
                 <div>
-                    <?php if($canRate): ?>
+                    <?php if ($canRate): ?>
                         <div id="gameTier">
                             <form method="post" action="/games/rate?id='<?= $game->getId() ?>'">
                                 <h2>Játék értékelése:</h2>

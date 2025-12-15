@@ -6,10 +6,11 @@ class BasketService {
     private UserDAO $userDAO;
 
     public function __construct(
-        BasketDAO $basketDAO,
+        BasketDAO   $basketDAO,
         PurchaseDAO $purchaseDAO,
-        UserDAO $userDAO
-    ) {
+        UserDAO     $userDAO
+    )
+    {
         $this->basketDAO = $basketDAO;
         $this->purchaseDAO = $purchaseDAO;
         $this->userDAO = $userDAO;

@@ -1,6 +1,6 @@
 ﻿<?php
     $errors = [];
-    if(isset($_SESSION["errors"])){
+    if (isset($_SESSION["errors"])) {
         $errors = $_SESSION["errors"];
     }
     unset($_SESSION['errors']);
@@ -24,14 +24,17 @@
             <li><a href="/news">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
             <li><a href="/games">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
-            <?php if($user->getProfilePicture() != null): ?>
+            <?php if ($user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="" id="active2"></a>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt="" id="active2"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a>
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                                            class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php endif; ?>
@@ -64,8 +67,9 @@
         <h1 id="cim">Profil módosítása</h1>
         <div class="inner">
             <div class="profile_buttons">
-                <?php if($user->getProfilePicture() != null): ?>
-                    <img class="profile_pick_2" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="">
+                <?php if ($user->getProfilePicture() != null): ?>
+                    <img class="profile_pick_2"
+                         src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="">
                 <?php else: ?>
                     <img class="profile_pick_2" src="/img/profile/profilePicture.png" alt="">
                 <?php endif; ?>
@@ -81,10 +85,13 @@
                 <h2>Adatok módosítása</h2>
                 <form method="post" action="/profile/edit">
                     <div class="input_field">
-                        <input type="text" placeholder="<?= htmlspecialchars($user->getSurname()) ?>" name="veznev">
+                        <input type="text" placeholder="<?= htmlspecialchars($user->getSurname()) ?>" name="surname">
                         <div class="error">
                             <?php
-                            if(in_array("long_veznev",$errors)){
+                            if (in_array("empty_surname", $errors)) {
+                                echo "<b>Kérem adja meg a vezetéknevét!</b>";
+                            }
+                            if (in_array("long_surname", $errors)) {
                                 echo "<b>Túl hosszú vezetéknév. Kérem adjon meg egy rövidebbet</b>";
                             }
                             ?>
@@ -92,10 +99,13 @@
                     </div>
 
                     <div class="input_field">
-                        <input type="text" placeholder="<?= htmlspecialchars($user->getFirstname()) ?>" name="kernev">
+                        <input type="text" placeholder="<?= htmlspecialchars($user->getFirstname()) ?>" name="first_name">
                         <div class="error">
                             <?php
-                            if(in_array("long_kernev",$errors)){
+                            if (in_array("empty_first_name", $errors)) {
+                                echo "<b>Kérem adja meg a keresztnevét!</b>";
+                            }
+                            if (in_array("long_first_name", $errors)) {
                                 echo "<b>Túl hosszú keresztnév. Kérem adjon meg egy rövidebbet!</b>";
                             }
                             ?>
@@ -106,7 +116,7 @@
                         <input type="text" placeholder="<?= htmlspecialchars($user->getUsername()) ?>" name="username">
                         <div class="error">
                             <?php
-                            if(in_array("username_contains",$errors)){
+                            if (in_array("username_already_exists", $errors)) {
                                 echo "<b>Ez a felhasználónév már létezik. Kérem válasszon másikat!</b>";
                             }
                             ?>
@@ -114,7 +124,7 @@
                     </div>
 
                     <div class="input_field">
-                        <input type="date" name="szul_datum" value="<?= htmlspecialchars($user->getBirthdate()) ?>">
+                        <input type="date" name="birth_date" value="<?= htmlspecialchars($user->getBirthdate()) ?>">
                     </div>
 
                     <input type="submit" value="Módosít">

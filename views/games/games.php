@@ -18,28 +18,30 @@
             <li><a href="/games" id="active">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
-                $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilePicture() != null): ?>
-            <li>
-                <a href="/profile"><img class="header_avatar" src="data:image/jpeg;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
-                <p><?= $user->getCatCredit() ?>&#128008;</p>
-            </li>
-        <?php else: ?>
-            <li>
-                <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
-                <?php if($user): ?>
+            $user = SessionHelper::getCurrentUser();
+            if ($user && $user->getProfilePicture() != null): ?>
+                <li>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/jpeg;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt=""></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
-                <?php endif; ?>
-            </li>
+                </li>
+            <?php else: ?>
+                <li>
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
+                    <?php if ($user): ?>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
+                    <?php endif; ?>
+                </li>
             <?php endif; ?>
         </ul>
     </nav>
 </header>
 <main>
     <?php if (isset($_SESSION['addToBasketSuccessful'])): ?>
-    <div class="successful">
-        <b>Játék kosárhoz adva!</b>
-    </div>
+        <div class="successful">
+            <b>Játék kosárhoz adva!</b>
+        </div>
         <?php unset($_SESSION['addToBasketSuccessful']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['ratingSuccess'])): ?>
@@ -81,7 +83,7 @@
         <div class="inner">
             <h1 id="title">Top 3 Legjobb Játékunk:</h1>
             <div class="games_container">
-                <?php foreach($topGames as $game): ?>
+                <?php foreach ($topGames as $game): ?>
                     <div class="game">
                         <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt="">
@@ -96,7 +98,7 @@
 
             <h1 id="title2">Összes Játékunk:</h1>
             <div class="games_container">
-                <?php foreach($games as $game): ?>
+                <?php foreach ($games as $game): ?>
                     <div class="game">
                         <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt="">

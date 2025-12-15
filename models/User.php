@@ -18,8 +18,9 @@ class User {
         ?string $password,
         ?string $birth_date,
         ?string $profile_picture,
-        ?int $cat_credit
-    ) {
+        ?int    $cat_credit
+    )
+    {
         $this->email = $email;
         $this->username = $username;
         $this->surname = $surname;
@@ -30,47 +31,58 @@ class User {
         $this->cat_credit = $cat_credit;
     }
 
-    public function getEmail(): ?string {
+    public function getEmail(): ?string
+    {
         return $this->email;
     }
 
-    public function getUsername(): ?string {
+    public function getUsername(): ?string
+    {
         return $this->username;
     }
 
-    public function setUsername(?string $username): void {
+    public function setUsername(?string $username): void
+    {
         $this->username = $username;
     }
 
-    public function getSurname(): ?string {
+    public function getSurname(): ?string
+    {
         return $this->surname;
     }
 
-    public function setSurname(?string $surname): void {
+    public function setSurname(?string $surname): void
+    {
         $this->surname = $surname;
     }
 
-    public function getFirstname(): ?string {
+    public function getFirstname(): ?string
+    {
         return $this->first_name;
     }
 
-    public function setFirstname(?string $first_name): void {
+    public function setFirstname(?string $first_name): void
+    {
         $this->first_name = $first_name;
     }
 
-    public function getPassword(): ?string {
+    public function getPassword(): ?string
+    {
         return $this->password;
     }
 
-    public function setPassword(?string $password): void {
+    public function setPassword(?string $password): void
+    {
         $this->password = $password;
     }
 
-    public function getBirthdate(): ?string {
+    public function getBirthdate(): ?string
+    {
         return $this->birth_date;
     }
 
-    public function setBirthdate(?string $birth_date): void {
+    public function setBirthdate(?string $birth_date): void
+    {
         try {
             $dateObj = new DateTime($birth_date);
         } catch (Exception $e) {
@@ -79,19 +91,23 @@ class User {
         $this->birth_date = $dateObj->format('Y-m-d');
     }
 
-    public function getProfilePicture(): ?string {
+    public function getProfilePicture(): ?string
+    {
         return $this->profile_picture;
     }
 
-    public function setProfilePicture(?string $profile_picture): void {
+    public function setProfilePicture(?string $profile_picture): void
+    {
         $this->profile_picture = $profile_picture;
     }
 
-    public function getCatCredit(): int {
+    public function getCatCredit(): int
+    {
         return $this->cat_credit;
     }
 
-    public function setCatCredit(int $cat_credit): void {
+    public function setCatCredit(int $cat_credit): void
+    {
         $this->cat_credit = $cat_credit;
     }
 }

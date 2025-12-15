@@ -11,34 +11,56 @@ class ProfileService {
         $errors = [];
         $user = $this->userDAO->getByEmail($email);
 
-        if (!$user) { return ["user_not_found"]; }
+        if (!$user) {
+            return ["user_not_found"];
+        }
 
-        $veznev = trim($postData["veznev"] ?? '');
-        $kernev = trim($postData["kernev"] ?? '');
         $username = trim($postData["username"] ?? '');
-        $szul_datum = trim($postData["szul_datum"] ?? '');
+        $surname = trim($postData["surname"] ?? '');
+        $first_name = trim($postData["first_name"] ?? '');
+        $birth_date = trim($postData["birth_date"] ?? '');
 
-        if (empty($veznev)) $veznev = $user->getSurname() ?? '';
-        if (empty($kernev)) $kernev = $user->getFirstname() ?? '';
+        if (empty($surname)) $surname = $user->getSurname() ?? '';
+        if (empty($first_name)) $first_name = $user->getFirstname() ?? '';
         if (empty($username)) $username = $user->getUsername() ?? '';
-        if (empty($szul_datum)) $szul_datum = $user->getBirthdate() ?? '';
+        if (empty($birth_date)) $birth_date = $user->getBirthdate() ?? '';
 
 
-        if (strlen($veznev) > 45) {
-            $errors[] = "long_veznev";
+        if (empty(trim($username))) {
+            $errors[] = "empty_username";
+        }
+
+        if (empty(trim($surname))) {
+            $errors[] = "empty_surname";
+        }
+
+        if (empty(trim($first_name))) {
+            $errors[] = "empty_first_name";
+        }
+
+        if (trim(strlen($username) > 50)) {
+            $errors[] = "long_username";
+        }
+
+        if (strlen($surname) > 45) {
+            $errors[] = "long_surname";
+        }
+
+        if (trim(strlen($first_name) > 45)) {
+            $errors[] = "long_first_name";
         }
 
         if ($username !== $user->getUsername()) {
             if ($this->userDAO->getByUsername($username)) {
-                $errors[] = "username_contains";
+                $errors[] = "username_already_exists";
             }
         }
 
         if (empty($errors)) {
-            $user->setSurname($veznev);
-            $user->setFirstname($kernev);
             $user->setUsername($username);
-            $user->setBirthdate($szul_datum);
+            $user->setSurname($surname);
+            $user->setFirstname($first_name);
+            $user->setBirthdate($birth_date);
 
             $this->userDAO->updateUserInfo($user);
         }
@@ -50,7 +72,7 @@ class ProfileService {
     public function updateProfilePicture(string $email, array $fileData): array {
         $errors = [];
 
-        $allowedTypes = ['jpg','png','jpeg'];
+        $allowedTypes = ['jpg', 'png', 'jpeg'];
         $type = strtolower(pathinfo($fileData["name"] ?? '', PATHINFO_EXTENSION));
 
         if (($fileData["size"] ?? 0) > 3145728) {
@@ -63,7 +85,9 @@ class ProfileService {
 
         if (empty($errors)) {
             $user = $this->userDAO->getByEmail($email);
-            if (!$user) { return ["user_not_found"]; }
+            if (!$user) {
+                return ["user_not_found"];
+            }
 
             $pictureData = file_get_contents($fileData["tmp_name"]);
 

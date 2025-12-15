@@ -15,41 +15,49 @@ class AuthService {
         $errors = [];
 
         $email = $data["email"];
-        $veznev = $data["veznev"];
-        $kernev = $data["kernev"];
         $username = $data["username"];
+        $surname = $data["surname"];
+        $first_name = $data["first_name"];
         $password = $data["password"];
-        $passwordagain = $data["passwdagain"];
-        $szul_datum = $data["szul_datum"];
+        $password_again = $data["password_again"];
+        $birth_date = $data["birth_date"];
 
-        /*Ellenőrzések*/
-        //Emptys
-
+        //Checks:
+        //Is empty:
         if(empty(trim($email))){
             $errors[] = "empty_email";
-        }
-        if(empty(trim($veznev))){
-            $errors[] = "empty_veznev";
-        }
-        if(empty(trim($kernev))){
-            $errors[] = "empty_kernev";
         }
         if(empty(trim($username))){
             $errors[] = "empty_username";
         }
+        if(empty(trim($surname))){
+            $errors[] = "empty_surname";
+        }
+        if(empty(trim($first_name))){
+            $errors[] = "empty_first_name";
+        }
         if(empty(trim($password))){
             $errors[] = "empty_password";
         }
-        if(empty(trim($passwordagain))){
-            $errors[] = "empty_passwordagain";
+        if(empty(trim($password_again))){
+            $errors[] = "empty_password_again";
         }
 
-        //Nev
-        if(trim(strlen($veznev)>45)){
-            $errors[] = "long_veznev";
+        //Email
+        if ($email !== "" && !filter_var($email, FILTER_VALIDATE_EMAIL)){
+            $errors[] = "invalid_email";
         }
-        if(trim(strlen($kernev)>45)){
-            $errors[] = "long_kernev";
+        $isUserWithEmailExits = $this->userDAO->getByEmail($email);
+        if($isUserWithEmailExits) {
+            $errors[] = "email_already_exists";
+        }
+
+        //Names
+        if(trim(strlen($surname)>45)){
+            $errors[] = "long_surname";
+        }
+        if(trim(strlen($first_name)>45)){
+            $errors[] = "long_first_name";
         }
         if(trim(strlen($username)>50)){
             $errors[] = "long_username";
@@ -57,32 +65,21 @@ class AuthService {
         $isUserWithNameExits = $this->userDAO->getByUsername($username);
         if($isUserWithNameExits)
         {
-            $errors[] = "username_contains";
+            $errors[] = "username_already_exists";
         }
 
-
-        //Jelszo
+        //Password
         if($password !== "" && strlen($password) < 7)
             $errors[] = "short_password";
         if($password!== "" && strlen($password) > 7 && (!preg_match("/[a-zA-Z]/",$password) || !preg_match("/[0-9]/",$password)))
-            $errors[] = "wrong_character";
-        if($passwordagain!="" && $password!=$passwordagain){
+            $errors[] = "wrong_characters";
+        if($password_again!="" && $password!=$password_again){
             $errors[] = "passwords_not_match";
         }
 
-
-        //Email
-        if ($email !== "" && !filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $errors[] = "helytelen_email";
-        }
-        $isUserWithEmailExits = $this->userDAO->getByEmail($email);
-        if($isUserWithEmailExits) {
-            $errors[] = "email_contains";
-        }
-
-        //Datum
-        $szul_datum2 = explode("-",$szul_datum);
-        if($szul_datum2[0]<1930 || $szul_datum2[0]>2025){
+        //Birth_date
+        $birth_date_split = explode("-",$birth_date);
+        if($birth_date_split[0]<1930 || $birth_date_split[0]>2025){
             $errors[] = "invalid_year";
         }
 
@@ -106,10 +103,10 @@ class AuthService {
         $user = new User(
             $data["email"],
             $data["username"],
-            $data["veznev"],
-            $data["kernev"],
+            $data["surname"],
+            $data["first_name"],
             $hashedPassword,
-            $data["szul_datum"],
+            $data["birth_date"],
             null,
             0
         );
@@ -126,7 +123,7 @@ class AuthService {
         }
 
         if ($user && !password_verify($oldPassword, $user->getPassword())) {
-            $errors[] = "wrong_passwd";
+            $errors[] = "wrong_password";
         }
         if ($newPassword !== $newPasswordAgain) {
             $errors[] = "new_passwd_not_equal";

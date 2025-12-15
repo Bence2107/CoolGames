@@ -26,7 +26,7 @@ class Game {
         ?string $publish_date,
         float   $rating,
         float   $original_rating,
-        int $price
+        int     $price
     )
     {
         $this->id = $id;

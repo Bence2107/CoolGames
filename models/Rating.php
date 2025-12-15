@@ -1,7 +1,6 @@
 <?php
 
-class Rating
-{
+class Rating {
     private int $game_id;
     private string $user_email;
     private int $rating;

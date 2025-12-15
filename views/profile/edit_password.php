@@ -1,9 +1,9 @@
 ﻿<?php
-$errors = [];
-if(isset($_SESSION["errors"])){
-    $errors = $_SESSION["errors"];
-}
-unset($_SESSION['errors']);
+    $errors = [];
+    if (isset($_SESSION["errors"])) {
+        $errors = $_SESSION["errors"];
+    }
+    unset($_SESSION['errors']);
 ?>
 <!DOCTYPE html>
 <html lang="hu">
@@ -24,14 +24,17 @@ unset($_SESSION['errors']);
             <li><a href="/news">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
             <li><a href="/games">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
-            <?php if($user->getProfilePicture() != null): ?>
+            <?php if ($user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="" id="active2"></a>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt="" id="active2"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a>
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                                            class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php endif; ?>
@@ -54,7 +57,7 @@ unset($_SESSION['errors']);
                     <input type="password" placeholder="Jelenlegi Jelszó" name="old_passwd">
                     <div class="error">
                         <?php
-                        if(in_array("wrong_passwd",$errors)){
+                        if (in_array("wrong_passwd", $errors)) {
                             echo "<b>Hibás jelszó! Kérem próbálja újra!</b>";
                         }
                         ?>
@@ -65,7 +68,7 @@ unset($_SESSION['errors']);
                     <input type="password" placeholder="Új Jelszó" name="new_passwd">
                     <div class="error">
                         <?php
-                        if(in_array("new_passwd_not_equal",$errors)){
+                        if (in_array("new_passwd_not_equal", $errors)) {
                             echo "<b>A két jelszó nem egyezik. Kérem próbálja újra!</b>";
                         }
                         ?>
@@ -76,7 +79,7 @@ unset($_SESSION['errors']);
                     <input type="password" placeholder="Új Jelszó Újra" name="new_passwd_again">
                     <div class="error">
                         <?php
-                        if(in_array("new_passwd_not_equal",$errors)){
+                        if (in_array("new_passwd_not_equal", $errors)) {
                             echo "<b>A két jelszó nem egyezik. Kérem próbálja újra!</b>";
                         }
                         ?>

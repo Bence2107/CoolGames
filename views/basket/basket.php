@@ -19,15 +19,17 @@
             <li><a href="/basket" id="active">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             $user = SessionHelper::getCurrentUser();
-            if($user && $user->getProfilePicture() != null): ?>
+            if ($user && $user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt=""></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
                     <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
-                    <?php if($user): ?>
+                    <?php if ($user): ?>
                         <p><?= $user->getCatCredit() ?>&#128008;</p>
                     <?php endif; ?>
                 </li>
@@ -43,7 +45,7 @@
         <?php unset($_SESSION['notEnoughMoneyError']); ?>
     <?php endif; ?>
 
-    <?php if(isset($_SESSION['buySuccessful'])): ?>
+    <?php if (isset($_SESSION['buySuccessful'])): ?>
         <div class="successful">
             <b>Sikeres vásárlás!</b>
         </div>
@@ -54,7 +56,7 @@
         <div class="inner">
             <h1 id="title">Kosár</h1>
             <div class="checkOut">
-                <?php if(empty($basketGames)): ?>
+                <?php if (empty($basketGames)): ?>
                     <div class="empty_sign">
                         <img src="/img/basket/trolley_cart_warning_icon.png" alt="">
                         <h1>A kosara <b>üres</b></h1>
@@ -67,7 +69,7 @@
                     </div>
                 <?php else: ?>
                     <hr>
-                    <?php foreach($basketGames as $game): ?>
+                    <?php foreach ($basketGames as $game): ?>
                         <div class="checkOut_item">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt=""/>
                             <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>"><?= htmlspecialchars($game->getTitle()) ?></a>

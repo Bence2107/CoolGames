@@ -17,14 +17,17 @@
             <li><a href="/news">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
             <li><a href="/games">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
-            <?php if($user->getProfilePicture() != null): ?>
+            <?php if ($user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="" id="active2"></a>
+                    <a href="/profile"><img class="header_avatar"
+                                            src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                            alt="" id="active2"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
-                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a>
+                    <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2"
+                                            class="header_avatar"></a>
                     <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php endif; ?>
@@ -37,8 +40,9 @@
             <div class="profile_container">
                 <div class="profile_pick_container">
                     <div class="profile_buttons">
-                        <?php if($user->getProfilePicture() != null): ?>
-                            <img class="profile_pick" src="data:image/jpeg;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="">
+                        <?php if ($user->getProfilePicture() != null): ?>
+                            <img class="profile_pick"
+                                 src="data:image/jpeg;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="">
                         <?php else: ?>
                             <img src="/img/profile/profilePicture.png" alt="" class="profile_pick">
                         <?php endif; ?>
@@ -77,9 +81,10 @@
             </div>
             <h1 id="title">Játékaim:</h1>
             <div class="games_container">
-                <?php if(empty($ownedGames)): ?>
+                <?php if (empty($ownedGames)): ?>
                     <div class="empty_sign">
-                        <h3>Ön még egy játéknak sem a tulajdonosa. Hogy birtokoljon, látogasson el a Játékok Weboldalra:</h3>
+                        <h3>Ön még egy játéknak sem a tulajdonosa. Hogy birtokoljon, látogasson el a Játékok
+                            Weboldalra:</h3>
                         <div class="action">
                             <form action="/games">
                                 <input type="submit" value="Játékok vásárlása">
@@ -87,7 +92,7 @@
                         </div>
                     </div>
                 <?php else: ?>
-                    <?php foreach($ownedGames as $game): ?>
+                    <?php foreach ($ownedGames as $game): ?>
                         <div class="game">
                             <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>">
                                 <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt=""/>

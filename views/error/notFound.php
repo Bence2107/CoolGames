@@ -17,7 +17,7 @@
             <li><a href="/news">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
             <li><a href="/games">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
-            <?php if(!isset($_SESSION["email"])): ?>
+            <?php if (!isset($_SESSION["email"])): ?>
                 <li class="dropdown">
                     <a href="/profile">Fiók <i class="fa-solid fa-user">&nbsp;</i></a>
                     <div class="dropdown_content">
@@ -27,15 +27,17 @@
                 </li>
             <?php else:
                 $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilePicture() != null): ?>
+                if ($user && $user->getProfilePicture() != null): ?>
                     <li>
-                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                        <a href="/profile"><img class="header_avatar"
+                                                src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>"
+                                                alt=""></a>
                         <p><?= $user->getCatCredit() ?>&#128008;</p>
                     </li>
                 <?php else: ?>
                     <li>
                         <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
-                        <?php if($user): ?>
+                        <?php if ($user): ?>
                             <p><?= $user->getCatCredit() ?>&#128008;</p>
                         <?php endif; ?>
                     </li>
