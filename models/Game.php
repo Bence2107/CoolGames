@@ -2,32 +2,45 @@
 
 class Game {
     private ?int $id;
-    private ?string $nev;
-    private ?string $fejleszto;
-    private ?string $kiado;
-    private ?string $mufaj;
-    private ?string $r_leiras; // rövid leírás
-    private ?string $h_leiras; // hosszú leírás
+    private ?string $title;
+    private ?string $developer;
+    private ?string $publisher;
+    private ?string $genre;
+    private ?string $short_description;
+    private ?string $long_description;
     private ?string $video_link;
-    private ?string $megjelenes_datum;
-    private float $ertekeles;
-    private float $eredeti_ertekeles;
-    private int $ar;
+    private ?string $publish_date;
+    private float $rating;
+    private float $original_rating;
+    private int $price;
 
-    public function __construct(?int $id, ?string $nev, ?string $fejleszto, ?string $kiado, ?string $mufaj, ?string $r_leiras, ?string $h_leiras, ?string $video_link, ?string $megjelenes_datum, float $ertekeles, float $eredeti_ertekeles, int $ar)
+    public function __construct(
+        ?int    $id,
+        ?string $title,
+        ?string $developer,
+        ?string $publisher,
+        ?string $genre,
+        ?string $short_desc,
+        ?string $long_desc,
+        ?string $video_link,
+        ?string $publish_date,
+        float   $rating,
+        float   $original_rating,
+        int $price
+    )
     {
         $this->id = $id;
-        $this->nev = $nev;
-        $this->fejleszto = $fejleszto;
-        $this->kiado = $kiado;
-        $this->mufaj = $mufaj;
-        $this->r_leiras = $r_leiras;
-        $this->h_leiras = $h_leiras;
+        $this->title = $title;
+        $this->developer = $developer;
+        $this->publisher = $publisher;
+        $this->genre = $genre;
+        $this->short_description = $short_desc;
+        $this->long_description = $long_desc;
         $this->video_link = $video_link;
-        $this->megjelenes_datum = $megjelenes_datum;
-        $this->ertekeles = $ertekeles;
-        $this->eredeti_ertekeles = $eredeti_ertekeles;
-        $this->ar = $ar;
+        $this->publish_date = $publish_date;
+        $this->rating = $rating;
+        $this->original_rating = $original_rating;
+        $this->price = $price;
     }
 
     public function getId(): ?int
@@ -40,64 +53,64 @@ class Game {
         $this->id = $id;
     }
 
-    public function getNev(): ?string
+    public function getTitle(): ?string
     {
-        return $this->nev;
+        return $this->title;
     }
 
-    public function setNev(?string $nev): void
+    public function setTitle(?string $title): void
     {
-        $this->nev = $nev;
+        $this->title = $title;
     }
 
-    public function getFejleszto(): ?string
+    public function getDeveloper(): ?string
     {
-        return $this->fejleszto;
+        return $this->developer;
     }
 
-    public function setFejleszto(?string $fejleszto): void
+    public function setDeveloper(?string $developer): void
     {
-        $this->fejleszto = $fejleszto;
+        $this->developer = $developer;
     }
 
-    public function getKiado(): ?string
+    public function getPublisher(): ?string
     {
-        return $this->kiado;
+        return $this->publisher;
     }
 
-    public function setKiado(?string $kiado): void
+    public function setPublisher(?string $publisher): void
     {
-        $this->kiado = $kiado;
+        $this->publisher = $publisher;
     }
 
-    public function getMufaj(): ?string
+    public function getGenre(): ?string
     {
-        return $this->mufaj;
+        return $this->genre;
     }
 
-    public function setMufaj(?string $mufaj): void
+    public function setGenre(?string $genre): void
     {
-        $this->mufaj = $mufaj;
+        $this->genre = $genre;
     }
 
-    public function getRLeiras(): ?string
+    public function getShortDescription(): ?string
     {
-        return $this->r_leiras;
+        return $this->short_description;
     }
 
-    public function setRLeiras(?string $r_leiras): void
+    public function setShortDescription(?string $short_description): void
     {
-        $this->r_leiras = $r_leiras;
+        $this->short_description = $short_description;
     }
 
-    public function getHLeiras(): ?string
+    public function getLongDescription(): ?string
     {
-        return $this->h_leiras;
+        return $this->long_description;
     }
 
-    public function setHLeiras(?string $h_leiras): void
+    public function setLongDescription(?string $long_description): void
     {
-        $this->h_leiras = $h_leiras;
+        $this->long_description = $long_description;
     }
 
     public function getVideoLink(): ?string
@@ -110,47 +123,43 @@ class Game {
         $this->video_link = $video_link;
     }
 
-    public function getMegjelenesDatum(): ?string
+    public function getPublishDate(): ?string
     {
-        return $this->megjelenes_datum;
+        return $this->publish_date;
     }
 
-    public function setMegjelenesDatum(?string $megjelenes_datum): void
+    public function setPublishDate(?string $publish_date): void
     {
-        $this->megjelenes_datum = $megjelenes_datum;
+        $this->publish_date = $publish_date;
     }
 
-    public function getErtekeles(): float
+    public function getRating(): float
     {
-        return $this->ertekeles;
+        return $this->rating;
     }
 
-    public function setErtekeles(float $ertekeles): void
+    public function setRating(float $rating): void
     {
-        $this->ertekeles = $ertekeles;
+        $this->rating = $rating;
     }
 
-    public function getEredetiErtekeles(): float
+    public function getOriginalRating(): float
     {
-        return $this->eredeti_ertekeles;
+        return $this->original_rating;
     }
 
-    public function setEredetiErtekeles(float $eredeti_ertekeles): void
+    public function setOriginalRating(float $original_rating): void
     {
-        $this->eredeti_ertekeles = $eredeti_ertekeles;
+        $this->original_rating = $original_rating;
     }
 
-    public function getAr(): int
+    public function getPrice(): int
     {
-        return $this->ar;
+        return $this->price;
     }
 
-    public function setAr(int $ar): void
+    public function setPrice(int $price): void
     {
-        $this->ar = $ar;
+        $this->price = $price;
     }
-
-
-
-
 }

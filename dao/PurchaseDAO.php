@@ -2,7 +2,7 @@
 
 class PurchaseDAO {
     private PDO $db;
-    private string $tableName = "birtokol";
+    private string $tableName = "purchase";
 
     public function __construct(PDO $db) {
         $this->db = $db;
@@ -12,46 +12,46 @@ class PurchaseDAO {
      * @return Game[]
      */
     public function getUserGames(string $email): array {
-        $sql = "SELECT j.* FROM jatek j 
-                INNER JOIN $this->tableName b ON j.id = b.jatek_id 
-                WHERE b.felh_email = :email";
+        $sql = "SELECT j.* FROM games j 
+                INNER JOIN $this->tableName b ON j.id = b.game_id 
+                WHERE b.user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':email', $email);
+        $stmt->bindValue(':user_email', $email);
         $stmt->execute();
 
         $games = [];
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $games[] = new Game(
                 $data['id'],
-                $data['nev'],
-                $data['fejleszto'],
-                $data['kiado'],
-                $data['mufaj'],
-                $data['r_leiras'],
-                $data['h_lerias'],
+                $data['title'],
+                $data['developer'],
+                $data['publisher'],
+                $data['genre'],
+                $data['short_description'],
+                $data['long_description'],
                 $data['video_link'],
-                $data['megjelenes_datum'],
-                $data['ertekeles'],
-                $data['eredeti_ertekeles'],
-                $data['ar']
+                $data['publish_date'],
+                $data['rating'],
+                $data['original_rating'],
+                $data['price'],
             );
         }
         return $games;
     }
 
     public function addPurchase(Purchase $purchase): bool {
-        $sql = "INSERT INTO $this->tableName (jatek_id, felh_email) VALUES (:jatek_id, :email)";
+        $sql = "INSERT INTO $this->tableName (game_id, user_email) VALUES (:game_id, :user_email)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $purchase->getJatekId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $purchase->getEmail());
+        $stmt->bindValue(':game_id', $purchase->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $purchase->getUserEmail());
         return $stmt->execute();
     }
 
     public function userOwnsGame(Purchase $purchase): bool {
-        $sql = "SELECT COUNT(*) FROM $this->tableName WHERE jatek_id = :jatek_id AND felh_email = :email";
+        $sql = "SELECT COUNT(*) FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $purchase->getJatekId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $purchase->getEmail());
+        $stmt->bindValue(':game_id', $purchase->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $purchase->getUserEmail());
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }

@@ -26,12 +26,12 @@ class ArticleController {
     public function showArticle(): void {
         $_SESSION["news"] = true;
 
-        if (!isset($_GET['cim'])) {
+        if (!isset($_GET['title'])) {
             header("Location: /news");
             exit();
         }
 
-        $title = $_GET['cim'];
+        $title = $_GET['title'];
         $article = $this->articleService->getArticleByTitle($title);
 
         if ($article === null) {

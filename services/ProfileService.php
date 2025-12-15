@@ -67,7 +67,7 @@ class ProfileService {
 
             $pictureData = file_get_contents($fileData["tmp_name"]);
 
-            $user->setProfilepicture($pictureData);
+            $user->setProfilePicture($pictureData);
             $this->userDAO->updateProfilePicture($user);
         }
 

@@ -27,16 +27,16 @@
                 </li>
             <?php else:
                 $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilepicture() != null): ?>
+                if($user && $user->getProfilePicture() != null): ?>
                     <li>
-                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                        <p><?= $user->getCatcredit() ?>&#128008;</p>
+                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
                     </li>
                 <?php else: ?>
                     <li>
                         <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                         <?php if($user): ?>
-                            <p><?= $user->getCatcredit() ?>&#128008;</p>
+                            <p><?= $user->getCatCredit() ?>&#128008;</p>
                         <?php endif; ?>
                     </li>
                 <?php endif; ?>
@@ -49,14 +49,14 @@
         <div class="inner">
             <div class="news_container">
                 <?php foreach($articles as $article): ?>
-                    <a href="/news/article?cim=<?= urlencode($article->getCim()) ?>">
+                    <a href="/news/article?title=<?= urlencode($article->getTitle()) ?>">
                         <div class="news_item">
                             <div class="new_description">
-                                <h1><?= htmlspecialchars($article->getCim()) ?></h1>
+                                <h1><?= htmlspecialchars($article->getTitle()) ?></h1>
                                 <br>
-                                <p><?= htmlspecialchars($article->getRovidLeiras()) ?></p>
+                                <p><?= htmlspecialchars($article->getShortDesc()) ?></p>
                                 <hr>
-                                <p><?= htmlspecialchars($article->getDatum()) ?></p>
+                                <p><?= htmlspecialchars($article->getPublishDate()) ?></p>
                             </div>
                             <img src="/img/assets/new_images/<?= $article->getId() ?>.jpg" alt=""/>
                         </div>

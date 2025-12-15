@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
-    <title><?= htmlspecialchars($game->getNev()) ?></title>
+    <title><?= htmlspecialchars($game->getTitle()) ?></title>
 </head>
 <body>
 <header>
@@ -19,16 +19,16 @@
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             $user = SessionHelper::getCurrentUser();
-            if($user && $user->getProfilepicture() != null): ?>
+            if($user && $user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                    <p><?= $user->getCatcredit() ?>&#128008;</p>
+                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                    <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
                     <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                     <?php if($user): ?>
-                        <p><?= $user->getCatcredit() ?>&#128008;</p>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
                     <?php endif; ?>
                 </li>
             <?php endif; ?>
@@ -38,24 +38,24 @@
 <main>
     <div class="inner_main">
         <div class="inner">
-            <h1 id="title"><?= htmlspecialchars($game->getNev()) ?></h1>
+            <h1 id="title"><?= htmlspecialchars($game->getTitle()) ?></h1>
             <div class="content" id="game">
                 <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt=""/>
                 <div>
                     <div id="rating_container">
-                        <h1>Értékelés: <?= round($game->getErtekeles(), 1) ?></h1>
+                        <h1>Értékelés: <?= round($game->getRating(), 1) ?></h1>
                     </div>
-                    <h3>Megjelenés:</h3><p><?= htmlspecialchars($game->getMegjelenesdatum()) ?></p>
-                    <h3>Fejlesztő:</h3><p><?= htmlspecialchars($game->getFejleszto()) ?></p>
-                    <h3>Kiadó:</h3><p><?= htmlspecialchars($game->getKiado()) ?></p>
-                    <h3>Műfaj:</h3><p><?= htmlspecialchars($game->getMufaj()) ?></p>
+                    <h3>Megjelenés:</h3><p><?= htmlspecialchars($game->getPublishDate()) ?></p>
+                    <h3>Fejlesztő:</h3><p><?= htmlspecialchars($game->getDeveloper()) ?></p>
+                    <h3>Kiadó:</h3><p><?= htmlspecialchars($game->getPublisher()) ?></p>
+                    <h3>Műfaj:</h3><p><?= htmlspecialchars($game->getGenre()) ?></p>
                     <hr>
                     <h2>Rövid Leírás:</h2>
-                    <p><?= nl2br(htmlspecialchars($game->getRLeiras())) ?></p>
+                    <p><?= nl2br(htmlspecialchars($game->getShortDescription())) ?></p>
                 </div>
                 <iframe class="video" src="<?= htmlspecialchars($game->getVideoLink()) ?>" allowfullscreen></iframe>
                 <h2>A Játékról:</h2>
-                <p><?= nl2br(htmlspecialchars($game->getHLeiras())) ?></p>
+                <p><?= nl2br(htmlspecialchars($game->getLongDescription())) ?></p>
                 <div>
                     <?php if($canRate): ?>
                         <div id="gameTier">
@@ -70,9 +70,9 @@
                     <?php endif; ?>
 
                     <div class="game_buy_sign">
-                        <h4>A(z) <?= htmlspecialchars($game->getNev()) ?> megvásárlása</h4>
+                        <h4>A(z) <?= htmlspecialchars($game->getTitle()) ?> megvásárlása</h4>
                         <div id="price">
-                            <p><?= $game->getAr() ?></p> &#128008;
+                            <p><?= $game->getPrice() ?></p> &#128008;
                             <div>
                                 <form method="post" action="/basket/add">
                                     <input type="hidden" value="<?= $game->getId() ?>" name="jatekID">

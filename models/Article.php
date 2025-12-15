@@ -2,23 +2,23 @@
 
 class Article {
     private ?int $id;
-    private ?string $cim;
-    private ?string $rovid_leiras;
-    private ?string $tartalom;
-    private ?string $datum;
+    private ?string $title;
+    private ?string $short_description;
+    private ?string $content;
+    private ?string $publish_date;
 
     public function __construct(
-        ?int $id,
-        ?string $cim,
-        ?string $rovid_leiras = null,
-        ?string $tartalom = null,
-        ?string $datum = null)
+        ?int    $id,
+        ?string $title,
+        ?string $short_desc = null,
+        ?string $content = null,
+        ?string $publish_date = null)
     {
         $this->id = $id;
-        $this->cim = $cim;
-        $this->rovid_leiras = $rovid_leiras;
-        $this->tartalom = $tartalom;
-        $this->datum = $datum;
+        $this->title = $title;
+        $this->short_description = $short_desc;
+        $this->content = $content;
+        $this->publish_date = $publish_date;
     }
 
     public function getId(): ?int
@@ -31,48 +31,48 @@ class Article {
         $this->id = $id;
     }
 
-    public function getCim(): ?string
+    public function getTitle(): ?string
     {
-        return $this->cim;
+        return $this->title;
     }
 
-    public function setCim(?string $cim): void
+    public function setTitle(?string $title): void
     {
-        $this->cim = $cim;
+        $this->title = $title;
     }
 
-    public function getRovidLeiras(): ?string
+    public function getShortDesc(): ?string
     {
-        return $this->rovid_leiras;
+        return $this->short_description;
     }
 
-    public function setRovidLeiras(?string $rovid_leiras): void
+    public function setShortDesc(?string $short_description): void
     {
-        $this->rovid_leiras = $rovid_leiras;
+        $this->short_description = $short_description;
     }
 
-    public function getTartalom(): ?string
+    public function getContent(): ?string
     {
-        return $this->tartalom;
+        return $this->content;
     }
 
-    public function setTartalom(?string $tartalom): void
+    public function setContent(?string $content): void
     {
-        $this->tartalom = $tartalom;
+        $this->content = $content;
     }
 
-    public function getDatum(): ?string
+    public function getPublishDate(): ?string
     {
-        return $this->datum;
+        return $this->publish_date;
     }
 
-    public function setDatum(?string $datum): void
+    public function setPublishDate(?string $publish_date): void
     {
         try {
-            $dateObj = new DateTime($datum);
+            $dateObj = new DateTime($publish_date);
         } catch (Exception $e) {
             die($e->getMessage());
         }
-        $this->datum = $dateObj->format('Y-m-d');
+        $this->publish_date = $dateObj->format('Y-m-d');
     }
 }

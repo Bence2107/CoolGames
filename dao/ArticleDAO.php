@@ -3,14 +3,14 @@
 class ArticleDAO {
     private PDO $db;
 
-    private string $tableName = "hir";
+    private string $tableName = "news";
 
     public function __construct(PDO $db) {
         $this->db = $db;
     }
 
     public function getArticles(): array {
-        $sql = "SELECT * FROM $this->tableName ORDER BY datum";
+        $sql = "SELECT * FROM $this->tableName ORDER BY publish_date DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
 
@@ -20,17 +20,17 @@ class ArticleDAO {
         foreach ($rows as $data) {
             $articles[] = new Article(
                 $data['id'],
-                $data['cim'],
-                $data['rovid_lerias'],
-                $data['tartalom'],
-                $data['datum']
+                $data['title'],
+                $data['short_description'],
+                $data['content'],
+                $data['publish_date']
             );
         }
         return $articles;
     }
 
     public function getArticleByTitle(string $title): ?Article {
-        $sql = "SELECT * FROM $this->tableName WHERE cim = :title";
+        $sql = "SELECT * FROM $this->tableName WHERE title = :title";
         $stmt = $this->db->prepare($sql);
         $stmt->bindValue(':title', $title);
         $stmt->execute();
@@ -40,10 +40,10 @@ class ArticleDAO {
         if($data) {
             return new Article(
                 $data['id'],
-                $data['cim'],
-                $data['rovid_lerias'],
-                $data['tartalom'],
-                $data['datum']
+                $data['title'],
+                $data['short_description'],
+                $data['content'],
+                $data['publish_date']
             );
         }
 

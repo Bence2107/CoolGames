@@ -4,30 +4,30 @@ class User {
     private ?string $email;
     private ?string $username;
     private ?string $surname;
-    private ?string $firstname;
+    private ?string $first_name;
     private ?string $password;
-    private ?string $birthdate;
-    private ?string $profilepicture;
-    private int $catcredit;
+    private ?string $birth_date;
+    private ?string $profile_picture;
+    private int $cat_credit;
 
     public function __construct(
         ?string $email,
         ?string $username,
-        ?string $veznev,
-        ?string $kernev,
-        ?string $jelszo,
-        ?string $szul_datum,
-        ?string $profilkep,
-        ?int $macskakredit
+        ?string $surname,
+        ?string $first_name,
+        ?string $password,
+        ?string $birth_date,
+        ?string $profile_picture,
+        ?int $cat_credit
     ) {
         $this->email = $email;
         $this->username = $username;
-        $this->surname = $veznev;
-        $this->firstname = $kernev;
-        $this->password = $jelszo;
-        $this->birthdate = $szul_datum;
-        $this->profilepicture = $profilkep;
-        $this->catcredit = $macskakredit;
+        $this->surname = $surname;
+        $this->first_name = $first_name;
+        $this->password = $password;
+        $this->birth_date = $birth_date;
+        $this->profile_picture = $profile_picture;
+        $this->cat_credit = $cat_credit;
     }
 
     public function getEmail(): ?string {
@@ -51,11 +51,11 @@ class User {
     }
 
     public function getFirstname(): ?string {
-        return $this->firstname;
+        return $this->first_name;
     }
 
-    public function setFirstname(?string $firstname): void {
-        $this->firstname = $firstname;
+    public function setFirstname(?string $first_name): void {
+        $this->first_name = $first_name;
     }
 
     public function getPassword(): ?string {
@@ -67,31 +67,31 @@ class User {
     }
 
     public function getBirthdate(): ?string {
-        return $this->birthdate;
+        return $this->birth_date;
     }
 
-    public function setBirthdate(?string $birthdate): void {
+    public function setBirthdate(?string $birth_date): void {
         try {
-            $dateObj = new DateTime($birthdate);
+            $dateObj = new DateTime($birth_date);
         } catch (Exception $e) {
             die($e->getMessage());
         }
-        $this->birthdate = $dateObj->format('Y-m-d');
+        $this->birth_date = $dateObj->format('Y-m-d');
     }
 
-    public function getProfilepicture(): ?string {
-        return $this->profilepicture;
+    public function getProfilePicture(): ?string {
+        return $this->profile_picture;
     }
 
-    public function setProfilepicture(?string $profilepicture): void {
-        $this->profilepicture = $profilepicture;
+    public function setProfilePicture(?string $profile_picture): void {
+        $this->profile_picture = $profile_picture;
     }
 
-    public function getCatcredit(): int {
-        return $this->catcredit;
+    public function getCatCredit(): int {
+        return $this->cat_credit;
     }
 
-    public function setCatcredit(int $catcredit): void {
-        $this->catcredit = $catcredit;
+    public function setCatCredit(int $cat_credit): void {
+        $this->cat_credit = $cat_credit;
     }
 }

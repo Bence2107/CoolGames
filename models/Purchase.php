@@ -1,19 +1,19 @@
 <?php
 
 class Purchase {
-    private int $jatekId;
-    private string $email;
+    private int $game_id;
+    private string $user_email;
 
     public function __construct(int $jatekId, string $email) {
-        $this->jatekId = $jatekId;
-        $this->email = $email;
+        $this->game_id = $jatekId;
+        $this->user_email = $email;
     }
 
-    public function getJatekId(): int {
-        return $this->jatekId;
+    public function getGameid(): int {
+        return $this->game_id;
     }
 
-    public function getEmail(): string {
-        return $this->email;
+    public function getUserEmail(): string {
+        return $this->user_email;
     }
 }

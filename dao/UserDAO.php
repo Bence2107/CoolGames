@@ -2,7 +2,7 @@
 
 class UserDAO {
     private PDO $db;
-    private string $tableName = "felhasznalo";
+    private string $tableName = "users";
 
     public function __construct(PDO $connection)
     {
@@ -15,8 +15,8 @@ class UserDAO {
 
         if($data) {
             return new User(
-                $data['email'], $data['felhasznalo_nev'], $data['veznev'], $data['kernev'],
-                $data['jelszo'], $data['szul_datum'], $data['profilkep'], (int)$data['money']
+                $data['email'], $data['username'], $data['surname'], $data['first_name'],
+                $data['password'], $data['birth_date'], $data['profile_picture'], (int)$data['cat_credit']
             );
         }
         return null;
@@ -39,20 +39,20 @@ class UserDAO {
     public function create(User $user): bool
     {
         $sql = "INSERT INTO $this->tableName 
-                (email, felhasznalo_nev, veznev, kernev, jelszo, szul_datum, profilkep, money)
+                (email, username, surname, first_name, password, birth_date, profile_picture, cat_credit)
                 VALUES 
-                (:email, :username, :surname, :firstname, :password, :birthdate, :profilkep, :catcredit)";
+                (:email, :username, :surname, :first_name, :password, :birth_date, :profile_picture, :cat_credit)";
 
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue(":email", $user->getEmail());
         $stmt->bindValue(":username", $user->getUsername());
         $stmt->bindValue(":surname", $user->getSurname());
-        $stmt->bindValue(":firstname", $user->getFirstName());
+        $stmt->bindValue(":first_name", $user->getFirstName());
         $stmt->bindValue(":password", $user->getPassword());
-        $stmt->bindValue(":birthdate", $user->getBirthdate());
-        $stmt->bindValue(":profilkep", $user->getProfilepicture(), PDO::PARAM_LOB);
-        $stmt->bindValue(":catcredit", $user->getCatcredit());
+        $stmt->bindValue(":birth_date", $user->getBirthdate());
+        $stmt->bindValue(":profile_picture", $user->getProfilePicture(), PDO::PARAM_LOB);
+        $stmt->bindValue(":cat_credit", $user->getCatCredit());
 
         return $stmt->execute();
     }
@@ -60,18 +60,18 @@ class UserDAO {
     public function updateUserInfo(User $user): bool
     {
         $sql = "UPDATE $this->tableName SET 
-                veznev = :vn, 
-                kernev = :kn, 
-                felhasznalo_nev = :un, 
-                szul_datum = :szd
+                username = :username, 
+                surname = :surname, 
+                first_name = :first_name, 
+                birth_date = :birth_date
                 WHERE email = :email";
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindValue(':vn', $user->getSurname());
-        $stmt->bindValue(':kn', $user->getFirstname());
-        $stmt->bindValue(':un', $user->getUsername());
-        $stmt->bindValue(':szd', $user->getBirthdate());
+        $stmt->bindValue(':username', $user->getUsername());
+        $stmt->bindValue(':surname', $user->getSurname());
+        $stmt->bindValue(':first_name', $user->getFirstname());
+        $stmt->bindValue(':birth_date', $user->getBirthdate());
         $stmt->bindValue(':email', $user->getEmail());
 
         return $stmt->execute();
@@ -79,12 +79,12 @@ class UserDAO {
 
     public function updatePassword(User $user): bool {
         $sql = "UPDATE $this->tableName SET 
-                jelszo = :jelszo
+                password = :password
                 WHERE email = :email";
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindValue(':jelszo', $user->getPassword());
+        $stmt->bindValue(':password', $user->getPassword());
         $stmt->bindValue(':email', $user->getEmail());
 
         return $stmt->execute();
@@ -93,21 +93,21 @@ class UserDAO {
     public function updateProfilePicture(User $user): bool
     {
         $sql = "UPDATE $this->tableName SET 
-                profilkep = :pk
+                profile_picture = :profile_picture
                 WHERE email = :email";
 
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindValue(':pk', $user->getProfilepicture(), PDO::PARAM_LOB);
+        $stmt->bindValue(':profile_picture', $user->getProfilePicture(), PDO::PARAM_LOB);
         $stmt->bindValue(':email', $user->getEmail());
 
         return $stmt->execute();
     }
 
     public function updateMoney(User $user): bool {
-        $sql = "UPDATE $this->tableName SET money = :money WHERE email = :email";
+        $sql = "UPDATE $this->tableName SET cat_credit = :cat_credit WHERE email = :email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':money', $user->getCatcredit());
+        $stmt->bindValue(':cat_credit', $user->getCatCredit());
         $stmt->bindValue(':email', $user->getEmail());
         return $stmt->execute();
     }

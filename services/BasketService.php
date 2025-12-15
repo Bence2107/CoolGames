@@ -64,13 +64,13 @@ class BasketService {
         $reward = $summary['reward'];
 
         // Check if user has enough money
-        $remainingMoney = ($user->getCatcredit() - $totalPrice) + $reward;
+        $remainingMoney = ($user->getCatCredit() - $totalPrice) + $reward;
         if ($remainingMoney < 0) {
             return ['success' => false, 'message' => 'notEnoughMoneyError'];
         }
 
         // Update user money
-        $user->setCatcredit($remainingMoney);
+        $user->setCatCredit($remainingMoney);
         $this->userDAO->updateMoney($user);
 
         // Add purchases
@@ -100,7 +100,7 @@ class BasketService {
         $totalPrice = 0;
 
         foreach ($basketGames as $game) {
-            $totalPrice += $game->getAr();
+            $totalPrice += $game->getPrice();
         }
 
         $reward = floor($totalPrice * 0.15);

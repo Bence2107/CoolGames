@@ -2,53 +2,53 @@
 
 class RatingDAO {
     private PDO $db;
-    private string $tableName = "ertekel";
+    private string $tableName = "ratings";
 
     public function __construct(PDO $db) {
         $this->db = $db;
     }
 
     public function addRating(Rating $rating): bool {
-        $sql = "INSERT INTO $this->tableName (jatek_id, email, ertekeles) 
-                VALUES (:jatek_id, :email, :ertekeles)";
+        $sql = "INSERT INTO $this->tableName (game_id, user_email, rating) 
+                VALUES (:game_id, :user_email, :rating)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $rating->getJatekId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $rating->getEmail());
-        $stmt->bindValue(':ertekeles', $rating->getErtekeles(), PDO::PARAM_INT);
+        $stmt->bindValue(':game_id', $rating->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $rating->getUserEmail());
+        $stmt->bindValue(':rating', $rating->getRating(), PDO::PARAM_INT);
         return $stmt->execute();
     }
 
     public function hasUserRated(Game $game, User $user): bool {
-        $sql = "SELECT COUNT(*) FROM $this->tableName WHERE jatek_id = :jatek_id AND email = :email";
+        $sql = "SELECT COUNT(*) FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $game->getId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':game_id', $game->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $user->getEmail());
         $stmt->execute();
         return $stmt->fetchColumn() > 0;
     }
 
     public function getUserRating(Game $game, User $user): ?float {
-        $sql = "SELECT ertekeles FROM $this->tableName WHERE jatek_id = :jatek_id AND email = :email";
+        $sql = "SELECT rating FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $game->getId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':game_id', $game->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $user->getEmail());
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result ? (float)$result['ertekeles'] : null;
+        return $result ? (float)$result['rating'] : null;
     }
 
     public function getRatingStats(Game $game): array {
-        $sql = "SELECT COUNT(ertekeles) as darab, SUM(ertekeles) as osszesen 
-                FROM $this->tableName WHERE jatek_id = :jatek_id";
+        $sql = "SELECT COUNT(rating) as numberof, SUM(rating) as total 
+                FROM $this->tableName WHERE game_id = :game_id";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $game->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':game_id', $game->getId(), PDO::PARAM_INT);
         $stmt->execute();
 
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return [
-            'count' => (int)$result['darab'],
-            'total' => (float)($result['osszesen'] ?? 0)
+            'count' => (int)$result['numberof'],
+            'total' => (float)($result['total'] ?? 0)
         ];
     }
 }

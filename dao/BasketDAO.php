@@ -2,60 +2,60 @@
 
 class BasketDAO {
     private PDO $db;
-    private string $tableName = "kosar";
+    private string $tableName = "basket";
 
     public function __construct(PDO $db) {
         $this->db = $db;
     }
 
     public function getUsersBasket(User $user): array {
-        $sql = "SELECT j.* FROM jatek j 
-                INNER JOIN $this->tableName k ON j.id = k.jatek_id 
-                WHERE k.email = :email";
+        $sql = "SELECT j.* FROM games j 
+                INNER JOIN $this->tableName k ON j.id = k.game_id 
+                WHERE k.user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':user_email', $user->getEmail());
         $stmt->execute();
 
         $games = [];
         while ($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $games[] = new Game(
                 $data['id'],
-                $data['nev'],
-                $data['fejleszto'],
-                $data['kiado'],
-                $data['mufaj'],
-                $data['r_leiras'],
-                $data['h_lerias'],
+                $data['title'],
+                $data['developer'],
+                $data['publisher'],
+                $data['genre'],
+                $data['short_description'],
+                $data['long_description'],
                 $data['video_link'],
-                $data['megjelenes_datum'],
-                $data['ertekeles'],
-                $data['eredeti_ertekeles'],
-                $data['ar']
+                $data['publish_date'],
+                $data['rating'],
+                $data['original_rating'],
+                $data['price'],
             );
         }
         return $games;
     }
 
     public function addToBasket(Game $game, User $user): bool {
-        $sql = "INSERT INTO $this->tableName (jatek_id, email) VALUES (:jatek_id, :email)";
+        $sql = "INSERT INTO $this->tableName (game_id, user_email) VALUES (:game_id, :user_email)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $game->getId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':game_id', $game->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $user->getEmail());
         return $stmt->execute();
     }
 
     public function removeFromBasket(Game $game, User $user): bool {
-        $sql = "DELETE FROM $this->tableName WHERE jatek_id = :jatek_id AND email = :email";
+        $sql = "DELETE FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':jatek_id', $game->getId(), PDO::PARAM_INT);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':game_id', $game->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':user_email', $user->getEmail());
         return $stmt->execute();
     }
 
     public function clearBasket(User $user): bool {
-        $sql = "DELETE FROM $this->tableName WHERE email = :email";
+        $sql = "DELETE FROM $this->tableName WHERE user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':email', $user->getEmail());
+        $stmt->bindValue(':user_email', $user->getEmail());
         return $stmt->execute();
     }
 }

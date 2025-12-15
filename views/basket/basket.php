@@ -19,16 +19,16 @@
             <li><a href="/basket" id="active">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
             $user = SessionHelper::getCurrentUser();
-            if($user && $user->getProfilepicture() != null): ?>
+            if($user && $user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                    <p><?= $user->getCatcredit() ?>&#128008;</p>
+                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                    <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
                     <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                     <?php if($user): ?>
-                        <p><?= $user->getCatcredit() ?>&#128008;</p>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
                     <?php endif; ?>
                 </li>
             <?php endif; ?>
@@ -70,8 +70,8 @@
                     <?php foreach($basketGames as $game): ?>
                         <div class="checkOut_item">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt=""/>
-                            <a href="/games/game?name=<?= urlencode($game->getNev()) ?>"><?= htmlspecialchars($game->getNev()) ?></a>
-                            <p><?= $game->getAr() ?>&#128008;</p>
+                            <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>"><?= htmlspecialchars($game->getTitle()) ?></a>
+                            <p><?= $game->getPrice() ?>&#128008;</p>
                             <form method="post" action="/basket/remove">
                                 <input type="hidden" value="<?= $game->getId() ?>" name="jatekID">
                                 <input type="submit" value="Törlés">

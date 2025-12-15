@@ -17,15 +17,15 @@
             <li><a href="/news">Hírek <i class="fa-solid fa-newspaper">&nbsp;</i></a></li>
             <li><a href="/games">Játékok <i class="fa-solid fa-gamepad">&nbsp;</i></a></li>
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
-            <?php if($user->getProfilepicture() != null): ?>
+            <?php if($user->getProfilePicture() != null): ?>
                 <li>
-                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt="" id="active2"></a>
-                    <p><?= $user->getCatcredit() ?>&#128008;</p>
+                    <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt="" id="active2"></a>
+                    <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php else: ?>
                 <li>
                     <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" id="active2" class="header_avatar"></a>
-                    <p><?= $user->getCatcredit() ?>&#128008;</p>
+                    <p><?= $user->getCatCredit() ?>&#128008;</p>
                 </li>
             <?php endif; ?>
         </ul>

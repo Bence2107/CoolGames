@@ -2,7 +2,7 @@
 
 class GameDAO {
     private PDO $db;
-    private string $tableName = "jatek";
+    private string $tableName = "games";
 
     public function __construct(PDO $db) {
         $this->db = $db;
@@ -18,17 +18,17 @@ class GameDAO {
         foreach ($rows as $data) {
             $games[] = new Game(
                 $data['id'],
-                $data['nev'],
-                $data['fejleszto'],
-                $data['kiado'],
-                $data['mufaj'],
-                $data['r_leiras'],
-                $data['h_lerias'],
+                $data['title'],
+                $data['developer'],
+                $data['publisher'],
+                $data['genre'],
+                $data['short_description'],
+                $data['long_description'],
                 $data['video_link'],
-                $data['megjelenes_datum'],
-                $data['ertekeles'],
-                $data['eredeti_ertekeles'],
-                $data['ar'],
+                $data['publish_date'],
+                $data['rating'],
+                $data['original_rating'],
+                $data['price'],
             );
         }
         return $games;
@@ -36,43 +36,43 @@ class GameDAO {
 
     public function getGames() : array
     {
-        $sql = "SELECT * FROM $this->tableName ORDER BY nev";
+        $sql = "SELECT * FROM $this->tableName ORDER BY title";
         return $this->gamesQuery($sql);
     }
 
     public function getTopThreeGames() : array {
-        $sql = "SELECT * FROM $this->tableName ORDER BY ertekeles DESC LIMIT 3";
+        $sql = "SELECT * FROM $this->tableName ORDER BY rating DESC LIMIT 3";
         return $this->gamesQuery($sql);
     }
 
     public function getGameByName(string $name) : ?Game {
-        $sql = "SELECT * FROM $this->tableName WHERE nev = :name";
+        $sql = "SELECT * FROM $this->tableName WHERE title = :title";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':title', $name);
         $stmt->execute();
         $data = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if($data) {
             return new Game(
                 $data['id'],
-                $data['nev'],
-                $data['fejleszto'],
-                $data['kiado'],
-                $data['mufaj'],
-                $data['r_leiras'],
-                $data['h_lerias'],
+                $data['title'],
+                $data['developer'],
+                $data['publisher'],
+                $data['genre'],
+                $data['short_description'],
+                $data['long_description'],
                 $data['video_link'],
-                $data['megjelenes_datum'],
-                $data['ertekeles'],
-                $data['eredeti_ertekeles'],
-                $data['ar'],
+                $data['publish_date'],
+                $data['rating'],
+                $data['original_rating'],
+                $data['price'],
             );
         }
         return null;
     }
 
     public function updateGameRating(Game $game, float $newRating): bool {
-        $sql = "UPDATE $this->tableName SET ertekeles = :rating WHERE id = :id";
+        $sql = "UPDATE $this->tableName SET rating = :rating WHERE id = :id";
         $stmt = $this->db->prepare($sql);
 
         $stmt->bindValue(':rating', $newRating);

@@ -41,7 +41,7 @@ class GameService {
         // Calculate new rating
         $ratingStats = $this->ratingDAO->getRatingStats($game);
         if ($ratingStats['count'] == 0) {
-            $newRating = ($game->getErtekeles() + $ratingValue) / 2;
+            $newRating = ($game->getRating() + $ratingValue) / 2;
         } else {
             $newRating = ($ratingStats['total'] + $ratingValue) / ($ratingStats['count'] + 1);
         }
@@ -54,8 +54,8 @@ class GameService {
         $this->gameDAO->updateGameRating($game, $newRating);
 
         // Award user money (5 units)
-        $newMoney = $user->getCatcredit() + 5;
-        $user->setCatcredit($newMoney);
+        $newMoney = $user->getCatCredit() + 5;
+        $user->setCatCredit($newMoney);
         $this->userDAO->updateMoney($user);
 
         return ['success' => true, 'message' => 'ratingSuccess'];

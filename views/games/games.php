@@ -19,16 +19,16 @@
             <li><a href="/basket">Kosár <i class="fa-solid fa-cart-shopping">&nbsp;</i></a></li>
             <?php
                 $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilepicture() != null): ?>
+                if($user && $user->getProfilePicture() != null): ?>
             <li>
-                <a href="/profile"><img class="header_avatar" src="data:image/jpeg;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                <p><?= $user->getCatcredit() ?>&#128008;</p>
+                <a href="/profile"><img class="header_avatar" src="data:image/jpeg;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                <p><?= $user->getCatCredit() ?>&#128008;</p>
             </li>
         <?php else: ?>
             <li>
                 <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                 <?php if($user): ?>
-                    <p><?= $user->getCatcredit() ?>&#128008;</p>
+                    <p><?= $user->getCatCredit() ?>&#128008;</p>
                 <?php endif; ?>
             </li>
             <?php endif; ?>
@@ -83,12 +83,12 @@
             <div class="games_container">
                 <?php foreach($topGames as $game): ?>
                     <div class="game">
-                        <a href="/games/game?name=<?= urlencode($game->getNev()) ?>">
+                        <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt="">
                         </a>
-                        <h3><?= htmlspecialchars($game->getNev()) ?>
+                        <h3><?= htmlspecialchars($game->getTitle()) ?>
                             <br>
-                            <span><?= $game->getAr() ?>&#128008;</span>
+                            <span><?= $game->getPrice() ?>&#128008;</span>
                         </h3>
                     </div>
                 <?php endforeach; ?>
@@ -98,12 +98,12 @@
             <div class="games_container">
                 <?php foreach($games as $game): ?>
                     <div class="game">
-                        <a href="/games/game?name=<?= urlencode($game->getNev()) ?>">
+                        <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>">
                             <img src="/img/assets/games/<?= $game->getId() ?>.jpg" alt="">
                         </a>
-                        <h3><?= htmlspecialchars($game->getNev()) ?>
+                        <h3><?= htmlspecialchars($game->getTitle()) ?>
                             <br>
-                            <span><?= $game->getAr() ?>&#128008;</span>
+                            <span><?= $game->getPrice() ?>&#128008;</span>
                         </h3>
                     </div>
                 <?php endforeach; ?>

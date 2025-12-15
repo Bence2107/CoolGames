@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/0c6bdff3b5.js" crossorigin="anonymous"></script>
-    <title><?= htmlspecialchars($article->getCim()) ?></title>
+    <title><?= htmlspecialchars($article->getTitle()) ?></title>
 </head>
 <body>
 <header>
@@ -27,16 +27,16 @@
                 </li>
             <?php else:
                 $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilepicture() != null): ?>
+                if($user && $user->getProfilePicture() != null): ?>
                     <li>
-                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                        <p><?= $user->getCatcredit() ?>&#128008;</p>
+                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
                     </li>
                 <?php else: ?>
                     <li>
                         <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                         <?php if($user): ?>
-                            <p><?= $user->getCatcredit() ?>&#128008;</p>
+                            <p><?= $user->getCatCredit() ?>&#128008;</p>
                         <?php endif; ?>
                     </li>
                 <?php endif; ?>
@@ -49,11 +49,11 @@
         <div class="inner">
             <img id="new_image" src="/img/assets/new_images/<?= $article->getId() ?>.jpg" alt=""/>
             <div class="content">
-                <h1 id="new_title"><?= htmlspecialchars($article->getCim()) ?></h1>
+                <h1 id="new_title"><?= htmlspecialchars($article->getTitle()) ?></h1>
                 <br>
-                <p><?= nl2br(htmlspecialchars($article->getTartalom())) ?></p>
+                <p><?= nl2br(htmlspecialchars($article->getContent())) ?></p>
                 <hr>
-                <p><?= htmlspecialchars($article->getDatum()) ?></p>
+                <p><?= htmlspecialchars($article->getPublishDate()) ?></p>
             </div>
         </div>
     </div>

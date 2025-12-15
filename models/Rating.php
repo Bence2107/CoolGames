@@ -2,48 +2,44 @@
 
 class Rating
 {
-    private int $jatekId;
-    private string $email;
-    private int $ertekeles;
+    private int $game_id;
+    private string $user_email;
+    private int $rating;
 
-    public function __construct(int $jatekId, string $email, int $ertekeles)
+    public function __construct(int $gameID, string $email, int $rating)
     {
-        $this->jatekId = $jatekId;
-        $this->email = $email;
-        $this->ertekeles = $ertekeles;
+        $this->game_id = $gameID;
+        $this->user_email = $email;
+        $this->rating = $rating;
     }
 
-    public function getJatekId(): int
+    public function getGameid(): int
     {
-        return $this->jatekId;
+        return $this->game_id;
     }
 
-    public function setJatekId(int $jatekId): void
+    public function setGameid(int $game_id): void
     {
-        $this->jatekId = $jatekId;
+        $this->game_id = $game_id;
     }
 
-    public function getEmail(): string
+    public function getUserEmail(): string
     {
-        return $this->email;
+        return $this->user_email;
     }
 
-    public function setEmail(string $email): void
+    public function setUserEmail(string $user_email): void
     {
-        $this->email = $email;
+        $this->user_email = $user_email;
     }
 
-    public function getErtekeles(): int
+    public function getRating(): int
     {
-        return $this->ertekeles;
+        return $this->rating;
     }
 
-    public function setErtekeles(int $ertekeles): void
+    public function setRating(int $rating): void
     {
-        $this->ertekeles = $ertekeles;
+        $this->rating = $rating;
     }
-
-
-
-
 }

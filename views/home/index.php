@@ -27,16 +27,16 @@
                 </li>
             <?php else:
                 $user = SessionHelper::getCurrentUser();
-                if($user && $user->getProfilepicture() != null): ?>
+                if($user && $user->getProfilePicture() != null): ?>
                     <li>
-                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilepicture()) ?>" alt=""></a>
-                        <p><?= $user->getCatcredit() ?>&#128008;</p>
+                        <a href="/profile"><img class="header_avatar" src="data:image/png;base64,<?= base64_encode($user->getProfilePicture()) ?>" alt=""></a>
+                        <p><?= $user->getCatCredit() ?>&#128008;</p>
                     </li>
                 <?php else: ?>
                     <li>
                         <a href="/profile"><img src="/img/profile/profilePicture.png" alt="" class="header_avatar"></a>
                         <?php if($user): ?>
-                            <p><?= $user->getCatcredit() ?>&#128008;</p>
+                            <p><?= $user->getCatCredit() ?>&#128008;</p>
                         <?php endif; ?>
                     </li>
                 <?php endif; ?>
