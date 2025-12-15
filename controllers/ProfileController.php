@@ -2,11 +2,11 @@
 
 class ProfileController {
     private View $view;
-    private UserDAO $userDAO;
+    private AuthService $authService;
 
-    public function __construct(View $view, UserDAO $userDAO) {
+    public function __construct(View $view, AuthService $authService) {
         $this->view = $view;
-        $this->userDAO = $userDAO;
+        $this->authService = $authService;
     }
 
     public function showEdit(): void {
@@ -15,7 +15,7 @@ class ProfileController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -36,7 +36,7 @@ class ProfileController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -57,7 +57,7 @@ class ProfileController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {

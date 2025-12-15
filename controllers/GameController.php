@@ -4,12 +4,12 @@ use JetBrains\PhpStorm\NoReturn;
 
 class GameController {
     private GameService $gameService;
-    private UserDAO $userDAO;
+    private AuthService $authService;
     private View $view;
 
-    public function __construct(GameService $gameService, UserDAO $userDAO, View $view) {
+    public function __construct(GameService $gameService, AuthService $authService, View $view) {
         $this->gameService = $gameService;
-        $this->userDAO = $userDAO;
+        $this->authService = $authService;
         $this->view = $view;
     }
 
@@ -24,7 +24,7 @@ class GameController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
 
         $games = $this->gameService->getAllGames();
         $topGames = $this->gameService->getTopGames();
@@ -47,7 +47,7 @@ class GameController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
 
         $gameName = $_GET['name'] ?? null;
         if (!$gameName) {
@@ -91,7 +91,7 @@ class GameController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -130,7 +130,7 @@ class GameController {
         $_SESSION[$result['message']] = true;
 
         // Refresh user in session with updated money
-        SessionHelper::refreshUser($this->userDAO);
+        SessionHelper::refreshUser($this->authService);
 
         header("Location: /games");
         exit();
@@ -145,7 +145,7 @@ class GameController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {

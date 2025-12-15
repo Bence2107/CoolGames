@@ -63,7 +63,7 @@ class Router
 
         // Ensure user is in session
         try {
-            SessionHelper::ensureUserInSession($this->container->get('userDao'));
+            SessionHelper::ensureUserInSession($this->container->get('authService'));
         } catch (Exception $e) {
             die($e->getMessage());
         }

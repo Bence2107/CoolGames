@@ -5,13 +5,13 @@ use JetBrains\PhpStorm\NoReturn;
 class BasketController {
     private BasketService $basketService;
     private GameService $gameService;
-    private UserDAO $userDAO;
+    private AuthService $authService;
     private View $view;
 
-    public function __construct(BasketService $basketService, GameService $gameService, UserDAO $userDAO, View $view) {
+    public function __construct(BasketService $basketService, GameService $gameService, AuthService $authService , View $view) {
         $this->basketService = $basketService;
         $this->gameService = $gameService;
-        $this->userDAO = $userDAO;
+        $this->authService = $authService;
         $this->view = $view;
     }
 
@@ -26,7 +26,7 @@ class BasketController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -59,7 +59,7 @@ class BasketController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -106,7 +106,7 @@ class BasketController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -149,7 +149,7 @@ class BasketController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -160,7 +160,7 @@ class BasketController {
         $result = $this->basketService->purchaseBasket($user);
         $_SESSION[$result['message']] = true;
 
-        SessionHelper::refreshUser($this->userDAO);
+        SessionHelper::refreshUser($this->authService);
 
         header("Location: /basket");
         exit();

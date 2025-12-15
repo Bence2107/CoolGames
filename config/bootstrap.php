@@ -118,7 +118,6 @@ $container->set('UserController', function ($c) {
         $c->get('authService'),
         $c->get('profileService'),
         $c->get('gameService'),
-        $c->get('userDao'),
         $c->get('view')
     );
 });
@@ -133,7 +132,7 @@ $container->set('ArticleController', function ($c) {
 $container->set('GameController', function ($c) {
     return new GameController(
         $c->get('gameService'),
-        $c->get('userDao'),
+        $c->get('authService'),
         $c->get('view')
     );
 });
@@ -142,7 +141,7 @@ $container->set('BasketController', function ($c) {
     return new BasketController(
         $c->get('basketService'),
         $c->get('gameService'),
-        $c->get('userDao'),
+        $c->get('authService'),
         $c->get('view')
     );
 });
@@ -154,7 +153,7 @@ $container->set('AuthController', function ($c) {
 $container->set('ProfileController', function ($c) {
     return new ProfileController(
         $c->get('view'),
-        $c->get('userDao')
+        $c->get('authService')
     );
 });
 

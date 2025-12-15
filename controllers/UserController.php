@@ -6,14 +6,12 @@ class UserController {
     private AuthService $authService;
     private ProfileService $profileService;
     private GameService $gameService;
-    private UserDAO $userDAO;
     private View $view;
 
-    public function __construct(AuthService $authService, ProfileService $profileService, GameService $gameService, UserDAO $userDAO, View $view) {
+    public function __construct(AuthService $authService, ProfileService $profileService, GameService $gameService, View $view) {
         $this->authService = $authService;
         $this->profileService = $profileService;
         $this->gameService = $gameService;
-        $this->userDAO = $userDAO;
         $this->view = $view;
     }
 
@@ -23,7 +21,7 @@ class UserController {
             exit();
         }
 
-        SessionHelper::ensureUserInSession($this->userDAO);
+        SessionHelper::ensureUserInSession($this->authService);
         $user = SessionHelper::getCurrentUser();
 
         if (!$user) {
@@ -88,7 +86,7 @@ class UserController {
         if (empty($errors)) {
             $_SESSION["successful"] = true;
             // Refresh user in session
-            SessionHelper::refreshUser($this->userDAO);
+            SessionHelper::refreshUser($this->authService);
         } else {
             $_SESSION["errors"] = $errors;
         }
@@ -126,7 +124,7 @@ class UserController {
         if (empty($errors)) {
             $_SESSION["successful"] = true;
             // Refresh user in session
-            SessionHelper::refreshUser($this->userDAO);
+            SessionHelper::refreshUser($this->authService);
         } else {
             $_SESSION["errors"] = $errors;
         }

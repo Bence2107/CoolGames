@@ -1,18 +1,18 @@
 ﻿<?php
 
 class SessionHelper {
-    public static function ensureUserInSession(UserDAO $userDAO): void {
+    public static function ensureUserInSession(AuthService $authService): void {
         if (isset($_SESSION['email']) && !isset($_SESSION['user'])) {
-            $user = $userDAO->getByEmail($_SESSION['email']);
+            $user = $authService->getUserByEmail($_SESSION['email']);
             if ($user) {
                 $_SESSION['user'] = $user;   // store User object separately
             }
         }
     }
 
-    public static function refreshUser(UserDAO $userDAO): void {
+    public static function refreshUser(AuthService $authService): void {
         if (isset($_SESSION['email'])) {
-            $user = $userDAO->getByEmail($_SESSION['email']);
+            $user = $authService->getUserByEmail($_SESSION['email']);
             if ($user) {
                 $_SESSION['user'] = $user;   // refresh User object
             }
