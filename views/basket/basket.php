@@ -43,11 +43,11 @@
         <?php unset($_SESSION['notEnoughMoneyError']); ?>
     <?php endif; ?>
 
-    <?php if(isset($_SESSION['buySuccessfull'])): ?>
-        <div class="successfull">
+    <?php if(isset($_SESSION['buySuccessful'])): ?>
+        <div class="successful">
             <b>Sikeres vásárlás!</b>
         </div>
-        <?php unset($_SESSION['buySuccessfull']); ?>
+        <?php unset($_SESSION['buySuccessful']); ?>
     <?php endif; ?>
 
     <div class="inner_main">
@@ -73,7 +73,7 @@
                             <a href="/games/game?name=<?= urlencode($game->getTitle()) ?>"><?= htmlspecialchars($game->getTitle()) ?></a>
                             <p><?= $game->getPrice() ?>&#128008;</p>
                             <form method="post" action="/basket/remove">
-                                <input type="hidden" value="<?= $game->getId() ?>" name="jatekID">
+                                <input type="hidden" value="<?= $game->getId() ?>" name="game_id">
                                 <input type="submit" value="Törlés">
                             </form>
                         </div>

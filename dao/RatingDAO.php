@@ -12,7 +12,7 @@ class RatingDAO {
         $sql = "INSERT INTO $this->tableName (game_id, user_email, rating) 
                 VALUES (:game_id, :user_email, :rating)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':game_id', $rating->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':game_id', $rating->getGameId(), PDO::PARAM_INT);
         $stmt->bindValue(':user_email', $rating->getUserEmail());
         $stmt->bindValue(':rating', $rating->getRating(), PDO::PARAM_INT);
         return $stmt->execute();

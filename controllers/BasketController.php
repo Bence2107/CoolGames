@@ -18,7 +18,7 @@ class BasketController {
     /**
      * Show user's basket
      */
-    public function showBasket(array $post = [], array $files = []): void {
+    public function showBasket(): void {
         $_SESSION["basket"] = true;
 
         if (!SessionHelper::isLoggedIn()) {
@@ -67,7 +67,7 @@ class BasketController {
             exit();
         }
 
-        $gameId = $post['jatekID'] ?? null;
+        $gameId = $post['game_id'] ?? null;
 
         if (!$gameId) {
             header("Location: /games");
@@ -114,7 +114,7 @@ class BasketController {
             exit();
         }
 
-        $gameId = $post['jatekID'] ?? null;
+        $gameId = $post['game_id'] ?? null;
 
         if (!$gameId) {
             header("Location: /basket");

@@ -36,14 +36,14 @@
     </nav>
 </header>
 <main>
-    <?php if (isset($_SESSION['addToBasketSuccessfull'])): ?>
-    <div class="successfull">
+    <?php if (isset($_SESSION['addToBasketSuccessful'])): ?>
+    <div class="successful">
         <b>Játék kosárhoz adva!</b>
     </div>
-        <?php unset($_SESSION['addToBasketSuccessfull']); ?>
+        <?php unset($_SESSION['addToBasketSuccessful']); ?>
     <?php endif; ?>
     <?php if (isset($_SESSION['ratingSuccess'])): ?>
-        <div class="successfull">
+        <div class="successful">
             <b>Játék értékelve! 5 pont hozzáadva az egyenleghez!</b>
         </div>
         <?php unset($_SESSION['ratingSuccess']); ?>

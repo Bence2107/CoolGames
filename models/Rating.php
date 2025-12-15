@@ -13,12 +13,12 @@ class Rating
         $this->rating = $rating;
     }
 
-    public function getGameid(): int
+    public function getGameId(): int
     {
         return $this->game_id;
     }
 
-    public function setGameid(int $game_id): void
+    public function setGameId(int $game_id): void
     {
         $this->game_id = $game_id;
     }

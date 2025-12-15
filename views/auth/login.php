@@ -36,7 +36,7 @@
     <?php endif; ?>
 
     <?php if (isset($_SESSION['registration_success'])): ?>
-        <div class="successfull">
+        <div class="successful">
             <b>Sikeres regisztráció!<br>Kérem jelentkezzen be!</b>
         </div>
         <?php unset($_SESSION['registration_success']); ?>

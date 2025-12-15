@@ -35,7 +35,7 @@ class BasketService {
 
         // Add to basket
         if ($this->basketDAO->addToBasket($game, $user)) {
-            return ['success' => true, 'message' => 'addToBasketSuccessfull'];
+            return ['success' => true, 'message' => 'addToBasketSuccessful'];
         }
 
         return ['success' => false, 'message' => 'error'];
@@ -82,7 +82,7 @@ class BasketService {
         // Clear basket
         $this->basketDAO->clearBasket($user);
 
-        return ['success' => true, 'message' => 'buySuccessfull'];
+        return ['success' => true, 'message' => 'buySuccessful'];
     }
 
     /**

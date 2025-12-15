@@ -86,7 +86,7 @@ class UserController {
         $errors = $this->profileService->updateUserInfo($email, $postData);
 
         if (empty($errors)) {
-            $_SESSION["successfull"] = true;
+            $_SESSION["successful"] = true;
             // Refresh user in session
             SessionHelper::refreshUser($this->userDAO);
         } else {
@@ -106,7 +106,7 @@ class UserController {
         );
 
         if (empty($errors)) {
-            $_SESSION["successfull"] = true;
+            $_SESSION["successful"] = true;
         } else {
             $_SESSION["errors"] = $errors;
         }
@@ -124,7 +124,7 @@ class UserController {
         $errors = $this->profileService->updateProfilePicture($email, $fileData);
 
         if (empty($errors)) {
-            $_SESSION["successfull"] = true;
+            $_SESSION["successful"] = true;
             // Refresh user in session
             SessionHelper::refreshUser($this->userDAO);
         } else {

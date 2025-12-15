@@ -39,11 +39,11 @@ unset($_SESSION['errors']);
     </nav>
 </header>
 <main>
-    <?php if (isset($_SESSION["successfull"])): ?>
-        <div class="successfull">
+    <?php if (isset($_SESSION["successful"])): ?>
+        <div class="successful">
             <b>Jelszó módosítva!</b>
         </div>
-        <?php unset($_SESSION["successfull"]); ?>
+        <?php unset($_SESSION["successful"]); ?>
     <?php endif; ?>
 
     <div class="inner_main">

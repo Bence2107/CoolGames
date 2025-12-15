@@ -75,7 +75,7 @@
                             <p><?= $game->getPrice() ?></p> &#128008;
                             <div>
                                 <form method="post" action="/basket/add">
-                                    <input type="hidden" value="<?= $game->getId() ?>" name="jatekID">
+                                    <input type="hidden" value="<?= $game->getId() ?>" name="game_id">
                                     <input type="submit" value="Kosárba">
                                 </form>
                             </div>

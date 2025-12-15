@@ -743,7 +743,7 @@ input[type=file]::file-selector-button:hover {
     margin-top: 5px;
 
 }
-.successfull{
+.successful{
     width: fit-content;
     background-color: #cef6b9;
     color: #30592f;
@@ -1041,7 +1041,7 @@ a hr{
         font-size: 24px;
         padding: 10px 5px;
     }
-    .successfull{
+    .successful{
         padding: 20px;
     }
     .empty_sign img{

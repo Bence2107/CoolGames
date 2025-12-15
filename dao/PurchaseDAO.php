@@ -42,7 +42,7 @@ class PurchaseDAO {
     public function addPurchase(Purchase $purchase): bool {
         $sql = "INSERT INTO $this->tableName (game_id, user_email) VALUES (:game_id, :user_email)";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':game_id', $purchase->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':game_id', $purchase->getGameId(), PDO::PARAM_INT);
         $stmt->bindValue(':user_email', $purchase->getUserEmail());
         return $stmt->execute();
     }
@@ -50,7 +50,7 @@ class PurchaseDAO {
     public function userOwnsGame(Purchase $purchase): bool {
         $sql = "SELECT COUNT(*) FROM $this->tableName WHERE game_id = :game_id AND user_email = :user_email";
         $stmt = $this->db->prepare($sql);
-        $stmt->bindValue(':game_id', $purchase->getGameid(), PDO::PARAM_INT);
+        $stmt->bindValue(':game_id', $purchase->getGameId(), PDO::PARAM_INT);
         $stmt->bindValue(':user_email', $purchase->getUserEmail());
         $stmt->execute();
         return $stmt->fetchColumn() > 0;

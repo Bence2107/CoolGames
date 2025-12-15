@@ -107,7 +107,7 @@ class GameController {
             exit();
         }
 
-        // Parse game ID from the format used in your old code
+        // Parse game ID from the format used in  old code
         $gameDataCharacters = explode("'", $gameId);
         $actualGameId = $gameDataCharacters[1] ?? $gameId;
 
