@@ -103,7 +103,7 @@ header #active, header #active3{
     color: #e4a14a;
     text-shadow: 1px 1px black, 0 0 3px #e4a14a;
 }
-header #active2{
+header #active_profile_frame{
     box-shadow: 1px -1px 10px 0 #e4a14a;
 }
 
@@ -743,7 +743,7 @@ input[type=file]::file-selector-button:hover {
     margin-top: 5px;
 
 }
-.successfull{
+.successful{
     width: fit-content;
     background-color: #cef6b9;
     color: #30592f;
@@ -1041,7 +1041,7 @@ a hr{
         font-size: 24px;
         padding: 10px 5px;
     }
-    .successfull{
+    .successful{
         padding: 20px;
     }
     .empty_sign img{

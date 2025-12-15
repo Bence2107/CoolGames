@@ -5,9 +5,9 @@ const header = document.querySelector("header");
 let headerHeight = header.getBoundingClientRect().height;
 aboutBtn.addEventListener("click", () => {
 
-    let position = about.offsetTop-headerHeight;
+    let position = about.offsetTop - headerHeight;
     window.scrollTo({
-        left:0,
+        left: 0,
         top: position,
     })
 });
@@ -17,18 +17,17 @@ const aboutUs = document.getElementById("aboutUs");
 const tableDisplay = document.querySelector(".content table");
 let clicks = 0;
 aboutUs.addEventListener("click", () => {
-    if(clicks === 0){
+    if (clicks === 0) {
         tableDisplay.style.display = "table";
         tableDisplay.style.animationName = "fadeIn";
         tableDisplay.style.animationDuration = "2s";
-        let position = tableDisplay.offsetTop-headerHeight;
+        let position = tableDisplay.offsetTop - headerHeight;
         window.scrollTo({
-            left:0,
+            left: 0,
             top: position,
         });
         clicks++;
-    }
-    else{
+    } else {
         tableDisplay.style.animationName = "fadeOut";
         tableDisplay.style.animationDuration = "1s";
         setTimeout(() => {

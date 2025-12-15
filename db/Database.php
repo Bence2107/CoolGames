@@ -1,0 +1,112 @@
+<?php
+
+class Database {
+    private static ?Database $instance = null;
+    private PDO $connection;
+    private string $host = "localhost";
+    private string $user = "root";
+    private string $pass = "";
+    private string $dbname = "coolgames";
+    private string $sqlFilePath = __DIR__ . "/coolgames.sql";
+
+    private function __construct() {
+        try {
+            $dsn = "mysql:host=$this->host;charset=utf8mb4";
+            $options = [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ];
+
+            $this->connection = new PDO($dsn, $this->user, $this->pass, $options);
+
+            if (!$this->databaseExists()) {
+                $this->createDatabase();
+            } else {
+                $this->connection->exec("USE `$this->dbname`");
+            }
+        } catch (PDOException $e) {
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Get Instance of the Class.
+     * @return Database
+     */
+    public static function getInstance(): Database {
+        if (self::$instance === null) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Get Connection to database via PDO.
+     * @return PDO
+     */
+    public function getConnection(): PDO {
+        return $this->connection;
+    }
+
+    /**
+     * Check if Database already exits.
+     * @return bool
+     */
+    private function databaseExists(): bool {
+        try {
+            $stmt = $this->connection->prepare("SHOW DATABASES LIKE ?");
+            $stmt->execute([$this->dbname]);
+            return $stmt->fetch() !== false;
+        } catch (PDOException $e) {
+            error_log("Database query failed: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Creates the Database, reads the SQL.
+     * @return void
+     */
+    private function createDatabase(): void {
+        try {
+            $this->connection->exec("CREATE DATABASE IF NOT EXISTS `$this->dbname`");
+            $this->connection->exec("USE `$this->dbname`");
+
+            if (!$this->tablesExist()) {
+                if (file_exists($this->sqlFilePath)) {
+                    $sqlContent = file_get_contents($this->sqlFilePath);
+                    if ($sqlContent === false) {
+                        throw new RuntimeException("Nem sikerült beolvasni az SQL fájlt.");
+                    }
+
+                    // Split into individual statements
+                    $queries = explode(";", $sqlContent);
+                    foreach ($queries as $query) {
+                        $query = trim($query);
+                        if (!empty($query)) {
+                            try {
+                                $this->connection->exec($query);
+                            } catch (PDOException $e) {
+                                error_log("SQL import hiba: " . $e->getMessage() . " | Query: " . $query);
+                            }
+                        }
+                    }
+                } else {
+                    error_log("SQL file not found at: " . $this->sqlFilePath);
+                }
+            }
+        } catch (PDOException $e) {
+            die("Database create / import failed: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Check if Tables already exits in database.
+     * @return bool
+     */
+    private function tablesExist(): bool {
+        $stmt = $this->connection->query("SHOW TABLES");
+        return $stmt->fetch() !== false;
+    }
+}
