@@ -1,5 +1,9 @@
 ﻿<?php
 
+/**
+ * Initialize Backend components.
+ */
+
 require_once __DIR__ . '/../db/Database.php';
 require_once __DIR__ . '/../controllers/helpers/SessionHelper.php';
 

@@ -9,6 +9,10 @@ class ArticleController {
         $this->view = $view;
     }
 
+    /**
+     * Handles showing News page.
+     * @return void
+     */
     public function showNews(): void {
         $_SESSION["news"] = true;
 
@@ -23,6 +27,10 @@ class ArticleController {
         }
     }
 
+    /**
+     * Handles showing Article page.
+     * @return void
+     */
     public function showArticle(): void {
         $_SESSION["news"] = true;
 

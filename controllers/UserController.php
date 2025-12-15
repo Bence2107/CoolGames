@@ -15,6 +15,10 @@ class UserController {
         $this->view = $view;
     }
 
+    /**
+     * Handles showing Profile page.
+     * @return void
+     */
     public function showProfile(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
@@ -41,6 +45,11 @@ class UserController {
         }
     }
 
+    /**
+     * Handles Login logic.
+     * @param array $postData
+     * @return void
+     */
     #[NoReturn]
     public function handleLogin(array $postData): void {
         $user = $this->authService->login($postData);
@@ -56,6 +65,11 @@ class UserController {
         exit();
     }
 
+    /**
+     * Handles Register logic.
+     * @param array $postData
+     * @return void
+     */
     #[NoReturn]
     public function register(array $postData): void {
         $errors = $this->authService->validateRegistration($postData);
@@ -79,6 +93,12 @@ class UserController {
         exit();
     }
 
+    /**
+     * Handles Update User's info logic.
+     * @param string $email
+     * @param array $postData
+     * @return void
+     */
     #[NoReturn]
     public function updateUserInfo(string $email, array $postData): void {
         $errors = $this->profileService->updateUserInfo($email, $postData);
@@ -94,6 +114,12 @@ class UserController {
         exit();
     }
 
+    /**
+     * Handles Update User's password logic.
+     * @param string $email
+     * @param array $postData
+     * @return void
+     */
     #[NoReturn]
     public function changePassword(string $email, array $postData): void {
         $errors = $this->authService->changePassword($email, $postData);
@@ -107,6 +133,12 @@ class UserController {
         exit();
     }
 
+    /**
+     * Handles Update User's picture logic.
+     * @param string $email
+     * @param array $fileData
+     * @return void
+     */
     #[NoReturn]
     public function updateProfilePicture(string $email, array $fileData): void {
         if (empty($fileData["name"] ?? null)) {
@@ -128,6 +160,11 @@ class UserController {
         exit();
     }
 
+    /**
+     * Handles delete User's logic.
+     * @param string $email
+     * @return void
+     */
     #[NoReturn]
     public function deleteAccount(string $email): void {
         if ($this->authService->deleteAccount($email)) {

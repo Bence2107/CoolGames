@@ -9,6 +9,10 @@ class ProfileController {
         $this->authService = $authService;
     }
 
+    /**
+     * Handling show Profile Edit page.
+     * @return void
+     */
     public function showEdit(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
@@ -30,6 +34,10 @@ class ProfileController {
         }
     }
 
+    /**
+     * Handling show Password Edit page.
+     * @return void
+     */
     public function showPasswordEdit(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");
@@ -51,6 +59,10 @@ class ProfileController {
         }
     }
 
+    /**
+     * Handling show Profile Delete page.
+     * @return void
+     */
     public function showDelete(): void {
         if (!SessionHelper::isLoggedIn()) {
             header("Location: /auth/login");

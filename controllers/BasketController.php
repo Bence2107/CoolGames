@@ -16,7 +16,8 @@ class BasketController {
     }
 
     /**
-     * Show user's basket
+     * Handles showing User's basket.
+     * @return void
      */
     public function showBasket(): void {
         $_SESSION["basket"] = true;
@@ -50,7 +51,9 @@ class BasketController {
     }
 
     /**
-     * Add game to basket
+     * Handles adding Game to User's basket.
+     * @param array $post
+     * @return void
      */
     #[NoReturn]
     public function addToBasket(array $post = []): void {
@@ -97,7 +100,9 @@ class BasketController {
     }
 
     /**
-     * Remove game from basket
+     * Handles removing Game from User's basket
+     * @param array $post
+     * @return void
      */
     #[NoReturn]
     public function removeFromBasket(array $post = []): void {
@@ -140,7 +145,8 @@ class BasketController {
     }
 
     /**
-     * Purchase basket
+     * Handles purchasing in basket.
+     * @return void
      */
     #[NoReturn]
     public function purchaseBasket(): void {

@@ -7,6 +7,10 @@ class HomeController {
         $this->view = $view;
     }
 
+    /**
+     * Handles showing Index page.
+     * @return void
+     */
     public function index(): void {
         try {
             $this->view->render('home/index');

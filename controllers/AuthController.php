@@ -9,6 +9,10 @@ class AuthController {
         $this->view = $view;
     }
 
+    /**
+     * Handles showing Login page.
+     * @return void
+     */
     public function showLogin(): void {
         if (SessionHelper::isLoggedIn()) {
             header("Location: /profile");
@@ -22,6 +26,10 @@ class AuthController {
         }
     }
 
+    /**
+     * Handles showing Register page.
+     * @return void
+     */
     public function showRegister(): void {
         if (SessionHelper::isLoggedIn()) {
             header("Location: /profile");
@@ -35,6 +43,10 @@ class AuthController {
         }
     }
 
+    /**
+     * Handles logout logic.
+     * @return void
+     */
     #[NoReturn]
     public function logout(): void {
         session_destroy();

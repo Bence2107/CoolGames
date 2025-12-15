@@ -14,7 +14,8 @@ class GameController {
     }
 
     /**
-     * Show all games page
+     * Handles showing Games Page.
+     * @return void
      */
     public function showGames(): void {
         $_SESSION["games"] = true;
@@ -39,6 +40,10 @@ class GameController {
         }
     }
 
+    /**
+     * Handles showing Game page.
+     * @return void
+     */
     public function showGame(): void {
         $_SESSION["games"] = true;
 
@@ -82,7 +87,9 @@ class GameController {
     }
 
     /**
-     * Rate a game
+     * Handles rating a Game form.
+     * @param array $post
+     * @return void
      */
     #[NoReturn]
     public function rateGame(array $post = []): void {
@@ -137,7 +144,8 @@ class GameController {
     }
 
     /**
-     * Show user's library (owned games)
+     * Handles showing User's Games.
+     * @return void
      */
     public function showLibrary(): void {
         if (!SessionHelper::isLoggedIn()) {
